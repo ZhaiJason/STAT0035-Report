@@ -1,28 +1,14 @@
-\documentclass[10pt, a4paper]{report}
-\usepackage{hyperref}
-\usepackage{minted}
+\documentclass[10pt, letterpaper]{report}
 
-\title{R Package Development}
-\author{Yuze Zhai}
-\date{\today}
+\input{Packages}
 
 \begin{document}
 
-\maketitle
-\newpage
-\tableofcontents
-\newpage
+\input{Preamble}
+\input{Chapter 1}
+\input{Chapter 2}
 
-\input{Introduction}
-
-% \chapter{Chapter}
-% \section{Section}
-% \subsection{Subsection}
-
-% \begin{minted}{R}
-% x = c(1,2,3,4,5)
-% print("hello world")
-% \end{minted}
-
+\bibliography{Bibliography}
+\bibliographystyle{ieeetr}
 
 \end{document}

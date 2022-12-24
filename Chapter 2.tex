@@ -1,0 +1,52 @@
+\chapter{Methodology}
+
+\section{Cox, Ross \& Rubinstein Binomial Lattice Model}
+The Cox, Ross, Rubinstein (CRR) Binomial Model was introduced by 
+
+
+
+\section{Phelim Boyle Trinomial Lattice Model}
+
+Extending the Binomial model, the Trinomial Lattice model was introduced by Phelim Boyle in 1988 \cite{Boyle1988}.
+
+\begin{Rminted}
+Trinomial <- function(K, S, u, r, t, n, sigma = 0,
+    type = "call",
+    style = "European",
+    all = FALSE,
+    plot = FALSE) {
+
+# Restrict u != 1
+
+dt <- T/n
+M <- exp(r * dt)
+V <- M^2 * (exp(sigma^2 * dt) - 1)
+p1 <- ((V + M^2 - M) * u - (M - 1)) / ((u - 1) * (u^2 - 1))
+p3 <- (u^2 * (V + M^2 - M) - u^3 * (M - 1)) / ((u - 1) * (u^2 - 1))
+p2 <- 1 - p1 - p3
+
+price_tree <- Trinomial.tree(S, u, n)
+Sn <- price_tree[n + 1, ]
+
+if (type == "call") {
+fn <- sapply(Sn, function(x) {max(x - K, 0)})
+} else if (type == "put") {
+fn <- sapply(Sn, function(x) {max(K - x, 0)})
+}
+
+price <- Trinomial.rnv(fn, p1, p2, p3, r, n, dt, K, S = price_tree, type = type, style = style)
+
+if (all) {
+list(
+"price" = price,
+"p" = c(p1, p2, p3),
+"price_tree" = price_tree
+)
+} else {
+price
+}
+}
+\end{Rminted}
+
+
+\newpage

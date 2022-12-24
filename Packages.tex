@@ -1,0 +1,31 @@
+% Customise page margin
+\usepackage{geometry}
+\geometry{
+    top = 1.2 in,
+    bottom = 1.2 in,
+    left = 1.2 in,
+    right = 1.2 in
+}
+
+% Enable advanced colour control
+\usepackage{xcolor}
+\definecolor{codebg}{rgb}{0.97, 0.97, 0.97} % Customise colour used as code blocks' background
+\definecolor{linecol}{rgb}{0.85, 0.85, 0.85} % Customise colour used for the code blocks' frame lines
+
+% Render code blocks better with pygmentised highlighting
+\usepackage{minted}
+\newminted[Rminted]{R}{ % Customised minted function for R code blocks
+    frame = leftline,
+    framesep = 8 pt,
+    rulecolor = linecol,
+    xleftmargin = 18 pt,
+    xrightmargin = 10 pt,
+    mathescape, % Enable LaTeX math rendered as math symbols in comments
+    obeytabs,
+    tabsize = 4,
+    bgcolor = codebg,
+    linenos, % Show line number
+    numbersep = 5 pt,
+    breaklines, % Set auto wrap
+    breaksymbolleft = , % Remove wrap symbol
+}
