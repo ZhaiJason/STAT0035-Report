@@ -1,0 +1,78 @@
+\chapter{Package Development}
+
+\section{Package Structure}
+
+\subsection{Objective Oriented Programming in R}
+
+Existing packages in R ecosystem, such as \mintinline{R}|fOptions|, \mintinline{R}|derivmkts|, and \mintinline{R}|RQuantLib| provides comprehensive pricing algorithms for financial derivatives. However, their implementation of models are procedural oriented.
+
+
+
+Generic S3 method.
+
+
+\section{Deterministic Methods}
+
+\subsection{Black-Scholes}
+The Black-Scholes model perceive the movement of the stock price as an Geometric Brownian motion, explained by the stochastic differential equation:
+
+\begin{align*}
+    \frac{dS(t)}{S(t)} = \mu (S(t), t)dt + \sigma dW(t)
+\end{align*}
+
+
+\subsection{Binomial Lattice Tree}
+
+
+Introduced by Cox, Ross, and Rubinstein in 1979, the Binomial Model 
+
+The Cox, Ross, Rubinstein (CRR) Binomial Model was introduced by 
+
+
+\subsection{Trinomial Lattice}
+ 
+Extending the Binomial model, the Trinomial Lattice model was introduced by Phelim Boyle in 1988 \cite{Boyle1988}.
+
+\begin{Rminted}
+Trinomial <- function(K, S, u, r, t, n, sigma = 0,
+    type = "call",
+    style = "European",
+    all = FALSE,
+    plot = FALSE) {
+
+}
+\end{Rminted}
+
+\subsection{Discussion on Multinomial Option Pricing Models \& Their Relationship with Binomial Model}
+
+\newpage
+
+\section{Monte Carlo Methods}
+
+\subsection{Vanilla Option Pricing}
+
+\subsection{Asian Option Pricing}
+
+Different from a vanilla option whose payoff only depends on stock price at maturity (i.e. $t = T$), an Asian option's payoff is determined by the mean stock price throughout the option's life $\bar{S}$ and the strike price $K$. To calculate $\bar{S}$, we need to consider the price movement throughout $t \in [0, T]$, making the pricing of an Asian option path-dependent.
+
+% Cite from Glasserman
+
+A generalised case of the stock pricing model is given by:
+
+\begin{align}
+    dS(t) = rS(t)dt + \sigma(S(t))S(t)dW(t)
+\end{align}
+
+By discritise the infinitesimal $dt$ to $\Delta t$ using Euler approximation, we can obtain the form:
+
+\begin{align}
+    S(t + \Delta t) = S(t) + rS(t)\Delta t + \sigma(S(t))S(t)\sqrt{\Delta t}Z
+\end{align}
+
+Where $Z \sim N(0,1)$. Taking the logrithm of the above expression, we have:
+
+\begin{align}
+    log(S(t + \Delta t)) = log(S(t))
+\end{align}
+
+\newpage
