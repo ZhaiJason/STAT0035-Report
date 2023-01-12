@@ -1,8 +1,39 @@
 \begin{thebibliography}{1}
 
+\bibitem{Bachelier1900}
+L.~Bachelier, ``Théorie de la spéculation,'' {\em Annales scientifiques de
+  l'École normale supérieure}, vol.~17, pp.~21--86, 1900.
+\newblock Earliest attempt of quantitative method in option pricing.
+
+\bibitem{Sprenkle1961}
+C.~M. Sprenkle, ``Warrant prices as indicators of expectations and
+  preferences,'' {\em Yale economic essays}, vol.~1, pp.~179--232, 1961.
+
+\bibitem{BS1973}
+F.~Black and M.~Scholes, ``The pricing of options and corporate liabilities,''
+  {\em The Journal of political economy}, vol.~81, pp.~637--654, 1973.
+\newblock Black-Scholes Model.
+
+\bibitem{CRR1979}
+J.~C. Cox, S.~A. Ross, and M.~Rubinstein, ``Option pricing: A simplified
+  approach,'' {\em Journal of financial economics}, vol.~7, pp.~229--263, 1979.
+\newblock Binomial Lattice Model.
+
+\bibitem{Glasserman2003}
+P.~Glasserman, {\em Monte Carlo methods in financial engineering}.
+\newblock Springer, 2003.
+\newblock Explaination on Monte Carlo method, MC European vanilla option
+  pricing, MC Asian option pricing.
+
 \bibitem{Boyle1988}
 P.~P. Boyle, ``A lattice framework for option pricing with two state
   variables,'' {\em Journal of Financial and Quantitative Analysis}, vol.~23, 3
   1988.
+\newblock Trinomial Lattice Model.
+
+\bibitem{Higham2004}
+D.~Higham, {\em An Introduction to Financial Option Valuation}.
+\newblock Cambridge University Press, 2004.
+\newblock Exotic Options Pricing.
 
 \end{thebibliography}

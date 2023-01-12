@@ -2,46 +2,73 @@
 
 \section{Package Structure}
 
-\subsection{Objective Oriented Programming in R}
+\subsection{R Scripts}
 
-Existing packages in R ecosystem, such as \mintinline{R}|fOptions|, \mintinline{R}|derivmkts|, and \mintinline{R}|RQuantLib| provides comprehensive pricing algorithms for financial derivatives. However, their implementation of models are procedural oriented.
+The package consists of 7 R scripts, with their contents defined as below:
 
+\begin{table}[h] % `h` specifies that table should be displayed here
 
+\resizebox{\textwidth}{!}{
+\begin{tabular}{ll}
+File                           & Contents                                                                 \\ \hline
+\mintinline{R}|Option.R|       & Methods creating and updating option and option.env objects              \\
+\mintinline{R}|Price.R|        & Pricing functions takes objects input and calls specific pricing engines \\
+\mintinline{R}|MonteCarlo.R|   & Monte Carlo option pricing method engine functions                       \\
+\mintinline{R}|BlackScholes.R| & Black-Scholes option pricing method engine functions                     \\
+\mintinline{R}|Binomial.R|     & Binomial option pricing method engine functions                          \\
+\mintinline{R}|Trinomial.R|    & Trinomial option pricing method engine functions                         \\
+\mintinline{R}|Tools.R|        & Other supplementary functions used in package                           
+\end{tabular}
+}
+\end{table}
 
-Generic S3 method.
+For the simplicity of user access, only four functions are exported, they are:
 
+\begin{table}[h]
+
+\resizebox{\textwidth}{!}{
+\begin{tabular}{ll}
+Function                            & Description                                                                                               \\ \hline
+\mintinline{R}|option()|            & Create new \mintinline{R}|"option"| class object, which represents the option of interest                 \\
+\mintinline{R}|option.env()|        & Create new \mintinline{R}|"option.env"| class object, which represents the market environment of interest \\
+\mintinline{R}|update.option.env()| & Update the variables within a defined \mintinline{R}|"option.env"| class object                           \\
+\mintinline{R}|price.option()|      & Pricing the option based on specified option, market environment, and method input                       
+\end{tabular}
+}
+\end{table}
+
+\section{Functions}
 
 \section{Deterministic Methods}
 
-\subsection{Black-Scholes}
-The Black-Scholes model perceive the movement of the stock price as an Geometric Brownian motion, explained by the stochastic differential equation:
+\subsection{Black-Scholes Model}
+The movement of asset prices is intuitively described by an Geometric Brownian Motion (GBM). Through 1960s to 1970s, deterministic formula have been driven by numerous scholars.
 
-\begin{align*}
-    \frac{dS(t)}{S(t)} = \mu (S(t), t)dt + \sigma dW(t)
-\end{align*}
+Introduced by Fisher Black and Myron Scholes in 1973, the Black-Scholes model provides a deterministic method in valuing options under the assumption that the underlying asset's price is described by a Geometric Brownian Motion (GBM).
+
+
+the Black-Scholes valuation formula provides a deterministic estimation for European option price.
+
+
+Introduced by Fischer Black and Myron Scholes, the Black-Scholes model perceive the movement of the stock price as an Geometric Brownian Motion (GBM). The general form of the Brownian motion is specified by the following Stochastic Differential Equation (SDE) \cite{Glasserman2003}:
+
+\begin{align}
+\frac{dS(t)}{S(t)} = \mu (S(t), t)dt + \sigma dW(t)
+\end{align}
+
+Where $\mu$ is the drift term measuring the "direction" of the price movement at time $t$, $\sigma$ measuring the volatility of the motion, and $W(t)$ the Standard Brownian Motion.
+
 
 
 \subsection{Binomial Lattice Tree}
 
-
-Introduced by Cox, Ross, and Rubinstein in 1979, the Binomial Model 
-
-The Cox, Ross, Rubinstein (CRR) Binomial Model was introduced by 
+Introduced by Cox, Ross, and Rubinstein in 1979, the Binomial Model
 
 
 \subsection{Trinomial Lattice}
- 
+    
 Extending the Binomial model, the Trinomial Lattice model was introduced by Phelim Boyle in 1988 \cite{Boyle1988}.
 
-\begin{Rminted}
-Trinomial <- function(K, S, u, r, t, n, sigma = 0,
-    type = "call",
-    style = "European",
-    all = FALSE,
-    plot = FALSE) {
-
-}
-\end{Rminted}
 
 \subsection{Discussion on Multinomial Option Pricing Models \& Their Relationship with Binomial Model}
 
@@ -49,13 +76,15 @@ Trinomial <- function(K, S, u, r, t, n, sigma = 0,
 
 \section{Monte Carlo Methods}
 
+Due to the complexity of American option pricing using Monte Carlo method, the package (until now) has only includes European option pricing.
+
 \subsection{Vanilla Option Pricing}
+
+
 
 \subsection{Asian Option Pricing}
 
-Different from a vanilla option whose payoff only depends on stock price at maturity (i.e. $t = T$), an Asian option's payoff is determined by the mean stock price throughout the option's life $\bar{S}$ and the strike price $K$. To calculate $\bar{S}$, we need to consider the price movement throughout $t \in [0, T]$, making the pricing of an Asian option path-dependent.
-
-% Cite from Glasserman
+Different from a vanilla option whose payoff only depends on stock price at maturity (i.e. $t = T$), an Asian option's payoff is determined by the average stock price throughout the option's life $\bar{S}$ and the strike price $K$. To calculate $\bar{S}$, we need to consider the price movement throughout $t \in [0, T]$, making the pricing of an Asian option path-dependent , i.e. we should store the price at any time $t \in [0,T]$ for each simulated price trajectory \cite{Higham2004}.
 
 A generalised case of the stock pricing model is given by:
 
@@ -63,16 +92,22 @@ A generalised case of the stock pricing model is given by:
     dS(t) = rS(t)dt + \sigma(S(t))S(t)dW(t)
 \end{align}
 
-By discritise the infinitesimal $dt$ to $\Delta t$ using Euler approximation, we can obtain the form:
+\subsection{Barrier Option Pricing}
 
-\begin{align}
-    S(t + \Delta t) = S(t) + rS(t)\Delta t + \sigma(S(t))S(t)\sqrt{\Delta t}Z
-\end{align}
+\subsection{Binary Option Pricing}
 
-Where $Z \sim N(0,1)$. Taking the logrithm of the above expression, we have:
+\subsection{Lookback Option Pricing}
 
-\begin{align}
-    log(S(t + \Delta t)) = log(S(t))
-\end{align}
+% rmcop provides NO COMPUTATIONAL ADVANTAGE compare to lower level programming techniques provided by packages such as RQuantLib.
+
 
 \newpage
+
+% [14:49] Dogucu, Mine
+% @Manual{xaringan,
+%   title = {xaringan: Presentation Ninja},
+%   author = {Yihui Xie},
+%   year = {2021},
+%   note = {R package version 0.20},
+%   url = {https://CRAN.R-project.org/package=xaringan},
+% }

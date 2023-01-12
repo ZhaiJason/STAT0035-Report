@@ -1,18 +1,40 @@
 \chapter{Introduction}
 
 \section{Abstract}
-This report discuss the R implementation of the major statistical models used for pricing financial options. The models introduced are classified into two sections based on their approachs, either analytical or computational.
+This report discuss the development of the R package \mintinline{R}{rmcop}, an objective oriented financial option pricing package.
 
-Analytical models generate exact estimation for option prices. Fundamental models such as Black-Scholes formula, Binomial tree, and Trinomial tree methods are discussed, following by an extension to multinomial tree solutions.
+In chapter 2, fundamental technical concepts are introduced. These includes explainations on financial options and programming techniques in R that are essential for understanding the development phase described in chapter 4.
 
-For more complex cases where analytical formula is infeasible to find, Monte Carlo based models provides computational path to find the options prices. Basic Monte Carlo model and its extensions, including Heston model, Jump Diffusion model, and Merton model are discussed.
+In chapter 3, the report enumerates multiple existing R packages for financial options pricing. We will discuss their functionalities and identify the advantages and limitations \mintinline{R}{rmcop} has comparing to them.
+
+In chapter 4, we give detailed explainations on quantitative models in option pricing and their R implementations. This part will be roughly divided into two sections: deterministic methods and Monte Carlo methods.
+
+In the last chapter, we will explain the current functionalities and limitations of \mintinline{R}{rmcop} comprehensively, and briefly discuss the possible extension of the package in the future.
 
 \section{Literature Review}
-In 1973, economists Fischer Black and Myron Scholes introduced the Black-Scholes model, establishing the foundation for modern quantitative finance.
+The very first attempt of applying quantitative method in option pricing (perhaps in all finance) is by the French mathematician Louis Bachelier in 1900 \cite{Bachelier1900}. In his paper ``The Theory of Speculation,'' he deducted deterministic formulas for pricing European (vanilla) call and put options as follows:
+
+% \begin{align}
+% C(S, T) &= SN(\frac{S - X}{\sigma\sqrt{t}}) - XN(\frac{S - X}{\sigma \sqrt{t}}) + \sigma\sqrt{t}N(\frac{S - X}{\sigma \sqrt{t}}) \\
+% P(S, T) &= XN(\frac{S - X}{\sigma \sqrt{t}}) - SN(\frac{S - X}{\sigma \sqrt{t}}) + \sigma\sqrt{t}N(\frac{S - X}{\sigma \sqrt{t}})
+% \end{align}
+
+Being the earlist approach, Bachelier's formula had already outlined the relationship between option price and asset price $S$, strike price $X$, and volatility measure $\sigma$, which are essential fragments in modern formulas. However, based on limited data, Bachelier's solution was built under some unrealistic assumptions. The normality assumption violates the non-negativity of the stock price, and the formula's discrete measure in time omitted the effect of continuous movements in the stock price. Also, the formula did not discount the effect of interest rate. These errors cause Bachelier's model fails to price options accurately.
+
+It wasn't until 1960s had further improvement been made to quantitative option pricing. In 1961, Case Sprenkle \cite{Sprenkle1961} introduced the Sprenkle formula. The formula addressed the above issues by describing the stock price by the more suitable log-normal distribution and discounting for the effect of interest rate, which successfully explained the time value of an option. In the following decade, improvements have been made by scholars such as Boness and Samuelson, who introduced emperical constants to increase the effectiveness of Sprenkle's model.
+
+The model was finalised by Black and Scholes in 1973, who explained the stock price movement by General Brownian Motion (GBM) described by a Stochastic Differential Equation (SDE). The solution (derived through Itô's lemma) of Black-Scholes formula under an risk-neutral assumption eliminates the emperical measure of Sprenkle et al's model.
 
 
 
+\cite{BS1973}
 
-\section{Existing R Packages for Options Pricing}
+\cite{CRR1979}
+
+\begin{align}
+\sigma 
+\end{align}
+
+
 
 \newpage
