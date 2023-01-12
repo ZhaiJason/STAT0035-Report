@@ -1,7 +1,7 @@
 \chapter{Introduction}
 
 \section{Abstract}
-This report discuss the development of the R package \mintinline{R}{rmcop}, an objective oriented financial option pricing package.
+This report discuss the development of the R package \mintinline{R}{rmcop}, an objective oriented financial option pricing package. The name "rmcop" stands for R Monte Carlo Option Pricing.
 
 In chapter 2, fundamental technical concepts are introduced. These includes explainations on financial options and programming techniques in R that are essential for understanding the development phase described in chapter 4.
 
@@ -21,20 +21,12 @@ The very first attempt of applying quantitative method in option pricing (perhap
 
 Being the earlist approach, Bachelier's formula had already outlined the relationship between option price and asset price $S$, strike price $X$, and volatility measure $\sigma$, which are essential fragments in modern formulas. However, based on limited data, Bachelier's solution was built under some unrealistic assumptions. The normality assumption violates the non-negativity of the stock price, and the formula's discrete measure in time omitted the effect of continuous movements in the stock price. Also, the formula did not discount the effect of interest rate. These errors cause Bachelier's model fails to price options accurately.
 
-It wasn't until 1960s had further improvement been made to quantitative option pricing. In 1961, Case Sprenkle \cite{Sprenkle1961} introduced the Sprenkle formula. The formula addressed the above issues by describing the stock price by the more suitable log-normal distribution and discounting for the effect of interest rate, which successfully explained the time value of an option. In the following decade, improvements have been made by scholars such as Boness and Samuelson, who introduced emperical constants to increase the effectiveness of Sprenkle's model.
+It wasn't until 1960s had further improvement been made to quantitative option pricing. In 1961, Case Sprenkle \cite{Sprenkle1961} introduced the Sprenkle formula. The formula addressed the above issues by describing the stock price by the more suitable log-normal distribution and discounting for the effect of interest rate, which successfully explained the time value of an option. In the following decade, improvements have been made by scholars such as Boness and Samuelson \cite{BS1973}, who introduced emperical constants to increase the effectiveness of Sprenkle's model.
 
-The model was finalised by Black and Scholes in 1973, who explained the stock price movement by General Brownian Motion (GBM) described by a Stochastic Differential Equation (SDE). The solution (derived through Itô's lemma) of Black-Scholes formula under an risk-neutral assumption eliminates the emperical measure of Sprenkle et al's model.
+The model was finalised by Black and Scholes in 1973 \cite{BS1973}, who explained the stock price movement by General Brownian Motion (GBM). The GBM was described in the form of a Stochastic Differential Equation (SDE), which effectly model the continuity of price movement. The solution (derived through Itô's lemma) of Black-Scholes formula under an risk-neutral approach \footnote{The risk-neutral approach, in simple terms, is constructing a portfolio at a moment in time such that the portfolio value will be identical at the next moment in time regardless of the price movement, so the portfolio will be riskless to the price movement} eliminates the emperical measure of Sprenkle et al's model, which resulted in an objective and deterministic estimation of option price, as is used by most contemporary pricing methods.
 
+In 1979, based on the risk-neutral methods introduced by Black and Scholes, Cox, Ross and Rubinstein \cite{CRR1979} introduced a Binomial lattice tree model for modelling stock prices\dots
 
-
-\cite{BS1973}
-
-\cite{CRR1979}
-
-\begin{align}
-\sigma 
-\end{align}
-
-
+As the financial market develops and more complicated options emerge, in many realistic cases, one cannot find a deterministic solution for pricing option. However, thanks to the advancement of computer power, one can simulate price trajectories for enormous times, and obtain estimate of the stock price and corresponding options' prices accroding to the results of these simulations. Such method is known as the Monte Carlo method. The very first attempt of applying computational method in option pricing is by Phelim Boyle in 1977. More serious (and effective) approach was introduced by Paul Glasserman \cite{Glasserman2003} in the 1990s. Until now, the field of Monte Carlo option pricing is still under active development and is widely used by "quants".
 
 \newpage
