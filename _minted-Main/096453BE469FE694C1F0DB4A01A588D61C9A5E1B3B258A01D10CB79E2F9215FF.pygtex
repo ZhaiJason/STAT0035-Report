@@ -1,4 +1,4 @@
-\begin{Verbatim}[commandchars=\\\{\}]
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
 \PYG{n}{John} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{list}\PYG{p}{(}
     \PYG{l+s}{\PYGZdq{}age\PYGZdq{}} \PYG{o}{=} \PYG{l+m}{20}\PYG{p}{,}
     \PYG{l+s}{\PYGZdq{}gender\PYGZdq{}} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}male\PYGZdq{}}\PYG{p}{,}

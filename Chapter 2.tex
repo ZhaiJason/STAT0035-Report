@@ -1,44 +1,14 @@
-\chapter{Concepts}
+\chapter{Existing Option Pricing Packages within R Ecosystem} \label{cpt:Existing Packages}
 
-\section{Financial Options}
+\section{Packages Review}
 
-\subsection{Option Styles}
+\subsection{derivmkts} \label{sub:derivmkts}
 
-\subsection{Pricing of Option}
+\subsection{fOptions} \label{sub:fOptions}
 
-\section{R}
+\subsection{RQuantLib} \label{sub:RQuantLib}
 
-\subsection{R Package Development}
+An R interface to the QuantLib library, which embeded C++ programming.
 
-% we can cite devtools
+\section{General Comments}
 
-\subsection{Objective Oriented Programming in R}
-
-% Cross reference to section on pkgs
-% Use label of the section so latex will automatically reference for that
-
-% If do the TEST, ADD a SECTION ON TESTING
-% mention the test (even manual) procedures of testing
-
-Existing packages in R ecosystem provides comprehensive pricing algorithms for financial derivatives. However, their function are based on Procedural Oriented Programming (POP). POP functions can be called directly by passing in required arguments. For simple options pricing cases, such as pricing individual options, using POP functions is intuitive. However, many real scenarios require pricing options in a complex formulation, such as compounded options (i.e. options with underlying assets being another option) and combination of options (i.e. spread, straddle, stringle, and other option strategies). In these situations, managing numerous arguments for POP functions can be difficult and inefficient.
-
-The \mintinline{R}|rmcop| package proposed an Objective Oriented Programming (OOP) approach for pricing financial options in R. It encapsulates multiple arguments, such as option style, type, strike price, and maturity time, into an \mintinline{R}|option| class object. It also allows encapsulation of other market environemnt arguments, such as interest rate, dividend yield rate, and volatility measure into an \mintinline{R}|option.env| class object. The OOP structure enables easier variables managements and facilitates the comparison of prices among different sets of options and market environments.
-
-The codes below demonstrates the calculation of an theoretical European vanilla call option with strike price $K = 20$, maturity $t = 0.75$, under the market condition such that the current price is $S = 20$, fixed interest rate is $r = 1\%$, and market volatility measured by $\sigma = 0.1$. We use Monte Carlo (i.e. \mintinline{R}|mc|) method with $n = 100$ replications and number of time steps per replication $steps = 1$.
-
-OOP approach requires extra steps declaring objects before using the function, but once the declaration is completed, calling the pricing funcion is much simpler than the POP approach. As above, it only required two (object) arguments, \mintinline{R}|obj| and \mintinline{R}|env|.
-
-R provides two ways to perform OOP, the S3 and S4 methods. The S3 class objects are based on R \mintinline{R}|list| objects. An R list contains a \mintinline{R}|class| attribute, which can be customised into string (or vector of strings) that can be interpreted as a list's corresponding S3 class (i.e. so that the list itself became an object of that class). Other items within the list can be treated as object's properties under the OOP scope, and can be extracted using the \mintinline{R}|$| operator. Here is an example on how to implement OOP using S3 method in R.
-
-\begin{Rminted}
-John <- list(
-    "age" = 20,
-    "gender" = "male",
-    "nation" = "UK"
-)
-class(John) <- "student"
-\end{Rminted}
-
-We first define a new \mintinline{R}|list| object named "John", which contains three items (age, gender, and nationality). Then, we redefined the class of this list using the \mintinline{R}|class()| function to "student". Now, we have created a new object named "John" of the class "student" under the S3 scheme.
-
-The S4 methods requires more rigorous class and object definition, as one would typically see within an OOP language such as Python and Java. The development of our pricing functions does not require rigorous OOP structure or defining generic functions, so S3 method is sufficient for its development.
