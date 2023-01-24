@@ -117,6 +117,25 @@ To construct a Binomial tree of stock prices, one breaks down the option's life 
 
 % TODO: Add a figure here to illustrate the graph. \label{}
 
+\begin{figure}[ht]
+    \centering
+    \[\tikz{
+        \node (a) at (0, 2) {$S$};
+        \node (b) at (2, 3) {$uS$};
+        \node (c) at (2, 1) {$dS$};
+		\node (d) at (4, 4) {$u^2S$};
+        \node (e) at (4, 2) {$udS$};
+		\node (f) at (4, 0) {$d^2S$};
+        \path[->] (a) edge (b);
+        \path[->] (a) edge (c);
+		\path[->] (b) edge (d);
+        \path[->] (b) edge (e);
+		\path[->] (c) edge (e);
+        \path[->] (c) edge (f);
+    }\]
+    \caption{Binomial Lattice Tree for Stock Price}
+\end{figure}
+
 As we can see, we will obtain a total of $n+1$ nodes at maturity $T$. For each node at the final step, we can obtain the corresponding payoff of an option related to that stock price. For example, recall from the above section, the $n+1$ possible payoffs $P(S(T))$ of an vanilla European call option would be:
 
 \begin{align}

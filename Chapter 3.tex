@@ -92,14 +92,13 @@ Where $\mu$ is the drift term measuring the "direction" of the price movement at
 
 
 
-\subsection{Binomial Lattice Tree}
-
-Introduced by Cox, Ross, and Rubinstein in 1979, the Binomial Model
+\subsection{vanilla.binomial}
 
 
-\subsection{Trinomial Lattice}
+
+
+\subsection{vanilla.trinomial}
     
-Extending the Binomial model, the Trinomial Lattice model was introduced by Phelim Boyle in 1988 \cite{Boyle1988}.
 
 
 \newpage
@@ -112,11 +111,18 @@ Due to the complexity of American option pricing using Monte Carlo method, the p
 
 The \mintinline{R}|mc.engine| function is the core of the package's Monte Carlo pricing funcitions. It is an internal function that is used to simulate price trajectories.
 
-\subsection{Vanilla Option Pricing}
+Recall Equation \ref{eq:BS for MC}, the Black-Scholes model allows us to simulate the stock price trajectory using normal random variables.
 
 
 
-\subsection{Asian Option Pricing}
+
+
+
+\subsection{vanilla.mc}
+
+
+
+\subsection{asian.mc}
 
 \ref{lst:exotic_options}
 
@@ -128,9 +134,11 @@ A generalised case of the stock pricing model is given by:
     dS(t) = rS(t)dt + \sigma(S(t))S(t)dW(t)
 \end{align}
 
-\subsection{Barrier Option Pricing}
+\subsection{barrier.mc}
 
-\subsection{Binary Option Pricing}
+\subsection{binary.mc}
 
-\subsection{Lookback Option Pricing}
+\subsection{lookback.mc}
+
+
 
