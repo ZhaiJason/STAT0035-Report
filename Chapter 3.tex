@@ -1,11 +1,37 @@
-\chapter{Package Development} \label{cpt:Package Development}
+\chapter{Package Development} \label{cpt:Pkg Dev}
 
-% FIXME: 6 duplicate label errors
+\section{Introduction}
 
-\section{Objective Oriented Programming in R} \label{sec:R OOP}
+\section{Package Structure}
 
-% If do the TEST, ADD a SECTION ON TESTING
-% mention the test (even manual) procedures of testing
+The package consists of 7 R scripts, with their functionalities defined as below:
+
+\begin{table}[ht] \label{tab:pkg_scripts}
+\begin{tabular}{p{0.25\linewidth} | p{0.65\linewidth}}
+File                           & Contents                                                                 \\ \hline
+\mintinline{R}|Option.R|       & Methods creating and updating option and option.env objects              \\
+\mintinline{R}|Price.R|        & Pricing functions takes objects input and calls specific pricing engines \\
+\mintinline{R}|MonteCarlo.R|   & Monte Carlo option pricing method engine functions                       \\
+\mintinline{R}|BlackScholes.R| & Black-Scholes option pricing method engine functions                     \\
+\mintinline{R}|Binomial.R|     & Binomial option pricing method engine functions                          \\
+\mintinline{R}|Trinomial.R|    & Trinomial option pricing method engine functions                         \\
+\mintinline{R}|Tools.R|        & Other supplementary functions used in package                           
+\end{tabular}
+\caption{Package R Scripts}
+\end{table} 
+
+For the simplicity of user access, only three functions are exported, they are:
+
+\begin{table}[ht] \label{tab:pkg_functions}
+\begin{tabular}{p{0.25\linewidth} | p{0.65\linewidth}}
+Function                            & Description \\ \hline
+\mintinline{R}|option()|            & Create new \mintinline{R}|"option"| class object, which encapsulates the characteristics of an option \\
+\mintinline{R}|option.env()|        & Create new \mintinline{R}|"env"| class object, which encapsulates the market environment setup \\
+\mintinline{R}|price.option()|      & Pricing the option based on specified option, market environment, and method input                       
+\end{tabular}
+\caption{Package Exported Functions}
+\end{table}
+\section{Objective Oriented Programming in R}
 
 Existing packages in R ecosystem provides comprehensive pricing algorithms for financial derivatives. However, their function are based on Procedural Oriented Programming (POP). POP functions can be called directly by passing in required arguments. For simple options pricing cases, such as pricing individual options, using POP functions is intuitive. However, many real scenarios require pricing options in a complex formulation, such as compounded options (i.e. options with underlying assets being another option) and combination of options (i.e. spread, straddle, stringle, and other option strategies). In these situations, managing numerous arguments for POP functions can be difficult and inefficient.
 
@@ -26,113 +52,23 @@ John <- list(
 class(John) <- "student"
 \end{Rminted}
 
-We first define a new \mintinline{R}|list| object named "John", which contains three items (age, gender, and nationality). Then, we redefined the class of this list using the \mintinline{R}|class()| function to "student". Now, we have created a new object named "John" of the class "student" under the S3 scheme.
+We first define a new \mintinline{R}|list| object named ``John'', which contains three items (age, gender, and nationality). Then, we redefined the class of this list using the \mintinline{R}|class()| function to ``student''. Now, we have created a new object named ``John'' of the class ``student'' under the S3 scheme.
 
 The S4 methods requires more rigorous class and object definition, as one would typically see in an OOP language such as Python and Java. The development of our pricing functions does not require rigorous OOP structure or defining generic functions, so S3 method is sufficient for its development.
 
-
-\section{Package Structure} \label{sec:Package Structure}
-
-
-\subsection{R Scripts}
-
-The package consists of 7 R scripts, with their contents defined as below:
-
-\begin{table}[h] \label{tab:pkg_scripts}
-\begin{tabular}{p{0.25\linewidth} | p{0.65\linewidth}}
-File                           & Contents                                                                 \\ \hline
-\mintinline{R}|Option.R|       & Methods creating and updating option and option.env objects              \\
-\mintinline{R}|Price.R|        & Pricing functions takes objects input and calls specific pricing engines \\
-\mintinline{R}|MonteCarlo.R|   & Monte Carlo option pricing method engine functions                       \\
-\mintinline{R}|BlackScholes.R| & Black-Scholes option pricing method engine functions                     \\
-\mintinline{R}|Binomial.R|     & Binomial option pricing method engine functions                          \\
-\mintinline{R}|Trinomial.R|    & Trinomial option pricing method engine functions                         \\
-\mintinline{R}|Tools.R|        & Other supplementary functions used in package                           
-\end{tabular}
-\caption{R Scripts for rmcop}
-\end{table} 
-
-For the simplicity of user access, only four functions are exported, they are:
-
-In Table \ref{tab:pkg_functions}, we have \dots
-
-\begin{table}[h] \label{tab:pkg_functions}
-\begin{tabular}{p{0.25\linewidth} | p{0.65\linewidth}}
-Function                            & Description                                                                                               \\ \hline
-\mintinline{R}|option()|            & Create new \mintinline{R}|"option"| class object, which represents the option of interest                 \\
-\mintinline{R}|option.env()|        & Create new \mintinline{R}|"option.env"| class object, which represents the market environment of interest \\
-\mintinline{R}|update.option.env()| & Update the variables within a defined \mintinline{R}|"option.env"| class object                           \\
-\mintinline{R}|price.option()|      & Pricing the option based on specified option, market environment, and method input                       
-\end{tabular}
-\caption{Functions for rmcop}
-\end{table}
-
-
-
-\section{Implementation} \label{sec:Implementation}
-
 \section{Deterministic Methods}
 
-\subsection{Black-Scholes Model}
-The movement of asset prices is intuitively described by an Geometric Brownian Motion (GBM). Through 1960s to 1970s, deterministic formula have been driven by numerous scholars.
-
-Introduced by Fisher Black and Myron Scholes in 1973, the Black-Scholes model provides a deterministic method in valuing options under the assumption that the underlying asset's price is described by a Geometric Brownian Motion (GBM).
-
-
-the Black-Scholes valuation formula provides a deterministic estimation for European option price.
-
-
-Introduced by Fischer Black and Myron Scholes, the Black-Scholes model perceive the movement of the stock price as an Geometric Brownian Motion (GBM). The general form of the Brownian motion is specified by the following Stochastic Differential Equation (SDE) \cite{Glasserman2003}:
-
-\begin{align}
-\frac{dS(t)}{S(t)} = \mu (S(t), t)dt + \sigma dW(t)
-\end{align}
-
-Where $\mu$ is the drift term measuring the "direction" of the price movement at time $t$, $\sigma$ measuring the volatility of the motion, and $W(t)$ the Standard Brownian Motion.
-
-
+\subsection{vanilla.bs}
 
 \subsection{vanilla.binomial}
 
-
-
-
 \subsection{vanilla.trinomial}
-    
-
-
-\newpage
 
 \section{Monte Carlo Methods}
 
-Due to the complexity of American option pricing using Monte Carlo method, the package (until now) has only includes European option pricing.
-
-\subsection{mc.engine}
-
-The \mintinline{R}|mc.engine| function is the core of the package's Monte Carlo pricing funcitions. It is an internal function that is used to simulate price trajectories.
-
-Recall Equation \ref{eq:BS for MC}, the Black-Scholes model allows us to simulate the stock price trajectory using normal random variables.
-
-
-
-
-
-
 \subsection{vanilla.mc}
 
-
-
 \subsection{asian.mc}
-
-\ref{lst:exotic_options}
-
-Different from a vanilla option whose payoff only depends on stock price at maturity (i.e. $t = T$), an Asian option's payoff is determined by the average stock price throughout the option's life $\bar{S}$ and the strike price $K$. To calculate $\bar{S}$, we need to consider the price movement throughout $t \in [0, T]$, making the pricing of an Asian option path-dependent , i.e. we should store the price at any time $t \in [0,T]$ for each simulated price trajectory \cite{Higham2004}.
-
-A generalised case of the stock pricing model is given by:
-
-\begin{align}
-    dS(t) = rS(t)dt + \sigma(S(t))S(t)dW(t)
-\end{align}
 
 \subsection{barrier.mc}
 
@@ -140,5 +76,4 @@ A generalised case of the stock pricing model is given by:
 
 \subsection{lookback.mc}
 
-
-
+\newpage

@@ -11,6 +11,11 @@ P.~Glasserman, {\em Monte Carlo methods in financial engineering}.
 \newblock Explaination on Monte Carlo method, MC European vanilla option
   pricing, MC Asian option pricing.
 
+\bibitem{Iacus2008}
+S.~M. Iacus, {\em Stochastic Processes and Stochastic Differential Equations}.
+\newblock Springer New York, 2008.
+\newblock Stochastic Processes<br/>Brownian Motion.
+
 \bibitem{Bachelier1900}
 L.~Bachelier, ``Théorie de la spéculation,'' {\em Annales scientifiques de
   l'École normale supérieure}, vol.~17, pp.~21--86, 1900.

@@ -1,36 +1,38 @@
 \chapter{Introduction} \label{cpt:Introduction}
 
 \section{Abstract}
-This report discuss the development of the R package \mintinline{R}{rmcop}, an objective oriented financial option pricing package. The name "rmcop" stands for R Monte Carlo Option Pricing.
+This report discusses the development of the R package \mintinline{R}{rmcop}, an fully R-based package for pricing financial options (see Section \ref{sec:Literature Review} for definitions). Pricing financial options is an essensial fragment of financial engineering and quantitative finance. Because options consider future in time, determining their fair price involves modelling uncertainty, so statistical methods are widely applied. Modern option pricing methods can be complex and product-specific, but most works are still built upon the basic frameworks of Black-Scholes formula and Monte Carlo simulations. The package \mintinline{R}{rmcop} covers the R implementation of some of these fundamental option price models on various option types and styles, and can be a good reference for constructing more complex R opiton pricing algorithms.
 
-In this chapter \ref{cpt:Introduction}, we will briefly introduces the function of \mintinline{R}|rmcop| in Section \ref{sec:Package Description}. The literature review below in Section \ref{sec:Literature Review} will discuss the option pricing models that are included in the package, accompanying by some formula deductions. The implementation of them using R programming are explained in details in Chapter \ref{cpt:Package Development}.
+\section{Report Structure}
+
+Here in Chapter \ref{cpt:Introduction}, the literature review in Section \ref{sec:Literature Review} will introduce necessary definitions of financial options and option pricing methods that are included in \mintinline{R}|rmcop| package. This is accompanyed by some useful formula deductions that will be seen useful in Chapter \ref{cpt:Pkg Dev}, where we will discuss the programming implementation of these models.
 
 In Chapter \ref{cpt:Existing Packages}, we will introduce three existing option pricing packages in R (\mintinline{R}|derivmkts|, \mintinline{R}|fOptions|, \mintinline{R}|RQuantLib|), and explain their functionalities. We will also discuss their advantages and limitations.
 
-In Chapter \ref{cpt:Package Development}, we will discuss the package structure of \mintinline{R}|rmcop|. Section \ref{sec:R OOP} explains R's Objective Oriented Programming techniques that are used in developing the package. Section \ref{sec:Package Structure} outlines the R scripts and functions the package contains and their respective purposes. Section \ref{sec:Implementation} will detailedly explain the implementation of the option pricing models in R.
+In Chapter \ref{cpt:Pkg Dev}, we will discuss the package structure of \mintinline{R}|rmcop|. This includes: 1. a discussion on R's generic Objective Oriented Programming (OOP) environment; 2. an outline of the package's structure; and 3. a detailed elaboration of the R implementation techniques of the financial models introduced in Section \ref{sec:Literature Review}.
 
-In the last chapter, Chapter \ref{cpt:Results}, we will illustrate \mintinline{R}|rmcop|'s functionalities by providing examples of R code as well as results' intrepretations under Section \ref{sec:Examples}. Finally in Section \ref{sec:Discussions}, we will conclude the report by a discussion on \mintinline{R}|rmcop|'s limitations and plans for further development.
+Finally in Chapter \ref{cpt:Results}, we will demonstrate examples and interpretations using \mintinline{R}|rmcop|. The report is then concluded by a discussion on \mintinline{R}|rmcop|'s limitations and plans for further development.
 
-\section{Package Description} \label{sec:Package Description}
+\section{Package Description} \label{sec:Pkg Description}
 
-\mintinline{R}|rmcop| is an R package used for pricing financial options. The name ``rmcop'' stands for ``R Monte Carlo Option Pricing''. The package supports Monte Carlo based pricing for European vanilla options and several European exotic options, as well as some deterministic methods for pricing European and American vanilla options, which will be discussed in more details in Chapter \ref{cpt:Package Development}.
+\mintinline{R}|rmcop| is an R package used for pricing financial options. The name ``rmcop'' stands for ``R Monte Carlo Option Pricing''. The package supports Monte Carlo based pricing for European vanilla options and European exotic options, including Asian, Barrier, Binary, and Lookback options. It also provides some deterministic methods for both European and American vanilla options pricing, including option pricing via Binomial-Trinomial lattice tree and Black-Scholes formula.
 
-% A table showing the supported pricing method and options
+Unlike most existing packages in the R Ecosystem, \mintinline{R}|rmcop| is developed through an object oriented approach. User's argument inputs for pricing functions are encapsulated in corresponding objects, and pricing functions are themselves methods. This introduces ordered arguments control and easier functions application.
 
 \section{Literature Review} \label{sec:Literature Review}
 
 \subsection{Pricing of Financial Options}
 
-A financial option is a common derivative\footnote{A financial derivative is a security whose value depends on an the value of an underlying (i.e.corresponding) asset/stock.} in the market. A option can be generally be classified into two types, either ``call'' or ``put''. An (European) call option, by definition \cite{Higham2004}, ``gives its holder the right (but not the obligation) to purchase from the writer a prescribed asset for a prescribed price (strike price) at a prescribed time (maturity / expiration) in the future.'' In constst, an (European) put option gives the right to sale an asset.
+An option is a common financial derivative\footnote{a security whose value depends on an the value of an underlying (i.e. the related) asset/stock.} in the market. Options can be roughly classified into two types, either being ``call'' or ``put''. A call option, ``gives its holder the right (but not the obligation) to purchase from the writer (issuer) a prescribed asset for a prescribed price (strike price) at a prescribed time (maturity / expiration) in the future.\cite{Higham2004}'' Similarly, a put option gives the right to sell.
 
-The two most common styles of financial options are European and American. An European option can only be exercised at maturity, whereas an American option allows exercising at anytime prior to maturity (which is a more complex setting for option pricing).
+The two most common styles of financial options are European options and American options. An European option can only be exercised at maturity, whereas an American option allows exercising at anytime prior to maturity (which is a more complex setting).
 
-The most typical options are so called ``vanilla options'', which includes no special or unusual features. For vanilla cases, an European's call option has a payoff of $(S_T-K)^+ \coloneqq \max{(S_T-K,0)}$, and an European put option has a payoff of $(K-S_T)^+ \coloneqq \max{(K-S_T,0)}$ \cite{Glasserman2003} at the point of exercise $T$ (i.e. maturity). Here, $S_t$ is the underlying asset price at time $t\in[0,T]$, and $K$ is the option's strike price.
+The most typical "family" of options are the so called ``vanilla options'', which includes no special or unusual features seen in exotic options (see list below). For vanilla cases, an European's call option has a payoff of $(S_T-K)^+ \coloneqq \max{(S_T-K,0)}$, and an European put option has a payoff of $(K-S_T)^+ \coloneqq \max{(K-S_T,0)}$ \cite{Glasserman2003} at the point of exercise $T$ (i.e. maturity). Here, $S_t$ is the underlying asset price at time $t\in[0,T]$, and $K$ is the option's strike price.
 
 Options with ``special or unusual features'' are called ``exotic options''. The exotic options whose pricing are supported by \mintinline{R}|rmcop| is introduced as follows based on the definitions given in \textit{An Introduction to Financial Option Valuation} \cite{Higham2004}.
 
 \begin{itemize} \label{lst:exotic_options}
-    \item \textbf{Asian Options} Asian options' payoff are determined by the average price of the underlying asset.
+    \item \textbf{Asian Options} Asian options' payoff are determined by the average price of the underlying asset throughout its life span.
     \begin{itemize}
 		\item An average price Asian call option has payoff at the expiry $T$ given by $\max(\bar{S} - K)$.
 		\item An average price Asian put option has payoff at the expiry $T$ given by $\max(K - \bar{S})$.
@@ -53,8 +55,40 @@ Options with ``special or unusual features'' are called ``exotic options''. The 
 		\item A fixed strike lookback put option has payoff at expiry $T$ given by $\max(K-S^{\min}, 0)$.
 		\item A floating strike lookback call option has payoff at expiry $T$ given by $S_T -S^{\min}$.
 		\item A floating strike lookback put option has payoff at expiry $T$ given by $S^{\max} -S_T$.
-    \end{itemize} 
+    \end{itemize}
 \end{itemize}
+
+\subsection{Brownian Motion}
+
+A \textit{stochastic process}, by definition \cite{Iacus2008}, is a family of random variables $\{X_\gamma,\gamma\in\Gamma\}$ defined on $\Omega\times\Gamma$ taking values in $\mathbb{R}$. Thus, the random variables of the family (measurable for every $\gamma\in\Gamma$) are functions of the form:
+
+\begin{align*}
+X(\gamma,\omega):\Gamma\times\Omega\mapsto\mathbb{R}
+\end{align*}
+
+Where $(\omega,\mathcal{A},P)$ is a probability space described by samples $\omega$, action space $\mathcal{A}$, and probability measure $P$.
+
+For $\Gamma=\mathbb{N}$, we have a \textit{discrete process}, and for $\Gamma\subset\mathbb{R}$, we have a \textit{continuous process}. In our context we will consider $\Gamma$ to represent the scope in time, and takes values from $0$ to option's maturity $T$.
+
+A stochastic process $\{X(t), t\geq 0\}$ is said to be a \textit{Brownian motion} if \cite{Iacus2008}:
+
+\begin{enumerate}
+	\item $X(0)=0$;
+	\item $\{X(t),t\geq0\}$ has stationary and independent increments.
+	\item for every $t>0$, $X(t)\sim N(0,\sigma^2 t)$.
+\end{enumerate}
+
+\begin{figure}[H] \label{img:wiener_process}
+	\centering
+	\includegraphics[scale = 0.5]{wiener_process.jpeg}
+	\caption{Wiener Process}
+\end{figure}
+
+Image \ref{img:wiener_process} demonstrates the trajectories of a one-dimensional Standard Brownian Motion (SBM, Wiener Process), where each gray line represents a simulated path of a Wiener process.
+
+Notice that the expectation of a SBM at any time $t\geq0$ is zero, and that that the deviation is explained by $N(0,t)$. This makes the spread of the trajectories almost symmetric. This makes the SBM a \textit{symmetric stochastic process}.
+
+
 
 \subsection{Black-Scholes Model}
 
@@ -70,6 +104,10 @@ Being the earlist approach, Bachelier's formula had already outlined the relatio
 It wasn't until 1960s had further improvement been made to quantitative option pricing. In 1961, Case Sprenkle \cite{Sprenkle1961} introduced the Sprenkle formula. The formula addressed the above issues by describing the stock price by the more suitable log-normal distribution and discounting for the effect of interest rate, which successfully explained the time value of an option. In the following decade, improvements have been made by scholars such as Boness and Samuelson \cite{BS1973}, who introduced emperical constants to increase the effectiveness of Sprenkle's model.
 
 The model was finalised by Black and Scholes in 1973 \cite{BS1973}, who explained the stock price movement by Geometric Brownian Motion (GBM). The GBM was described in the form of a Stochastic Differential Equation (SDE), which effectly model the continuity of price movement. The solution (derived through Itô's lemma) of Black-Scholes formula under an risk-neutral approach\footnote{The risk-neutral approach, in simple terms, is constructing a portfolio at a moment in time such that the portfolio value will be identical at the next moment in time regardless of the price movement, so the portfolio will be riskless to the price movement.} eliminates the emperical measure of Sprenkle et al's model, which resulted in an objective and deterministic estimation of option price, as is used by most contemporary pricing methods.
+
+
+
+
 
 The Black-Scholes model describes the price movement of an underlying asset via a Geometric Brownian Motion (GBM), defined by the Stochastic Differential Equation (SDE) \cite{BS1973}:
 
@@ -115,9 +153,7 @@ In 1979, based on the risk-neutral approach used by the Black-Scholes model, Cox
 
 To construct a Binomial tree of stock prices, one breaks down the option's life $[0,T]$ into $n$ time steps with fixed interval $\Delta t=T/n$. For each time steps, the stock price can move either up by a factor $u$ with probablity $\hat{p}$ or down by a factor $d$ with probability $\hat{q}=1-\hat{p}$.
 
-% TODO: Add a figure here to illustrate the graph. \label{}
-
-\begin{figure}[ht]
+\begin{figure}[ht] \label{gph:binomial_tree}
     \centering
     \[\tikz{
         \node (a) at (0, 2) {$S$};
@@ -187,13 +223,13 @@ The payoff of an option is calculated similarly as mentioned in the Binomial mod
 
 The Trinomial model, as well as multinomial models, allows exponentially more stock price possibilities to be generated within the same number of time steps given. However, they are not necessarily computationally advantagous than the Binomial model, and solving for risk-neutral probabilities will be infeasible as more directions of movements are considered.
 
-Relevant researches\cite{SI2019} have shown that, for some option styles, multinomial models are simply "transformation from Binomial lattice by removing the intraday periods." These ideas shows that pursue of further multinomial methods are unnecessary.
+Relevant researches \cite{SI2019} have shown that, for some option styles, multinomial models are simply "transformation from Binomial lattice by removing the intraday periods." These ideas shows that pursue of further multinomial methods are unnecessary.
 
 \subsection{Monte Carlo Option Pricing}
 
 As the financial market develops and more complicated options emerge, in many realistic cases, one cannot find a deterministic solution for pricing option. However, thanks to the advancement of computer power, one can simulate price trajectories for enormous times, and estimate the payoff of the option of interest by simply taking the average of the option payoff under each simulated trajectory. Such method is known as the Monte Carlo method. The very first attempt of applying computational method in option pricing is by Phelim Boyle in 1977. More serious (and effective) approach was introduced by Paul Glasserman \cite{Glasserman2003} in the 1990s based on the Black-Scholes model. Until now, the field of Monte Carlo option pricing is still under active development and is widely used by "quants".
 
-\mintinline{R}|rmcop|'s Monte Carlo pricing functionalities are limited to pricing European options. The supported scenarios are vanilla options and exotic options displayed in List \ref{lst:exotic_options} above. The methods implementing Monte Carlo option follow the framework introduced in Glasserman's \textit{Monte Carlo Methods in Financial Engineering} \cite{Glasserman2003}, and will be elaborated below.
+\mintinline{R}|rmcop|'s Monte Carlo pricing functionalities are limited to pricing European options. The supported scenarios are vanilla options and exotic options displayed in Section \ref{lst:exotic_options} above. The methods implementing Monte Carlo option follow the framework introduced in Glasserman's \textit{Monte Carlo Methods in Financial Engineering} \cite{Glasserman2003}, and will be elaborated below.
 
 A generalised form of the Black-Scholes SDE shown in Equation \ref{eq:BS Original} can be written as:
 
@@ -223,6 +259,6 @@ Where $Z_1,...,Z_n$ are independent Standard Normal random variables. Now, by si
 
 Repeating the above procedure many times, we will obtain multiple simulated stock prices. By using information within each trajetory to compute the payoff of the option for that simulation, and take the mean of the payoffs computed for all simulations, we will have an estimated of the expected option payoff. Discounting this payoff will gave us an estimation of the option's current price under the scope of Black-Scholes model.
 
-Detailed description on implementing Monte Caro method upon each style of option that are relevant to \mintinline{R}|rmcop| will be discussed in Section \ref{sec:Implementation}.
+Detailed description on implementing Monte Caro method upon each style of option that are relevant to \mintinline{R}|rmcop| will be discussed in Chapter \ref{cpt:Pkg Dev}.
 
 \newpage

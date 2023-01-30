@@ -16,19 +16,27 @@
 % Enable extension of mathematical symbols
 \usepackage{mathtools}
 
-% Enable interactive reference
-% \usepackage{hyperref}
+% Enable interactive reference, this is necessary for interactive navigations such as table of contents
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks = true, % Set true if you want colored links
+    linkcolor = black,  % Choose some color if you want links to stand out
+    linktoc = all,     % Set to all if you want both sections and subsections linked
+}
 
 % Enable advanced graphic controls
 \usepackage{graphicx}
+
+% Enable floating objects control, this includes the [H] command fixing images' locations
+\usepackage{float}
 
 % Plot diagrams
 \usepackage{tikz}
 
 % Enable advanced colour control
 \usepackage{xcolor}
-\definecolor{codebg}{rgb}{0.97, 0.97, 0.97} % Customise colour used as code blocks' background
 \definecolor{linecol}{rgb}{0.85, 0.85, 0.85} % Customise colour used for the code blocks' frame lines
+\definecolor{codebg}{rgb}{0.97, 0.97, 0.97} % Customise colour used as code blocks' background
 
 % Render code blocks better with pygmentised highlighting
 \usepackage{minted}
