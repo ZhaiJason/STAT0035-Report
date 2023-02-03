@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+\PYG{c+c1}{\PYGZsh{} Setup arguments for calculation}
+\PYG{n}{t} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{l+m}{2} \PYG{c+c1}{\PYGZsh{} Expiration}
+\PYG{n}{n} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{l+m}{100} \PYG{c+c1}{\PYGZsh{} Number of trajectories to simulate}
+\PYG{n}{m} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{l+m}{100} \PYG{c+c1}{\PYGZsh{} Number of time steps per trajectory}
+\PYG{n}{S0} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{l+m}{20} \PYG{c+c1}{\PYGZsh{} The current asset price}
+\PYG{n}{mu} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{l+m}{0.05} \PYG{c+c1}{\PYGZsh{} The drift coefficient}
+\PYG{n}{sigma} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{l+m}{0.03} \PYG{c+c1}{\PYGZsh{} The diffusion coefficient}
+\PYG{n}{dt} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{t} \PYG{o}{/} \PYG{n}{m} \PYG{c+c1}{\PYGZsh{} The length of each time step}
+\end{Verbatim}

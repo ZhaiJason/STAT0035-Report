@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+\PYG{n}{S.mean} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{apply}\PYG{p}{(}\PYG{n}{S}\PYG{p}{,} \PYG{l+m}{2}\PYG{p}{,} \PYG{n}{mean}\PYG{p}{)}
+\end{Verbatim}

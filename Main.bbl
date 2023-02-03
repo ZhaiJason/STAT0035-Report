@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{Higham2004}
 D.~Higham, {\em An Introduction to Financial Option Valuation}.
@@ -15,6 +15,12 @@ P.~Glasserman, {\em Monte Carlo methods in financial engineering}.
 S.~M. Iacus, {\em Stochastic Processes and Stochastic Differential Equations}.
 \newblock Springer New York, 2008.
 \newblock Stochastic Processes<br/>Brownian Motion.
+
+\bibitem{Shreve2004}
+S.~E. Shreve, {\em Stochastic calculus for finance. II, Continuous-time
+  models}.
+\newblock Springer, 2004.
+\newblock Geometric Brownian Motion<br/>Ito Calculus.
 
 \bibitem{Bachelier1900}
 L.~Bachelier, ``Théorie de la spéculation,'' {\em Annales scientifiques de

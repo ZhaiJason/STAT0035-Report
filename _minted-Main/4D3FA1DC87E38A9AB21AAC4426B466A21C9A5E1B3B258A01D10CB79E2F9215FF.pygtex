@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+\PYG{n}{mc.SE} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{C\PYGZus{}i}\PYG{p}{,} \PYG{n}{C.mean}\PYG{p}{,} \PYG{n}{n}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n}{s\PYGZus{}c} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{sqrt}\PYG{p}{(}\PYG{n+nf}{sum}\PYG{p}{(}\PYG{n}{C\PYGZus{}i} \PYG{o}{\PYGZhy{}} \PYG{n}{C.mean}\PYG{p}{)}\PYG{o}{\PYGZca{}}\PYG{l+m}{2} \PYG{o}{/} \PYG{p}{(}\PYG{n}{n} \PYG{o}{\PYGZhy{}} \PYG{l+m}{1}\PYG{p}{))}
+    \PYG{n}{SE} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{s\PYGZus{}c} \PYG{o}{/} \PYG{n+nf}{sqrt}\PYG{p}{(}\PYG{n}{n}\PYG{p}{)}
+    \PYG{n}{SE}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

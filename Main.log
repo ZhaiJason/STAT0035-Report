@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.11.2)  30 JAN 2023 18:58
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.11.2)  3 FEB 2023 02:05
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -565,6 +565,24 @@ Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 )
 runsystem(if not exist _minted-Main mkdir _minted-Main)...executed.
 
+) (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/algorithmicx/algpseudocode.sty
+Package: algpseudocode 
+ (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/algorithmicx/algorithmicx.sty
+Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
+
+Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
+\c@ALG@line=\count341
+\c@ALG@rem=\count342
+\c@ALG@nested=\count343
+\ALG@tlm=\skip59
+\ALG@thistlm=\skip60
+\c@ALG@Lnr=\count344
+\c@ALG@blocknr=\count345
+\c@ALG@storecount=\count346
+\c@ALG@tmpcounter=\count347
+\ALG@tmplength=\skip61
+)
+Document Style - pseudocode environments for use with the `algorithmicx' style
 )
 runsystem(for ^%i in (pygmentize.exe pygmentize.bat pygmentize.cmd) do set > Main.aex <nul: /p x=^%~$PATH:i>> Main.aex)...executed.
 
@@ -572,7 +590,7 @@ runsystem(del Main.aex)...executed.
 
  (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2022-10-26 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count341
+\l__color_backend_stack_int=\count348
 \l__pdf_internal_box=\box74
 ) (./Main.aux)
 \openout1 = `Main.aux'.
@@ -637,16 +655,16 @@ Package hyperref Info: Link coloring ON on input line 9.
 
  (d:/Application/Programming/texlive/2022/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count342
+\scratchcounter=\count349
 \scratchdimen=\dimen295
 \scratchbox=\box75
-\nofMPsegments=\count343
-\nofMParguments=\count344
+\nofMPsegments=\count350
+\nofMParguments=\count351
 \everyMPshowfont=\toks39
-\MPscratchCnt=\count345
+\MPscratchCnt=\count352
 \MPscratchDim=\dimen296
-\MPnumerator=\count346
-\makeMPintoPDFobject=\count347
+\MPnumerator=\count353
+\makeMPintoPDFobject=\count354
 \everyMPtoPDFconversion=\toks40
 ) (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -670,7 +688,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.28 ...e {3.5.1}vanilla.mc}{14}{subsection.3.5.1}
+l.28 ...e {3.5.1}vanilla.mc}{19}{subsection.3.5.1}
                                                   % [1
 
 ])
@@ -726,35 +744,37 @@ Package pdftex.def Info: ./images//wiener_process.jpeg  used on input line 83.
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.107 
-       <./images//wiener_process.jpeg>] [7] [8
+l.120 
+       <./images//wiener_process.jpeg>] [7]
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/937D1B8A60E1776BF436457851B18BB1C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [8] [9
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.191 
+l.229 
       ]
 \openout5 = `Main.pyg'.
 
- (./_minted-Main/937D1B8A60E1776BF436457851B18BB1C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [9]
-\openout5 = `Main.pyg'.
-
- (./_minted-Main/937D1B8A60E1776BF436457851B18BB1C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
-\openout4 = `Main.pyg'.
-
- (./_minted-Main/69460A1020826EEA7656E84C599587851C9A5E1B3B258A01D10CB79E2F9215FF.pygtex)
-\openout5 = `Main.pyg'.
-
- (./_minted-Main/937D1B8A60E1776BF436457851B18BB1C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [10]) (./Chapter 2.tex
+ (./_minted-Main/937D1B8A60E1776BF436457851B18BB1C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [10
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1.3}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.273 
+      ] [11] [12]) (./Chapter 2.tex
 Chapter 2.
 \openout5 = `Main.pyg'.
 
-(./_minted-Main/5844684FD64A8CC419FA10947575447DC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [11
+(./_minted-Main/5844684FD64A8CC419FA10947575447DC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [13
 
 ]) (./Chapter 3.tex
 Chapter 3.
 \openout5 = `Main.pyg'.
 
-(./_minted-Main/AB4AD7F230160B2C08375225D04B1A32C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+(./_minted-Main/937D1B8A60E1776BF436457851B18BB1C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/AB4AD7F230160B2C08375225D04B1A32C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/7BB411A67D2E335012B92C2146804F11C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
@@ -787,18 +807,18 @@ Chapter 3.
  (./_minted-Main/4B53775B1C79EF8A8B82841E572ED502C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
- (./_minted-Main/3AEF716D7619949F18B50A3F1297CDF1C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [12
+ (./_minted-Main/3AEF716D7619949F18B50A3F1297CDF1C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [14
 
 
 pdfTeX warning (ext4): destination with the same identifier (name{table.3.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.37 
+l.40 
      
 pdfTeX warning (ext4): destination with the same identifier (name{table.3.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.37 
+l.40 
      ]
 \openout5 = `Main.pyg'.
 
@@ -824,9 +844,6 @@ l.37
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/20A882C5C27D7D7200ED5F431204314FC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
-\openout5 = `Main.pyg'.
-
- (./_minted-Main/F21E02B3BDC1281ADDF2A73BDE17F8FAC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout4 = `Main.pyg'.
 
  (./_minted-Main/096453BE469FE694C1F0DB4A01A588D61C9A5E1B3B258A01D10CB79E2F9215FF.pygtex)
@@ -835,11 +852,109 @@ l.37
  (./_minted-Main/43BE2F60A6DB7BF23ED742E2B13AB659C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
- (./_minted-Main/0B30CF6B168EA1D831A5FE28A209E73BC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [13] [14]) (./Chapter 4.tex
-Chapter 4.
-[15
+ (./_minted-Main/0B30CF6B168EA1D831A5FE28A209E73BC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
 
-]) (./Main.bbl) [16
+ (./_minted-Main/CA8E9C0698754D3EB13AE53DD275A724C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [15]
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/036F7D56EBBFE24680869D5353E1B1DFC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout4 = `Main.pyg'.
+
+ (./_minted-Main/0A50E54556228D18DB39F5F87AD8B8FC1C9A5E1B3B258A01D10CB79E2F9215FF.pygtex)
+\openout4 = `Main.pyg'.
+
+ (./_minted-Main/638F59A3D5EDFF78F17BA52AFA1F0C811C9A5E1B3B258A01D10CB79E2F9215FF.pygtex) [16]
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/95FB5538615BCA02A52C9C21BA51501FC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/365C60A73C0CB1FC2139E8748BD58EF9C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/A7F8A33CBEF694610E864DEB0885AD0EC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout4 = `Main.pyg'.
+
+ (./_minted-Main/B99A7D6A4390BD5986FA48633D63B7A81C9A5E1B3B258A01D10CB79E2F9215FF.pygtex)
+<./images//mc_trajectories.jpeg, id=404, 505.89pt x 361.35pt>
+File: ./images//mc_trajectories.jpeg Graphic file (type jpg)
+<use ./images//mc_trajectories.jpeg>
+Package pdftex.def Info: ./images//mc_trajectories.jpeg  used on input line 121.
+(pdftex.def)             Requested size: 252.94437pt x 180.67456pt.
+ [17
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.140 \end{align}
+                  <./images//mc_trajectories.jpeg>]
+\openout4 = `Main.pyg'.
+
+ (./_minted-Main/4A71060630C33E3B3FFCF834E197F5871C9A5E1B3B258A01D10CB79E2F9215FF.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/41FF0912A07FDC52799FF27B38E7F140C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/82143A90303ECA6301242063D80141E7C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/9C9D13C90544D7E87BC59B3A17387EBFC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/6F941C0362134481DF444188ED5C4644C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout4 = `Main.pyg'.
+
+ (./_minted-Main/481317C118763A59A05A0C3152DD364B1C9A5E1B3B258A01D10CB79E2F9215FF.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/772ECF8FB90FC1920B27824DFDB31196C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/7E49C96DA149E334E037EAAD9ED5E30EC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/47418AF077BDB32F8048E8061CC90B80C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/14D64E3D4B7F8E5EA698633773131049C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout4 = `Main.pyg'.
+
+ (./_minted-Main/1C2F05C47D318A0954A2B1B3C9241A491C9A5E1B3B258A01D10CB79E2F9215FF.pygtex) [18]
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/D122B23CACADE5BAB9FC7E4AE01AA12BC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/937D1B8A60E1776BF436457851B18BB1C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/14D64E3D4B7F8E5EA698633773131049C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/14D64E3D4B7F8E5EA698633773131049C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout4 = `Main.pyg'.
+
+ (./_minted-Main/4D3FA1DC87E38A9AB21AAC4426B466A21C9A5E1B3B258A01D10CB79E2F9215FF.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/14D64E3D4B7F8E5EA698633773131049C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout4 = `Main.pyg'.
+
+ (./_minted-Main/805107EB6425336BD54F2ED1ACD0EB7C1C9A5E1B3B258A01D10CB79E2F9215FF.pygtex) [19]
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/6AA2BFF30EAD46C17D0A5E424C4496B3C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout4 = `Main.pyg'.
+
+ (./_minted-Main/04110E19943767C1BD2FA033DB4776A41C9A5E1B3B258A01D10CB79E2F9215FF.pygtex)
+\openout4 = `Main.pyg'.
+
+ (./_minted-Main/33B74030187A80BC374324D84B6247DD1C9A5E1B3B258A01D10CB79E2F9215FF.pygtex) [20]) (./Chapter 4.tex
+Chapter 4.
+[21
+
+]) (./Main.bbl) [22
 
 ] (./Main.aux)
 Package rerunfilecheck Info: File `Main.out' has not changed.
@@ -848,18 +963,18 @@ runsystem(del Main.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 24321 strings out of 475066
- 482638 string characters out of 5770797
- 832925 words of memory out of 5000000
- 45090 multiletter control sequences out of 15000+600000
- 479520 words of font info for 68 fonts, out of 8000000 for 9000
+ 25001 strings out of 475066
+ 503473 string characters out of 5770797
+ 848876 words of memory out of 5000000
+ 45675 multiletter control sequences out of 15000+600000
+ 479688 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 89i,13n,92p,1087b,865s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{d:/Application/Programming/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on Main.pdf (17 pages, 1624177 bytes).
+ 89i,13n,92p,1114b,913s stack positions out of 10000i,1000n,20000p,200000b,200000s
+{d:/Application/Programming/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
+Output written on Main.pdf (23 pages, 3526410 bytes).
 PDF statistics:
- 497 PDF objects out of 1000 (max. 8388607)
- 432 compressed objects within 5 object streams
- 94 named destinations out of 1000 (max. 500000)
- 298 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 564 PDF objects out of 1000 (max. 8388607)
+ 486 compressed objects within 5 object streams
+ 103 named destinations out of 1000 (max. 500000)
+ 303 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,5 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
-\PYG{c+c1}{\PYGZsh{} for $i$ in 1,...,m:}
-\PYG{c+c1}{\PYGZsh{}	generate $Z_{i}$}
-\PYG{c+c1}{\PYGZsh{}	$S(t_i) = S(t_{i-1})\exp{([r - \frac{1}{2}\sigma^2](t_{i}-t_{i-1}) + \sigma\sqrt{t_{i}-t_{i-1}}Z_{i}))}$}
-\end{Verbatim}
