@@ -1,4 +1,4 @@
-\begin{thebibliography}{10}
+\begin{thebibliography}{1}
 
 \bibitem{Higham2004}
 D.~Higham, {\em An Introduction to Financial Option Valuation}.
@@ -41,17 +41,5 @@ F.~Black and M.~Scholes, ``The pricing of options and corporate liabilities,''
 J.~C. Cox, S.~A. Ross, and M.~Rubinstein, ``Option pricing: A simplified
   approach,'' {\em Journal of financial economics}, vol.~7, pp.~229--263, 1979.
 \newblock Binomial Lattice Model.
-
-\bibitem{Boyle1988}
-P.~P. Boyle, ``A lattice framework for option pricing with two state
-  variables,'' {\em Journal of Financial and Quantitative Analysis}, vol.~23, 3
-  1988.
-\newblock Trinomial Lattice Model.
-
-\bibitem{SI2019}
-F.~N.~F. Sudding and M.~Y.~T. Irsan, ``Multinomial method for pricing lookback
-  option,'' {\em Journal of Physics: Conference Series}, vol.~1341, p.~62036,
-  2019.
-\newblock Multinomial model.
 
 \end{thebibliography}

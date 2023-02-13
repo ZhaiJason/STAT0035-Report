@@ -75,11 +75,11 @@ The R algorithm can be roughly divided into four segments: 1. compute the risk-n
 
 To generate a binomial tree
 
-\subsection{vanilla.trinomial}
-
 \section{Monte Carlo Methods}
 
-The core of Monte Carlo is in simulating asset price movements. Recall the computable form of the Black-Scholes model (Equation \ref{eq:mc_explicit}) and the pseudocode given, we can directly implement this in R as follows.
+\subsection{Simulating Price Trajectories}
+
+The core of Monte Carlo option pricing is simulating the price movements of the underlying asset. Recall the computable form of the Black-Scholes model (Equation \ref{eq:mc_explicit}) and the pseudocode given, we can directly implement this in R as follows.
 
 \begin{Rminted}
 # Setup arguments for calculation
@@ -92,7 +92,7 @@ sigma <- 0.03 # The diffusion coefficient
 dt <- t / m # The length of each time step
 \end{Rminted}
 
-We will first implement directly using the pseudocode, as specified by Glasserman's work \cite{Glasserman2003}.
+We will first directly implement the pseudocode in R, following Glasserman's framework \cite{Glasserman2003}.
 
 \begin{Rminted}
 mc.for <- function() {
@@ -109,7 +109,7 @@ mc.for <- function() {
 }
 \end{Rminted}
 
-The resulting \mintinline{R}|S.mat| is a $(m + 1) \times n$ matrix, where each column records a simulated price trajectory from $t=0$ to $t=T$. We can plot the result trajectories using the \mintinline{R}|matplot()| function from the \mintinline{R}|graphics| package.
+The resulting \mintinline{R}|S.mat| is a $(m + 1) \times n$ matrix, where each column records a simulated price trajectory from $t=0$ to $t=T$ of $m+1$ steps (including the the current stock price at time $t=0$). We can plot the result trajectories using the \mintinline{R}|matplot()| function from the \mintinline{R}|graphics| package.
 
 \begin{Rminted}
 matplot(S.mat, type = "l", col = rgb(0, 0, 0, 0.2),
@@ -122,7 +122,7 @@ matplot(S.mat, type = "l", col = rgb(0, 0, 0, 0.2),
 	\caption{Monte Carlo Price Trajectories} \label{img:mc_trajectories}
 \end{figure}
 
-From the result shown in Figure \ref{img:mc_trajectories}, we see an collectively upward movement for prices. This corresponds to our setup of a positive drift coefficient.
+From the result shown in Figure \ref{img:mc_trajectories}, we see an collectively upward movement for prices. This corresponds to our setup of a positive drift coefficient of $0.05$.
 
 However, the above code is not computationally efficient. R is relatively slow in running for-loops, and we can speed up the process by using matrix method.
 
@@ -134,9 +134,9 @@ Recall Equation \ref{eq:BS_log_explicit}, where we have the explicit form of $\l
 
 Notice that assume $\Delta t$ is fixed, the part $\log(\Delta S)_i\coloneqq(\mu - \frac{\sigma^2}{2})\Delta t + \sigma Z_i \sqrt{\Delta t}$ is time independent. Therefore:
 
-\begin{align} \label{eq:mc_matrix}
+\begin{align}
 \log(S_{i+k}) &= \log(S_{i-1}) + \sum_{j=i}^{k}{\left[(\mu - \frac{\sigma^2}{2})\Delta t + \sigma Z_i \sqrt{\Delta t}\right]} \\
-&= \log(S_{i-1}) + \sum_{j=i}^{k}{\log(\Delta S_i)}
+&= \log(S_{i-1}) + \sum_{j=i}^{k}{\log(\Delta S_i)} \label{eq:mc_matrix}
 \end{align}
 
 For $i,k\in\mathbb{N}$ and $i+k\leq m$.
@@ -155,7 +155,7 @@ mc.mat <- function() {
 
 Here, we first define \mintinline{R}|Z| to be a matrix that constains all standard normal random variables required for a total of $n\times m$ number of steps. Then we define \mintinline{R}|logdS| as the matrix of all increments. Based on Equation \ref{eq:mc_matrix}, by using $\log(S_0)$ as the starting point and use cumulative sum \mintinline{R}|cumsum| function to add increament $\log(\Delta S)$ along steps of each trajectory, we will obtain the movement of prices in time. By some further post process shown above, we will get the same result as using the for-loops.
 
-To test the difference in computing speed between the two methods, we will test the average running time using the R package \mintinline{R}|microbenchmark|.
+To test the difference in computing speed between the two methods, we will test the average running time using the R package \mintinline{R}|microbenchmark|. The package's benchmarking test runs individual functions for 100 times and records the summary statistics of the running times, as shown below:
 
 \begin{Rminted}
 microbenchmark::microbenchmark(

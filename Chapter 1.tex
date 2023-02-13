@@ -1,6 +1,7 @@
 \chapter{Introduction} \label{cpt:Introduction}
 
 \section{Abstract}
+
 This report discusses the development of the R package \mintinline{R}{rmcop}, an fully R-based package for pricing financial options (see Section \ref{sec:Literature Review} for definitions). Pricing financial options is an essensial fragment of financial engineering and quantitative finance. Because options consider future in time, determining their fair price involves modelling uncertainty, so statistical methods are widely applied. Modern option pricing methods can be complex and product-specific, but most works are still built upon the basic frameworks of Black-Scholes formula and Monte Carlo simulations. The package \mintinline{R}{rmcop} covers the R implementation of some of these fundamental option price models on various option types and styles, and can be a good reference for constructing more complex R opiton pricing algorithms.
 
 \section{Report Structure}
@@ -15,21 +16,25 @@ Finally in Chapter \ref{cpt:Results}, we will demonstrate examples and interpret
 
 \section{Package Description} \label{sec:Pkg Description}
 
-\mintinline{R}|rmcop| is an R package used for pricing financial options. The name ``rmcop'' stands for ``R Monte Carlo Option Pricing''. The package supports Monte Carlo based pricing for European vanilla options and European exotic options, including Asian, Barrier, Binary, and Lookback options. It also provides some deterministic methods for both European and American vanilla options pricing, including option pricing via Binomial-Trinomial lattice tree and Black-Scholes formula.
+\mintinline{R}|rmcop| is an R package used for pricing financial options. The name ``rmcop'' stands for ``R Monte Carlo Option Pricing''. The package supports Monte Carlo based pricing for European vanilla options and European exotic options, including Asian, Barrier, Binary, and Lookback options. It also provides some deterministic methods for both European and American vanilla options pricing, including option pricing via Binomial lattice tree and Black-Scholes formula.
 
 Unlike most existing packages in the R Ecosystem, \mintinline{R}|rmcop| is developed through an object oriented approach. User's argument inputs for pricing functions are encapsulated in corresponding objects, and pricing functions are themselves methods. This introduces ordered arguments control and easier functions application.
+
+\section{Machine Environment}
+
+The majority of the development and testing of the package is completed using my laptop. The machine is an Honor MagicBook Pro 2020, with AMD R7-4800H CPU which has 8 cores and 16 strands.
 
 \section{Literature Review} \label{sec:Literature Review}
 
 \subsection{Pricing of Financial Options}
 
-An option is a common financial derivative\footnote{a security whose value depends on an the value of an underlying (i.e. the related) asset/stock.} in the market. Options can be roughly classified into two types, either being ``call'' or ``put''. A call option, ``gives its holder the right (but not the obligation) to purchase from the writer (issuer) a prescribed asset for a prescribed price (strike price) at a prescribed time (maturity / expiration) in the future.\cite{Higham2004}'' Similarly, a put option gives the right to sell.
+An option is a common financial derivative\footnote{a security whose value depends on an the value of an underlying (i.e. the related) asset.} in the market. Options can be roughly classified into two types, ``call'' or ``put''. A call option, ``gives its holder the right (but not the obligation) to purchase from the issuer a prescribed asset\footnote{Underlying asset/stock, the word "asset" and "stock" may be used interchangably through this report.} for a prescribed price (strike price) at a prescribed time (maturity / expiration) in the future.\cite{Higham2004}'' Similarly, a put option gives the right to sell.
 
-The two most common styles of financial options are European options and American options. An European option can only be exercised at maturity, whereas an American option allows exercising at anytime prior to maturity (which is a more complex setting).
+The two most common styles of financial options are European options and American options. An European option can only be exercised at maturity, whereas an American option can be exercised at anytime prior to maturity (which is a more complex setting).
 
-The most typical "family" of options are the so called ``vanilla options'', which includes no special or unusual features seen in exotic options (see list below). For vanilla cases, an European's call option has a payoff of $(S_T-K)^+ \coloneqq \max{(S_T-K,0)}$, and an European put option has a payoff of $(K-S_T)^+ \coloneqq \max{(K-S_T,0)}$ \cite{Glasserman2003} at the point of exercise $T$ (i.e. maturity). Here, $S_t$ is the underlying asset price at time $t\in[0,T]$, and $K$ is the option's strike price.
+The most typical "family" of options are the so called ``vanilla options'', which includes no special or unusual features seen in exotic options (see list below). For vanilla cases, an European call option has a payoff of $(S_T-K)^+ \coloneqq \max{(S_T-K,0)}$, and an European put option has a payoff of $(K-S_T)^+ \coloneqq \max{(K-S_T,0)}$ \cite{Glasserman2003} at the point of exercise $T$ (i.e. maturity). Here, $S_t$ is the underlying asset price at time $t\in[0,T]$, and $K$ is the option's strike price.
 
-Options with ``special or unusual features'' are called ``exotic options''. The exotic options whose pricing are supported by \mintinline{R}|rmcop| is introduced as follows based on the definitions given in \textit{An Introduction to Financial Option Valuation} \cite{Higham2004}.
+Options with ``special or unusual features'' are called ``exotic options''. The exotic options whose pricing are supported by \mintinline{R}|rmcop| package are introduced below based on the definitions given in \textit{An Introduction to Financial Option Valuation} \cite{Higham2004}.
 
 \begin{itemize} \label{lst:exotic_options}
     \item \textbf{Asian Options} Asian options' payoff are determined by the average price of the underlying asset throughout its life span.
@@ -222,50 +227,6 @@ P_{ij} &= e^{-rT}[\hat{p}P_{(i+1),j+1} + \hat{q}P_{(i+1),j}]
 \end{align}
 
 As mentioned above, the payoff of an option at maturity $T$ is obvious to obtain. By applying this recursive method forward from $t=T$ back to $t=0$, we will obtain an deterministic estimate of the current payoff (fair value) of the option of interest.
-
-\subsection{Trinomial Lattice Model}
-
-As a continuation of the Binomial model, Phelim Boyel in 1988 introduces the Trinomial Lattice Tree in modelling stock price movements \cite{Boyle1988}. Different from the Binomial tree, a Trinomial tree has three possible directions of movements: either up by a factor $u$ with probability $\hat{p}_1$, down by a factor $d$ with probability $\hat{p}_3$, or horizontally and remains unchanged with probability $\hat{p}_2$. We have $\hat{p}_1 + \hat{p}_2 + \hat{p}_3=1$.
-
-% TODO: add a graph to illustrate the Trinomial model
-
-\begin{figure}[H]
-    \centering
-    \[\tikz{
-        \node (a) at (0, 2) {$S$};
-        \node (b) at (2.5, 4) {$uS$};
-        \node (c) at (2.5, 2) {$S$};
-		\node (d) at (2.5, 0) {$dS$};
-        \path[->] (a) edge node [above left] {$\hat{p}_1$} (b)
-				  (a) edge node [above] {$\hat{p}_2$} (c)
-				  (a) edge node [below left] {$\hat{p}_3$} (d);
-    }\]
-    \caption{Binomial Lattice Tree for Stock Price with 1 Steps} \label{gph:trinomial_tree}
-\end{figure}
-
-The probabilities are also set to be risk neutral in such way that the current node's price is equal to the expected future nodes' price, discounting the interest:
-
-\begin{align}
-	S(t_{i}) &= e^{-r\Delta t}\mathbb{E}[S(t_{i+1})] \\
-	&= e^{-r\Delta t}[\hat{p}_1uS(t_i)+\hat{p}_2S(t_i)+\hat{p}_3uS(t_i)],\quad\text{for }i=0,...,n-1
-\end{align}
-
-However, in order to find unique solutions for $\hat{p}_i$'s, one need to imply more constraints on other parameters. One of the approach, which is implemented in \mintinline{R}|rmcop|, is that we have $u\times d=1$ and $u\neq1$. Under such setting, the solutions for the risk neutral probabilities are:
-
-% FIXME: adjust some equations so they are NOT all numbered
-
-\begin{align}
-\hat{p}_1&=\frac{(V + M^2 - M) u - (M - 1)}{(u - 1)(u^2 - 1)}\qquad\hat{p}_3=\frac{u^2(V + M^2 - M) - u^3(M - 1)}{(u - 1)(u^2 - 1)} \\
-\hat{p}_2&=1-\hat{p}_1-\hat{p}_3
-\end{align}
-
-Where $V\coloneqq M^2(e^{\sigma^2\Delta t} - 1)$, $M\coloneqq e^{r\Delta t}$, and $\Delta t=T/n$.
-
-The payoff of an option is calculated similarly as mentioned in the Binomial model.
-
-The Trinomial model, as well as multinomial models, allows exponentially more stock price possibilities to be generated within the same number of time steps given. However, they are not necessarily computationally advantagous than the Binomial model, and solving for risk-neutral probabilities will be infeasible as more directions of movements are considered.
-
-Relevant researches \cite{SI2019} have shown that, for some option styles, multinomial models are simply "transformation from Binomial lattice by removing the intraday periods." These ideas shows that pursue of further multinomial methods are unnecessary.
 
 \subsection{Monte Carlo Option Pricing}
 
