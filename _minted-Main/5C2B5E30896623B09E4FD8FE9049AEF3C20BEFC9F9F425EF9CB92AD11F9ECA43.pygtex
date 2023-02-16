@@ -1,0 +1,19 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{option} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{style}\PYG{p}{,} \PYG{n}{option} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}vanilla\PYGZdq{}}\PYG{p}{,} \PYG{n}{type}\PYG{p}{,} \PYG{n}{K}\PYG{p}{,} \PYG{n}{t}\PYG{p}{,} \PYG{k+kc}{...}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+
+    \PYG{n}{obj} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{list}\PYG{p}{(}
+        \PYG{l+s}{\PYGZdq{}style\PYGZdq{}} \PYG{o}{=} \PYG{n}{style}\PYG{p}{,}
+        \PYG{l+s}{\PYGZdq{}type\PYGZdq{}} \PYG{o}{=} \PYG{n}{type}\PYG{p}{,}
+        \PYG{l+s}{\PYGZdq{}K\PYGZdq{}} \PYG{o}{=} \PYG{n}{K}\PYG{p}{,}
+        \PYG{l+s}{\PYGZdq{}t\PYGZdq{}} \PYG{o}{=} \PYG{n}{t}
+    \PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Direct to corresponding sub\PYGZhy{}class constructors}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{option} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}vanilla\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{obj} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{option.vanilla}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{p}{\PYGZob{}}
+        \PYG{n}{obj} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{option.exotic}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{option}\PYG{p}{,} \PYG{k+kc}{...}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}}
+    \PYG{n}{obj}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

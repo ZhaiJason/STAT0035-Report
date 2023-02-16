@@ -1,4 +1,4 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{n}{mc.for} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{()} \PYG{p}{\PYGZob{}}
     \PYG{n}{S.mat} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{matrix}\PYG{p}{(}\PYG{n}{nrow} \PYG{o}{=} \PYG{n}{m} \PYG{o}{+} \PYG{l+m}{1}\PYG{p}{,} \PYG{n}{ncol} \PYG{o}{=} \PYG{n}{n}\PYG{p}{)}
     \PYG{n+nf}{for }\PYG{p}{(}\PYG{n}{j} \PYG{n}{in} \PYG{l+m}{1}\PYG{o}{:}\PYG{n}{n}\PYG{p}{)} \PYG{p}{\PYGZob{}}

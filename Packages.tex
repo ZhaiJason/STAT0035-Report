@@ -30,6 +30,13 @@
 % Enable floating objects control, this includes the [H] command fixing images' locations
 \usepackage{float}
 
+% Enable inserting .svg vector images, require Inkscape installed and added to PATH
+\usepackage{svg}
+\svgsetup{
+    inkscapeexe = D:/Application/Programming/Inkscape/bin/inkscape.exe,
+    inkscapelatex = false % Partially fix issue text overflow shape boundaries
+}
+
 % Plot diagrams
 \usepackage{tikz}
 
@@ -46,7 +53,7 @@
     rulecolor = linecol,
     xleftmargin = 18 pt,
     xrightmargin = 10 pt,
-    mathescape, % Enable LaTeX math rendered as math symbols in comments
+    % mathescape, % Enable LaTeX math rendered as math symbols in comments
     obeytabs,
     tabsize = 4,
     bgcolor = codebg,

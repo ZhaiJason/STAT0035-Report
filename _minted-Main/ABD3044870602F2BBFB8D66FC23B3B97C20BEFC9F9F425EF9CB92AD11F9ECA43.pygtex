@@ -1,0 +1,36 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{international.student} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{age}\PYG{p}{,} \PYG{n}{gender}\PYG{p}{,} \PYG{n}{nationality}\PYG{p}{,} \PYG{n}{language}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+
+    \PYG{n}{obj} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{student}\PYG{p}{(}\PYG{n}{age}\PYG{p}{,} \PYG{n}{gender}\PYG{p}{)}
+    \PYG{n}{obj} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{c}\PYG{p}{(}
+        \PYG{n}{obj}\PYG{p}{,}
+        \PYG{l+s}{\PYGZdq{}nationality\PYGZdq{}} \PYG{o}{=} \PYG{n}{nationality}\PYG{p}{,}
+        \PYG{l+s}{\PYGZdq{}language\PYGZdq{}} \PYG{o}{=} \PYG{n}{language}
+    \PYG{p}{)}
+    \PYG{n+nf}{class}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{)} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{c}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}international\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}student\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{obj}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{Sara} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{international.student}\PYG{p}{(}
+    \PYG{n}{age} \PYG{o}{=} \PYG{l+m}{21}\PYG{p}{,}
+    \PYG{n}{gender} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}female\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{nationality} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}Singapore\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{language} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}Chinese\PYGZdq{}}
+\PYG{p}{)}
+
+\PYG{n}{Sara}
+\PYG{c+c1}{\PYGZsh{} \PYGZdl{}age}
+\PYG{c+c1}{\PYGZsh{} [1] 21}
+\PYG{c+c1}{\PYGZsh{}}
+\PYG{c+c1}{\PYGZsh{} \PYGZdl{}gender}
+\PYG{c+c1}{\PYGZsh{} [1] \PYGZdq{}female\PYGZdq{}}
+\PYG{c+c1}{\PYGZsh{}}
+\PYG{c+c1}{\PYGZsh{} \PYGZdl{}nationality}
+\PYG{c+c1}{\PYGZsh{} [1] \PYGZdq{}Singapore\PYGZdq{}}
+\PYG{c+c1}{\PYGZsh{}}
+\PYG{c+c1}{\PYGZsh{} \PYGZdl{}language}
+\PYG{c+c1}{\PYGZsh{} [1] \PYGZdq{}Chinese\PYGZdq{}}
+\PYG{c+c1}{\PYGZsh{}}
+\PYG{c+c1}{\PYGZsh{} attr(,\PYGZdq{}class\PYGZdq{})}
+\PYG{c+c1}{\PYGZsh{} [1] \PYGZdq{}international\PYGZdq{} \PYGZdq{}student\PYGZdq{}}
+\end{Verbatim}

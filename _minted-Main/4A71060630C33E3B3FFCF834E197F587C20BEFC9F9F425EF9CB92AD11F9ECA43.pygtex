@@ -1,4 +1,4 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{n}{mc.mat} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{()} \PYG{p}{\PYGZob{}}
     \PYG{n}{Z} \PYG{o}{\PYGZlt{}\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{matrix}\PYG{p}{(}\PYG{n+nf}{rnorm}\PYG{p}{(}\PYG{n}{n} \PYG{o}{*} \PYG{n}{m}\PYG{p}{),} \PYG{n}{ncol} \PYG{o}{=} \PYG{n}{n}\PYG{p}{)}
     \PYG{n}{logdS} \PYG{o}{\PYGZlt{}\PYGZlt{}\PYGZhy{}} \PYG{p}{(}\PYG{n}{mu} \PYG{o}{\PYGZhy{}} \PYG{n}{sigma}\PYG{o}{\PYGZca{}}\PYG{l+m}{2} \PYG{o}{/} \PYG{l+m}{2}\PYG{p}{)} \PYG{o}{*} \PYG{n}{dt} \PYG{o}{+} \PYG{n}{sigma} \PYG{o}{*} \PYG{n}{Z} \PYG{o}{*} \PYG{n+nf}{sqrt}\PYG{p}{(}\PYG{n}{dt}\PYG{p}{)}

@@ -4,39 +4,53 @@
 
 In this chapter, we will elaborate on the development of \mintinline{R}|rmcop|. We will first present the general structure of the package. Then, we will discuss the implementation of pricing models mentioned in the literature review in Section \ref{sec:Literature Review} in details.
 
-\section{Package Structure}
+\section{Package Structure} \label{sec:Pkg Structure}
+
+The overlying workflow of using \mintinline{R}|rmcop| package to price financial option is displayed in Figure \ref{img:flowchart_option} below. One shall see that with the OOP framework, we encapsulate most arguments into two classes of objects: \mintinline{R}|option| and \mintinline{R}|env|.
+
+\begin{figure}[H]
+    \centering
+    % \def\svgwidth{\columnwidth}
+    \includesvg[scale = 0.8]{flowchart_option.drawio.svg}
+    \caption{Flowchart of option pricing using rmcop package} \label{img:flowchart_option}
+\end{figure}
+
+As Figure \ref{img:flowchart_option} indicates, there are only three exported\footnote{When installing an R package, only functions that are exported can be directly called and executed by the user, other "unexported" functions might serve as internal components of the package.} functions. Their purpose is shown in Table \ref{tab:pkg_functions} below:
+
+\begin{table}[H]
+    \begin{tabular}{p{0.25\linewidth} | p{0.65\linewidth}}
+    Function                            & Description \\ \hline
+    \mintinline{R}|option()|            & Create new \mintinline{R}|"option"| class object, which encapsulates the characteristics of an option \\
+    \mintinline{R}|option.env()|        & Create new \mintinline{R}|"env"| class object, which encapsulates the market environment setup \\
+    \mintinline{R}|price.option()|      & Pricing the option based on specified option, market environment, and method input                       
+    \end{tabular}
+    \caption{Functions to Call} \label{tab:pkg_functions}
+\end{table}
+    
+
 
 The package consists of 7 R scripts, with their functionalities defined as below:
 
-\begin{table}[ht] \label{tab:pkg_scripts}
+\begin{table}[H]
 \begin{tabular}{p{0.25\linewidth} | p{0.65\linewidth}}
-File                           & Contents                                                                 \\ \hline
-\mintinline{R}|Option.R|       & Methods creating and updating option and option.env objects              \\
+File                           & Contents \\ \hline
+\mintinline{R}|Option.R|       & Methods creating and updating option and option.env objects \\
 \mintinline{R}|Price.R|        & Pricing functions takes objects input and calls specific pricing engines \\
-\mintinline{R}|MonteCarlo.R|   & Monte Carlo option pricing method engine functions                       \\
-\mintinline{R}|BlackScholes.R| & Black-Scholes option pricing method engine functions                     \\
-\mintinline{R}|Binomial.R|     & Binomial option pricing method engine functions                          \\
-\mintinline{R}|Trinomial.R|    & Trinomial option pricing method engine functions                         \\
-\mintinline{R}|Tools.R|        & Other supplementary functions used in package                           
+\mintinline{R}|MonteCarlo.R|   & Monte Carlo option pricing method engine functions \\
+\mintinline{R}|BlackScholes.R| & Black-Scholes option pricing method engine functions \\
+\mintinline{R}|Binomial.R|     & Binomial option pricing method engine functions \\
+\mintinline{R}|Tools.R|        & Other supplementary functions used in package, including objects integrity check and plottign functions
 \end{tabular}
-\caption{Package R Scripts}
+\caption{Package R Scripts} \label{tab:pkg_scripts}
 \end{table} 
 
 For the simplicity of user access, only three functions are exported, they are:
 
-\begin{table}[ht] \label{tab:pkg_functions}
-\begin{tabular}{p{0.25\linewidth} | p{0.65\linewidth}}
-Function                            & Description \\ \hline
-\mintinline{R}|option()|            & Create new \mintinline{R}|"option"| class object, which encapsulates the characteristics of an option \\
-\mintinline{R}|option.env()|        & Create new \mintinline{R}|"env"| class object, which encapsulates the market environment setup \\
-\mintinline{R}|price.option()|      & Pricing the option based on specified option, market environment, and method input                       
-\end{tabular}
-\caption{Package Exported Functions}
-\end{table}
+\section{Objective Oriented Programming}
 
-\section{Objective Oriented Programming in R}
+\subsection{R Framework for OOP}
 
-Existing packages in R ecosystem provides comprehensive pricing algorithms for financial derivatives. However, their function are based on Procedural Oriented Programming (POP). POP functions can be called directly by passing in required arguments. For simple options pricing cases, such as pricing individual options, using POP functions is intuitive. However, many real scenarios require pricing options in a complex formulation, such as compounded options (i.e. options with underlying assets being another option) and combination of options (i.e. spread, straddle, stringle, and other option strategies). In these situations, managing numerous arguments for POP functions can be difficult and inefficient.
+Existing packages in R ecosystem provides comprehensive pricing algorithms for financial derivatives. However, their function are used in a Procedural Oriented (POP) way. POP functions can be called directly by passing in required arguments. For simple options pricing cases, such as pricing individual options, using POP functions is intuitive. However, many real scenarios require pricing options in a complex formulation, such as compounded options (i.e. options with underlying assets being another option) and combination of options (i.e. spread, straddle, stringle, and other option strategies). In these situations, managing numerous arguments for POP functions can be difficult and inefficient.
 
 The \mintinline{R}|rmcop| package proposed an Objective Oriented Programming (OOP) approach for pricing financial options in R. It encapsulates multiple arguments, such as option style, type, strike price, and maturity time, into an \mintinline{R}|option| class object. It also allows encapsulation of other market environemnt arguments, such as interest rate, dividend yield rate, and volatility measure into an \mintinline{R}|option.env| class object. The OOP structure enables easier variables managements and facilitates the comparison of prices among different sets of options and market environments.
 
@@ -47,33 +61,163 @@ OOP approach requires extra steps declaring objects before using the function, b
 R provides two ways to perform OOP, the S3 and S4 methods. The S3 class objects are based on R \mintinline{R}|list| objects. An R list contains a \mintinline{R}|class| attribute, which can be customised into string (or vector of strings) that can be interpreted as a list's corresponding S3 class (i.e. so that the list itself became an object of that class). Other items within the list can be treated as object's properties under the OOP scope. Here is an example on how to implement OOP using S3 method in R.
 
 \begin{Rminted}
-John <- list(
+student <- function(age, gender) {
+    obj <- list(
+        "age" = age,
+        "gender" = gender
+    )
+    class(obj) <- "student"
+    obj
+}
+
+John <- student(
     "age" = 20,
-    "gender" = "male",
-    "nation" = "UK"
+    "gender" = "male"
 )
-class(John) <- "student"
+
+John
+# $age
+# [1] 20
+# 
+# $gender
+# [1] "male"
+# 
+# attr(,"class")
+# [1] "student"
 \end{Rminted}
 
-We first define a new \mintinline{R}|list| object named ``John'', which contains three items (age, gender, and nationality). Then, we redefined the class of this list using the \mintinline{R}|class()| function to ``student''. Now, we have created a new object named ``John'' of the class ``student'' under the S3 scheme.
+We first define a new \mintinline{R}|list| object named ``John'', which contains two items/properties, age and gender. Then, we redefined the class of this list using the \mintinline{R}|class()| function to ``student''. Now, we have created a new object named ``John'' of the class ``student'' under the S3 scheme.
+
+R's S3 method also provides a naive way of expressing inheritance, which is by expressing the \mintinline{R}|class| attribute of an object with a vector instead of a single string. Continuing our previous example, let's now create a new object "Sara" using the following code:
+
+\begin{Rminted}
+international.student <- function(age, gender, nationality, language) {
+    
+    obj <- student(age, gender)
+    obj <- c(
+        obj,
+        "nationality" = nationality,
+        "language" = language
+    )
+    class(obj) <- c("international", "student")
+    obj
+}
+
+Sara <- international.student(
+    age = 21,
+    gender = "female",
+    nationality = "Singapore",
+    language = "Chinese"
+)
+
+Sara
+# $age
+# [1] 21
+# 
+# $gender
+# [1] "female"
+# 
+# $nationality
+# [1] "Singapore"
+# 
+# $language
+# [1] "Chinese"
+# 
+# attr(,"class")
+# [1] "international" "student"     
+\end{Rminted}
+
+Here, we see that the object representing Sara not only contains the properties as a "student" class object has, but also contains two extra properties "nationality" and "language". In this case, the objects from class \mintinline{R}|international student| are inherited from the father class \mintinline{R}|student|, which is reflected by the \mintinline{R}|class| attribute being a vector and has the last item named "student". To check whether an object is from a class, we can use the \mintinline{R}|inherits| function. For example:
+
+\begin{Rminted}
+inherits(Sara, "student") # True
+inherits(John, "student") # True
+inherits(John, c("international", "student"), which = TRUE) # 0 1
+\end{Rminted}
 
 The S4 methods requires more rigorous class and object definition, as one would typically see in an OOP language such as Python and Java. The development of our pricing functions does not require rigorous OOP structure or defining generic functions, so S3 method is sufficient for its development.
 
+\subsection{Option and Environment Class Objects}
+
+As we mentioned in Section \ref{sec:Pkg Structure}, \mintinline{R}|rmcop| requires users to encapsulate most of their input arguments as two classes of objects, \mintinline{R}|option| and \mintinline{R}|env|. Thus, we first need to build functions (constructors) that allows user to create/initialise new objects.
+
+The option class object should contains properties that defines an option, or elements that are common to be pre-specified when the option is issued. This includes the option's style, type, strike price $K$, and maturity $T$.
+
+First, it is reasonable and convenient to assume that all options should have specified style, type, strike price, and maturity. We should therefore make these properties that are included in the most overlying class.
+
+\begin{Rminted}
+option <- function(style, type, K, t) {
+    obj <- list(
+        "style" = style,
+        "type" = type,
+        "K" = K,
+        "t" = t
+    )
+    class(obj) <- "option" # Specifying class attribute to the S3 object
+    obj
+}
+\end{Rminted}
+
+This would be sufficient to deal with vanilla options in the market. However, when defining exotic options, extra properties may be required. For instance, a binary option would require an additional property to specify the fixed payoff it would generate; a barrier option, in contrast, would require a different property to classify whether it is a ``knock-in'' or ``knock-out'' option.
+
+To address these differences, creating ``sub-classes'' and using inheritance techniques via OOP framework is an intuitive and proper approach. We shall update our previous function by including a new argument named \mintinline{R}|option|, which allows user to specify the family/name of the (exotic) option the user wish to define\footnote{The default value is set to \mintinline{R}|"vanilla"|, since this is the most common family of options.}.
+
+\begin{Rminted}
+option <- function(style, option = "vanilla", type, K, t, ...) {
+
+    obj <- list(
+        "style" = style,
+        "type" = type,
+        "K" = K,
+        "t" = t
+    )
+
+    # Direct to corresponding sub-class constructors
+    if (option == "vanilla") {
+        obj <- option.vanilla(obj)
+    } else {
+        obj <- option.exotic(obj, option, ...)
+    }
+    obj
+}
+\end{Rminted}
+
+As shown by the codes above, depending on the value of input for the argument \mintinline{R}|option|, 
+
+
+
+
+
+
 \section{Deterministic Methods}
 
-\subsection{vanilla.bs}
+Deterministic methods provide closed-form formulas which builds upon their relevant assumptions to price options. When pricing an option using deterministic method, given the same initial conditions, the result estimates should always be the same.
 
-\mintinline{R}|vanilla.bs| is the function for option pricing via Black-Scholes formula.
+The deterministic methods that are included in \mintinline{R}|rmcop| are Black-Scholes formula and Binomial Lattice Tree. The package's implementation of them are limited to pricing American and European Vanilla options.
 
-The encoding of the function is fairly simply. As the solution is given directly by \dots
+\subsection{Black-Scholes Model}
 
-\subsection{vanilla.binomial}
+\mintinline{R}|vanilla.bs| is the function for option pricing via Black-Scholes formula, as we see from Equation \ref{eq:BS Formula Call} and \ref{eq:BS Formula Put}.
+
+The implementation is simple, as we shall simply ``translate'' the formula to R code. This can be done with the code below:
+
+\subsection{Binomial Lattice Tree}
 
 \mintinline{R}|vanilla.binomial| prices vanilla options via CRR's Binomial Lattice Tree method, as introduced in Section \ref{sec:Literature Review}.
 
-The R algorithm can be roughly divided into four segments: 1. compute the risk-neutral probability 2. generating binomial tree; 2. computing the payoff at the end step of the binomial tree; and 3. using backward recursive methods to compute the expected payoff of the option at current time under the risk-neutral assumption.
+The R algorithm can be roughly divided into four segments: 1. compute the risk-neutral probability 2. generating binomial tree; 3. computing the payoff at the end step of the binomial tree; and 4. using backward recursive methods to compute the expected payoff of the option at current time under the risk-neutral assumption.
 
 To generate a binomial tree
+
+
+
+
+
+Noticing that when the computer runs a recursive algorithm, the data will not be returned until the recurrsion reaches to an end. This means the memory useage will accumulate continuously as the recurrsing layers stacks deeper and deeper. For instance, a binomial tree with steps $n=1000$ will consume over 6GB of system memory and noticably long time to complete, and a binomial tree with steps $n=10000$ cannot be executed in R as the number of recurrsing layers will exceed R's default limit.
+
+Test reload
+
+% TODO: publish the n=1000 profvis profile to RPub and use hyperref to cite it.
 
 \section{Monte Carlo Methods}
 
@@ -155,7 +299,9 @@ mc.mat <- function() {
 
 Here, we first define \mintinline{R}|Z| to be a matrix that constains all standard normal random variables required for a total of $n\times m$ number of steps. Then we define \mintinline{R}|logdS| as the matrix of all increments. Based on Equation \ref{eq:mc_matrix}, by using $\log(S_0)$ as the starting point and use cumulative sum \mintinline{R}|cumsum| function to add increament $\log(\Delta S)$ along steps of each trajectory, we will obtain the movement of prices in time. By some further post process shown above, we will get the same result as using the for-loops.
 
-To test the difference in computing speed between the two methods, we will test the average running time using the R package \mintinline{R}|microbenchmark|. The package's benchmarking test runs individual functions for 100 times and records the summary statistics of the running times, as shown below:
+To test the difference in computing speed between the two methods, we will test the average running time using the R package \mintinline{R}|microbenchmark|. The device configuration which the test runs on can be find in Section \ref{sec:machine_env}.
+
+The \mintinline{R}|microbenchmark| function runs individual functions for 100 times and records the summary statistics of the running times, as shown below:
 
 \begin{Rminted}
 microbenchmark::microbenchmark(
@@ -199,7 +345,28 @@ Here, the drift coefficient is decomposed to (fixed) annual interest rate $r$ an
 
 Adapting this formulation, \mintinline{R}|rmcop| has a function named \mintinline{R}|mc.engine|, which takes the mentioned input arguments and returns a $(m+1)\times n$ matrix recording all generated trajectories. The rest of the functions described in the following subsections takes \mintinline{R}|mc.engine| as an internal component and use the returned matrix to perform further calculations of option payoff.
 
-The Standard Error of estimation is then calculated according to Equation \ref{eq:mc_SE}, which is implemented directly using the below algorithm:
+Using R package \mintinline{R}|profvis|, we can profile the run-time of the function \mintinline{R}|price.option| under a reasonably time-consuming Monte Carlo setup. Here we will simulate 10000 trajectories, each with 1000 time steps. The result trajectory matrix will contain $10000\times1000=10000000$ simulated prices. The code for benchmarking is shown below, and the output is presented in Figure \ref{img:mc_profile}.
+
+\begin{Rminted}
+# Creating option and environment objects
+op <- option("european", "vanilla", "call", 20, 0.75)
+op.env <- option.env(S = 20, r = 0.03, q = 0.01, sigma = 0.05)
+
+# Profiling
+profvis::profvis(
+    price.option(op, op.env, n = 10000, steps = 1000, all = FALSE, plot = FALSE)
+)
+\end{Rminted}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale = 0.45]{mc_profile.jpeg}
+	\caption{Profiling output of Monte Carlo pricing function} \label{img:mc_profile}
+\end{figure}
+
+The named strips in Figure \ref{img:mc_profile}, represents different components that are triggered when running \mintinline{R}|price.option|. Each function represented by the corresponding strip is the internal component of the one below it. Here, we see \mintinline{R}|mc.engine| is the most (and only) time consuming component of the pricing function. This means our prior adjustment of replacing for-loops with more efficient matrix operation is essensial for reducing the computing cost of the whole pricing procedure.
+
+An additional component is added to calculate the Standard Error of estimation. The formula used is shown by Equation \ref{eq:mc_SE}:
 
 \begin{Rminted}
 mc.SE <- function(C_i, C.mean, n) {
@@ -208,6 +375,8 @@ mc.SE <- function(C_i, C.mean, n) {
     SE
 }
 \end{Rminted}
+
+The resulting standard error can be used to construct confidence intervals of the estimate of the option price.
 
 One should be aware that Monte Carlo option pricing for American options is beyond the scope of this report. In the pricing functions below, we will only consider the pricing of European options.
 
@@ -223,17 +392,23 @@ if (type == "call") {
 }
 \end{Rminted}
 
+Where the resulting discounted payoffs for each trajectory is stored in the vector \mintinline{R}|C|.
+
 Notice that for a path-independent option such as an Vanilla option, we are only considering the option price at expiration. Thus, it is reasonable to take \mintinline{R}|step = 1| to reduce computational cost.
 
 \subsection{asian.mc}
 
 Exotic options such as Asian options and those included below are path-dependent. This implies capturing the price movements throughout time $t\in[0,T]$ is necessary.
 
-Recall from Section \ref{sec:Literature Review}, an Asian option consider the average price. Thus, we shall first take the average of simulated price trajectories.
+Recall from Section \ref{sec:Literature Review}, an Asian option's payoff is revelent to the underlying asset's average price through $t=[0,T]$. Thus, we will first compute and store the average prices of each trajectory.
 
 \begin{Rminted}
 S.mean <- apply(S, 2, mean)
 \end{Rminted}
+
+The \mintinline{R}|apply| function with the second argument set to \mintinline{R}|2| allows us to apply the operation \mintinline{R}|mean| on each column of \mintinline{R}|S|, thus giving us the average price of each trajectory.
+
+After obtaining the average, we will directly implement the payoff functions showed in List \ref{lst:exotic_options} in R as shown below:
 
 \begin{Rminted}
 if (is.avg_price) { # Compute payoff for average price Asian option
@@ -251,10 +426,109 @@ if (is.avg_price) { # Compute payoff for average price Asian option
 }
 \end{Rminted}
 
+Notice that for path dependent cases, using large enough number of steps for each simulation to better resemble the real-world scenario is necessary to obtain an accurate approximation.
+
 \subsection{barrier.mc}
+
+As we see from List \ref{lst:exotic_options}, a barrier option is ``switched on and off'' depending on whether the price movements crossed some pre-defined price barrier. To record this pre-specified quantity, we require user to include a property named \mintinline{R}|barrier| when they define their option object. We also require users to specify a boolean argument named \mintinline{R}|is.knockout| to classify whether the barrier option is ``knock-in'' or ``knock-out''. This is demonstrated by the below example:
+
+\begin{Rminted}
+option(style = "european", option = "barrier", type = "call", K = 20, t = 1, barrier = 21, is.knockout = TRUE)
+\end{Rminted}
+
+Here, besides from the regular parameters to see in any option, the user defined the barrier price to be $21$ and the option to be a ``knock-out'' barrier option, meaning that the option payoff will be zero if the price movement crossed the value $21$.
+
+To determine whether a price trajectory crossed certain level, we can record the minimum and maximum through the trajectory and see if the barrier value lies between two extremas. If so, because the price trajectory is continuous, we know that the trajectory must have crossed the barrier at least once through the option's life time.
+
+We will use similar \mintinline{R}|apply| method as mentioned in the previous section. Only now, we are computing the minimums and maximums of the trajectories. We then use a boolean vector \mintinline{R}|is.cross| to determine whether the barrier is bounded by the extremas.
+
+\begin{Rminted}
+S.min <- apply(S, 2, min)
+S.max <- apply(S, 2, max)
+is.cross <- (S.min < barrier & S.max > barrier)
+\end{Rminted}
+
+We know that a barrier option would behave exactly the same as a vanilla option if ignoring the ``knock-in/out'' effect, so we will first calculate its discounted payoff with the exact same methods in the above vanilla option pricing section.
+
+\begin{Rminted}
+if (type == "call") {
+    C <- exp(-r * t) * pmax(S[steps + 1, ] - K, 0)
+} else if (type == "put") {
+    C <- exp(-r * t) * pmax(K - S[steps + 1, ], 0)
+}
+\end{Rminted}
+
+Then, we take into account of the special effect and decide whether to zero the option payoff.
+
+\begin{Rminted}
+if (is.knockout) { # Case for knock-out barrier option
+    C <- ifelse(is.cross, 0, C)
+} else { # Case for knock-in barrier option
+    C <- ifelse(is.cross, C, 0)
+}
+\end{Rminted}
+
+The function \mintinline{R}|ifelse(condition, A, B)| is simply a quick command for the regular if-else statement. It execute expression \mintinline{R}|A| if \mintinline{R}|condition| is evaluated to \mintinline{R}|TRUE|, and execute \mintinline{R}|B| otherwise.
 
 \subsection{binary.mc}
 
+As we see from List \ref{lst:exotic_options}, a binary option, unlike other options discussed in the report, has a fixed payoff. To record this characteristic, we require user to passin a value for argument \mintinline{R}|payout| when defining a binary option object, as shown in the example below:
+
+\begin{Rminted}
+option(style = "european", option = "binary", type = "call", K = 20, t = 1, payout = 5)
+\end{Rminted}
+
+For each trajectory, to decide whether the payoff should be zero or the specified value, we simply compare the simulated price at maturity $S_T$ with the strike price $K$. This characteristic also makes a regular binary option path-independent.
+
+Since the payoff is fixed by the variable \mintinline{R}|payout|, for simplicity, we can first set the discounted payoff of every trajectory to be equal, and reduced the ``turned-off'' cases to zero afterwards:
+
+\begin{Rminted}
+# Genearte a column vector with the same discounted payoff
+C <- matrix(exp(-r * t) * payout, nrow = n, ncol = 1)
+
+# Based on the specific type of the option, reduced corresponding rows to zero based on the payoff formula for binary option
+if (type == "call") {
+    C <- ifelse(S[steps + 1, ] > K, C, 0)
+} else if (type == "put") {
+    C <- ifelse(S[steps + 1, ] < K, C, 0)
+}
+\end{Rminted}
+
 \subsection{lookback.mc}
+
+A lookback option is another case of a path-dependent option. As we see from List \ref{lst:exotic_options}, a fixed strike lookback's payoff is determined by comparing the price extramas and the strike price throughout the life time, and a floating strike lookback's payoff is by comparing the price extramas and the price at maturity. This makes the lookback option being obviously path-dependent.
+
+To determine whether the pre-specified lookback option is fixed or floating, we require the user to passin a value for the boolean variable \mintinline{R}|is.fixed|, which indicates the option is ``fixed strike'' if evaluated to \mintinline{R}|TRUE|, and being ``floating strike'' otherwise. This is shown in the codes below:
+
+\begin{Rminted}
+option(style = "european", option = "lookback", type = "call", K = 20, t = 1, is.fixed = TRUE)
+\end{Rminted}
+
+To allow us to calculate the payoff for each trajectory, we will first store the required value of minimum and maximum prices for each simulation, this could be done using the similar \mintinline{R}|apply| method as demonstrated above:
+
+\begin{Rminted}
+S.min <- apply(S, 2, min)
+S.max <- apply(S, 2, max)
+\end{Rminted}
+
+And the vector containing the simulated prices at maturity can be done with the same \mintinline{R}|S[steps + 1, ]| command.
+
+After obtaining these elements, based on the classification of lookback options, there are 4 scenarios for the payoff to be calculated. By directly implement the formulas as displayed in \ref{lst:exotic_options}, we will obtain the vector \mintinline{R}|C| of discounted payoffs.
+
+\begin{Rminted}
+if (type == "call") {
+    if (is.fixed) { # Fixed strike
+        C <- exp(-r * t) * pmax(S.max - K, 0)
+    } else { # Float strike
+        C <- exp(-r * t) * (S[steps + 1, ] - S.min)
+    }
+} else if (type == "put") {
+    if (is.fixed) { # Fixed strike
+        C <- exp(-r * t) * pmax(K - S.min, 0)
+    } else { # Float strike
+        C <- exp(-r * t) * (S.max - S[steps + 1, ])
+    }
+}
+\end{Rminted}
 
 \newpage

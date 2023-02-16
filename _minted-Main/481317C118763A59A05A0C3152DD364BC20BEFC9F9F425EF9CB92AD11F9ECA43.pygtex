@@ -1,4 +1,4 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{n}{microbenchmark}\PYG{o}{::}\PYG{n+nf}{microbenchmark}\PYG{p}{(}
     \PYG{n+nf}{mc.for}\PYG{p}{(),}
     \PYG{n+nf}{mc.mat}\PYG{p}{()}

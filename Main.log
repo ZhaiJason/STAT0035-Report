@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.11.2)  13 FEB 2023 14:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.11.2)  16 FEB 2023 23:08
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"c:/Users/Jason/OneDrive - University College London/University College London/Year 3/STAT0035 Project/Report/Main.tex"
-(c:/Users/Jason/OneDrive - University College London/University College London/Year 3/STAT0035 Project/Report/Main.tex
+**"c:/Users/Jason/R Projects/STAT0035 Report/Report/Main.tex"
+(c:/Users/Jason/R Projects/STAT0035 Report/Report/Main.tex
 LaTeX2e <2022-06-01> patch level 5
 L3 programming layer <2022-10-26> (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/base/report.cls
 Document Class: report 2022/07/02 v1.4n Standard LaTeX document class
@@ -277,17 +277,63 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \float@box=\box54
 \@float@everytoks=\toks24
 \@floatcapt=\box55
-) (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+) (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/svg/svg.sty
+Package: svg 2020/11/26 v2.02k (include SVG pictures)
+ (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/koma-script/scrbase.sty
+Package: scrbase 2022/10/12 v3.38 KOMA-Script package (KOMA-Script-independent basics and keyval usage)
+ (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/koma-script/scrlfile.sty
+Package: scrlfile 2022/10/12 v3.38 KOMA-Script package (file load hooks)
+ (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/koma-script/scrlfile-hook.sty
+Package: scrlfile-hook 2022/10/12 v3.38 KOMA-Script package (using LaTeX hooks)
+ (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/koma-script/scrlogo.sty
+Package: scrlogo 2022/10/12 v3.38 KOMA-Script package (logo)
+)))
+Applying: [2021/05/01] Usage of raw or classic option list on input line 252.
+Already applied: [0000/00/00] Usage of raw or classic option list on input line 368.
+) (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
+) (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/tools/shellesc.sty
+Package: shellesc 2019/11/08 v1.0c unified shell escape interface for LaTeX
+Package shellesc Info: Unrestricted shell escape enabled on input line 75.
+) (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/ifplatform/ifplatform.sty
+Package: ifplatform 2017/10/13 v0.4a Testing for the operating system
+ (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/catchfile/catchfile.sty
+Package: catchfile 2019/12/09 v1.8 Catch the contents of a file (HO)
+) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/iftex/ifluatex.sty
+Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
+))
+\c@svg@param@lastpage=\count291
+\svg@box=\box56
+\c@svg@param@currpage=\count292
+) (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2022/06/12 v2.14 LaTeX color extensions (UK)
+ (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 227.
+ (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1353.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1357.
+Package xcolor Info: Model `RGB' extended on input line 1369.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1371.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1372.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1373.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1374.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1375.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1376.
+) (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/transparent/transparent.sty
+Package: transparent 2022-10-27 v1.5 Transparency with color stacks
+ (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/transparent/transparent-nometadata.sty
+Package: transparent-nometadata 2022-10-27 v1.5 Transparency via pdfTeX's color stack (HO)
+)) (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
 \pgfutil@everybye=\toks25
 \pgfutil@tempdima=\dimen174
 \pgfutil@tempdimb=\dimen175
  (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.tex)) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
-\pgfutil@abb=\box56
+\pgfutil@abb=\box57
 ) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/pgf.revision.tex)
 Package: pgfrcs 2021/05/15 v3.1.9a (3.1.9a)
-))
-Package: pgf 2021/05/15 v3.1.9a (3.1.9a)
- (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+)) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
 Package: pgfsys 2021/05/15 v3.1.9a (3.1.9a)
  (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
 \pgfkeys@pathtoks=\toks26
@@ -307,14 +353,14 @@ Package: pgfsys 2021/05/15 v3.1.9a (3.1.9a)
 \pgf@yd=\dimen185
 \w@pgf@writea=\write3
 \r@pgf@reada=\read2
-\c@pgf@counta=\count291
-\c@pgf@countb=\count292
-\c@pgf@countc=\count293
-\c@pgf@countd=\count294
+\c@pgf@counta=\count293
+\c@pgf@countb=\count294
+\c@pgf@countc=\count295
+\c@pgf@countd=\count296
 \t@pgf@toka=\toks29
 \t@pgf@tokb=\toks30
 \t@pgf@tokc=\toks31
-\pgf@sys@id@count=\count295
+\pgf@sys@id@count=\count297
  (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
 File: pgf.cfg 2021/05/15 v3.1.9a (3.1.9a)
 )
@@ -325,37 +371,23 @@ File: pgfsys-pdftex.def 2021/05/15 v3.1.9a (3.1.9a)
 File: pgfsys-common-pdf.def 2021/05/15 v3.1.9a (3.1.9a)
 ))) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
 File: pgfsyssoftpath.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgfsyssoftpath@smallbuffer@items=\count296
-\pgfsyssoftpath@bigbuffer@items=\count297
+\pgfsyssoftpath@smallbuffer@items=\count298
+\pgfsyssoftpath@bigbuffer@items=\count299
 ) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
 File: pgfsysprotocol.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-)) (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/xcolor/xcolor.sty
-Package: xcolor 2022/06/12 v2.14 LaTeX color extensions (UK)
- (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/graphics-cfg/color.cfg
-File: color.cfg 2016/01/02 v1.6 sample color configuration
-)
-Package xcolor Info: Driver file: pdftex.def on input line 227.
- (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/graphics/mathcolor.ltx)
-Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1353.
-Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1357.
-Package xcolor Info: Model `RGB' extended on input line 1369.
-Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1371.
-Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1372.
-Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1373.
-Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1374.
-Package xcolor Info: Model `Gray' substituted by `gray' on input line 1375.
-Package xcolor Info: Model `wave' substituted by `hsb' on input line 1376.
-) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+)) (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
+Package: pgf 2021/05/15 v3.1.9a (3.1.9a)
+ (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
 Package: pgfcore 2021/05/15 v3.1.9a (3.1.9a)
  (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
 \pgfmath@dimen=\dimen186
-\pgfmath@count=\count298
-\pgfmath@box=\box57
+\pgfmath@count=\count300
+\pgfmath@box=\box58
 \pgfmath@toks=\toks32
 \pgfmath@stack@operand=\toks33
 \pgfmath@stack@operation=\toks34
 ) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.code.tex) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.code.tex) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.tex) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithmetics.code.tex))) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
-\c@pgfmathroundto@lastzeros=\count299
+\c@pgfmathroundto@lastzeros=\count301
 )) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/math/pgfint.code.tex) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
 File: pgfcorepoints.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \pgf@picminx=\dimen187
@@ -382,10 +414,10 @@ File: pgfcorepathusage.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \pgf@shorten@start@additional=\dimen260
 ) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
 File: pgfcorescopes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgfpic=\box58
-\pgf@hbox=\box59
-\pgf@layerbox@main=\box60
-\pgf@picture@serial@count=\count300
+\pgfpic=\box59
+\pgf@hbox=\box60
+\pgf@layerbox@main=\box61
+\pgf@picture@serial@count=\count302
 ) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex
 File: pgfcoregraphicstate.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \pgflinewidth=\dimen261
@@ -406,13 +438,13 @@ File: pgfcorearrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 ) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
 File: pgfcoreshade.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \pgf@max=\dimen266
-\pgf@sys@shading@range@num=\count301
-\pgf@shadingcount=\count302
+\pgf@sys@shading@range@num=\count303
+\pgf@shadingcount=\count304
 ) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
 File: pgfcoreimage.code.tex 2021/05/15 v3.1.9a (3.1.9a)
  (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
 File: pgfcoreexternal.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgfexternal@startupbox=\box61
+\pgfexternal@startupbox=\box62
 )) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex
 File: pgfcorelayers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 ) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex
@@ -423,8 +455,9 @@ File: pgfcorepatterns.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 File: pgfcorerdf.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 ))) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
 File: pgfmoduleshapes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgfnodeparttextbox=\box62
-) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+\pgfnodeparttextbox=\box63
+)
+(d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
 File: pgfmoduleplot.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 ) (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
 Package: pgfcomp-version-0-65 2021/05/15 v3.1.9a (3.1.9a)
@@ -441,10 +474,9 @@ Package: pgffor 2021/05/15 v3.1.9a (3.1.9a)
 \pgffor@toks=\toks36
 )) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
 Package: tikz 2021/05/15 v3.1.9a (3.1.9a)
-
-(d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex
+ (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex
 File: pgflibraryplothandlers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgf@plot@mark@count=\count303
+\pgf@plot@mark@count=\count305
 \pgfplotmarksize=\dimen271
 )
 \tikz@lastx=\dimen272
@@ -455,21 +487,21 @@ File: pgflibraryplothandlers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \tikz@lastmovetoy=\dimen277
 \tikzleveldistance=\dimen278
 \tikzsiblingdistance=\dimen279
-\tikz@figbox=\box63
-\tikz@figbox@bg=\box64
-\tikz@tempbox=\box65
-\tikz@tempbox@bg=\box66
-\tikztreelevel=\count304
-\tikznumberofchildren=\count305
-\tikznumberofcurrentchild=\count306
-\tikz@fig@count=\count307
+\tikz@figbox=\box64
+\tikz@figbox@bg=\box65
+\tikz@tempbox=\box66
+\tikz@tempbox@bg=\box67
+\tikztreelevel=\count306
+\tikznumberofchildren=\count307
+\tikznumberofcurrentchild=\count308
+\tikz@fig@count=\count309
  (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
 File: pgfmodulematrix.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgfmatrixcurrentrow=\count308
-\pgfmatrixcurrentcolumn=\count309
-\pgf@matrix@numberofcolumns=\count310
+\pgfmatrixcurrentrow=\count310
+\pgfmatrixcurrentcolumn=\count311
+\pgf@matrix@numberofcolumns=\count312
 )
-\tikz@expandcount=\count311
+\tikz@expandcount=\count313
  (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 ))) (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/minted/minted.sty
@@ -478,73 +510,64 @@ Package: minted 2021/12/24 v2.6 Yet another Pygments shim for LaTeX
 Package: fvextra 2022/11/30 v1.5 fvextra - extensions and patches for fancyvrb
  (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count312
+\etb@tempcnta=\count314
 ) (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
 Package: fancyvrb 2022/06/06 4.5 verbatim text (tvz,hv)
-\FV@CodeLineNo=\count313
+\FV@CodeLineNo=\count315
 \FV@InFile=\read3
-\FV@TabBox=\box67
-\c@FancyVerbLine=\count314
-\FV@StepNumber=\count315
+\FV@TabBox=\box68
+\c@FancyVerbLine=\count316
+\FV@StepNumber=\count317
 \FV@OutFile=\write4
 ) (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/upquote/upquote.sty
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verbatim
 ) (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/lineno/lineno.sty
 Package: lineno 2022/07/30 line numbers on paragraphs v5.0
-\linenopenalty=\count316
+\linenopenalty=\count318
 \output=\toks37
-\linenoprevgraf=\count317
+\linenoprevgraf=\count319
 \linenumbersep=\dimen280
 \linenumberwidth=\dimen281
-\c@linenumber=\count318
-\c@pagewiselinenumber=\count319
-\c@LN@truepage=\count320
-\c@internallinenumber=\count321
-\c@internallinenumbers=\count322
+\c@linenumber=\count320
+\c@pagewiselinenumber=\count321
+\c@LN@truepage=\count322
+\c@internallinenumber=\count323
+\c@internallinenumbers=\count324
 \quotelinenumbersep=\dimen282
 \bframerule=\dimen283
 \bframesep=\dimen284
-\bframebox=\box68
-\linenoamsmath@ams@eqpen=\count323
+\bframebox=\box69
+\linenoamsmath@ams@eqpen=\count325
 LaTeX Info: Redefining \\ on input line 3114.
 )
-\c@FV@TrueTabGroupLevel=\count324
-\c@FV@TrueTabCounter=\count325
-\FV@TabBox@Group=\box69
+\c@FV@TrueTabGroupLevel=\count326
+\c@FV@TrueTabCounter=\count327
+\FV@TabBox@Group=\box70
 \FV@TmpLength=\skip57
-\c@FV@HighlightLinesStart=\count326
-\c@FV@HighlightLinesStop=\count327
-\FV@LoopCount=\count328
-\FV@NCharsBox=\box70
+\c@FV@HighlightLinesStart=\count328
+\c@FV@HighlightLinesStop=\count329
+\FV@LoopCount=\count330
+\FV@NCharsBox=\box71
 \FV@BreakIndent=\dimen285
-\FV@BreakIndentNChars=\count329
+\FV@BreakIndentNChars=\count331
 \FV@BreakSymbolSepLeft=\dimen286
-\FV@BreakSymbolSepLeftNChars=\count330
+\FV@BreakSymbolSepLeftNChars=\count332
 \FV@BreakSymbolSepRight=\dimen287
-\FV@BreakSymbolSepRightNChars=\count331
+\FV@BreakSymbolSepRightNChars=\count333
 \FV@BreakSymbolIndentLeft=\dimen288
-\FV@BreakSymbolIndentLeftNChars=\count332
+\FV@BreakSymbolIndentLeftNChars=\count334
 \FV@BreakSymbolIndentRight=\dimen289
-\FV@BreakSymbolIndentRightNChars=\count333
-\c@FancyVerbLineBreakLast=\count334
-\FV@LineBox=\box71
-\FV@LineIndentBox=\box72
-\c@FV@BreakBufferDepth=\count335
+\FV@BreakSymbolIndentRightNChars=\count335
+\c@FancyVerbLineBreakLast=\count336
+\FV@LineBox=\box72
+\FV@LineIndentBox=\box73
+\c@FV@BreakBufferDepth=\count337
 \FV@LineWidth=\dimen290
 ) (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
-) (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/tools/shellesc.sty
-Package: shellesc 2019/11/08 v1.0c unified shell escape interface for LaTeX
-Package shellesc Info: Unrestricted shell escape enabled on input line 75.
-) (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/ifplatform/ifplatform.sty
-Package: ifplatform 2017/10/13 v0.4a Testing for the operating system
- (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/catchfile/catchfile.sty
-Package: catchfile 2019/12/09 v1.8 Catch the contents of a file (HO)
-) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/iftex/ifluatex.sty
-Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
-)) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/xstring/xstring.sty (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/xstring/xstring.tex
-\integerpart=\count336
-\decimalpart=\count337
+) (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/xstring/xstring.sty (d:/Application/Programming/texlive/2022/texmf-dist/tex/generic/xstring/xstring.tex
+\integerpart=\count338
+\decimalpart=\count339
 )
 Package: xstring 2021/07/21 v1.84 String manipulations (CT)
 ) (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/framed/framed.sty
@@ -556,12 +579,12 @@ Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \FrameSep=\dimen294
 )
 \minted@appexistsfile=\read4
-\minted@bgbox=\box73
+\minted@bgbox=\box74
 \minted@code=\write5
-\c@minted@FancyVerbLineTemp=\count338
-\c@minted@pygmentizecounter=\count339
+\c@minted@FancyVerbLineTemp=\count340
+\c@minted@pygmentizecounter=\count341
 \@float@every@listing=\toks38
-\c@listing=\count340
+\c@listing=\count342
 )
 runsystem(if not exist _minted-Main mkdir _minted-Main)...executed.
 
@@ -571,15 +594,15 @@ Package: algpseudocode
 Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
 
 Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
-\c@ALG@line=\count341
-\c@ALG@rem=\count342
-\c@ALG@nested=\count343
+\c@ALG@line=\count343
+\c@ALG@rem=\count344
+\c@ALG@nested=\count345
 \ALG@tlm=\skip59
 \ALG@thistlm=\skip60
-\c@ALG@Lnr=\count344
-\c@ALG@blocknr=\count345
-\c@ALG@storecount=\count346
-\c@ALG@tmpcounter=\count347
+\c@ALG@Lnr=\count346
+\c@ALG@blocknr=\count347
+\c@ALG@storecount=\count348
+\c@ALG@tmpcounter=\count349
 \ALG@tmplength=\skip61
 )
 Document Style - pseudocode environments for use with the `algorithmicx' style
@@ -590,8 +613,8 @@ runsystem(del Main.aex)...executed.
 
  (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2022-10-26 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count348
-\l__pdf_internal_box=\box74
+\l__color_backend_stack_int=\count350
+\l__pdf_internal_box=\box75
 ) (./Main.aux)
 \openout1 = `Main.aux'.
 
@@ -655,16 +678,16 @@ Package hyperref Info: Link coloring ON on input line 9.
 
  (d:/Application/Programming/texlive/2022/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count349
+\scratchcounter=\count351
 \scratchdimen=\dimen295
-\scratchbox=\box75
-\nofMPsegments=\count350
-\nofMParguments=\count351
+\scratchbox=\box76
+\nofMPsegments=\count352
+\nofMParguments=\count353
 \everyMPshowfont=\toks39
-\MPscratchCnt=\count352
+\MPscratchCnt=\count354
 \MPscratchDim=\dimen296
-\MPnumerator=\count353
-\makeMPintoPDFobject=\count354
+\MPnumerator=\count355
+\makeMPintoPDFobject=\count356
 \everyMPtoPDFconversion=\toks40
 ) (d:/Application/Programming/texlive/2022/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -688,7 +711,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.28 ...e {3.5.2}vanilla.mc}{18}{subsection.3.5.2}
+l.28 ...{3.5}Monte Carlo Methods}{18}{section.3.5}
                                                   % [1
 
 ])
@@ -734,13 +757,13 @@ Chapter 1.
  (./_minted-Main/937D1B8A60E1776BF436457851B18BB1C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
- (./_minted-Main/937D1B8A60E1776BF436457851B18BB1C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [4]
-<./images//wiener_process.jpeg, id=273, 505.89pt x 361.35pt>
+ (./_minted-Main/937D1B8A60E1776BF436457851B18BB1C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [4] [5]
+<./images//wiener_process.jpeg, id=292, 505.89pt x 361.35pt>
 File: ./images//wiener_process.jpeg Graphic file (type jpg)
 <use ./images//wiener_process.jpeg>
-Package pdftex.def Info: ./images//wiener_process.jpeg  used on input line 88.
+Package pdftex.def Info: ./images//wiener_process.jpeg  used on input line 98.
 (pdftex.def)             Requested size: 252.94437pt x 180.67456pt.
- [5] [6
+ [6
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
@@ -752,7 +775,7 @@ l.125
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.234 
+l.244 
       ] [10] [11]) (./Chapter 2.tex
 Chapter 2.
 \openout5 = `Main.pyg'.
@@ -764,6 +787,47 @@ Chapter 3.
 \openout5 = `Main.pyg'.
 
 (./_minted-Main/937D1B8A60E1776BF436457851B18BB1C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/937D1B8A60E1776BF436457851B18BB1C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/D3E353A4E7798AEF768776B10C29ECC7C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/E4AF4CA18C4651B5D703649E8B623395C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+<./svg-inkscape/flowchart_option.drawio_svg-raw.pdf, id=390, 518.2276pt x 226.59656pt>
+File: ./svg-inkscape/flowchart_option.drawio_svg-raw.pdf Graphic file (type pdf)
+<use ./svg-inkscape/flowchart_option.drawio_svg-raw.pdf>
+Package pdftex.def Info: ./svg-inkscape/flowchart_option.drawio_svg-raw.pdf  used on input line 14.
+(pdftex.def)             Requested size: 414.58264pt x 181.27748pt.
+
+Overfull \hbox (2.64275pt too wide) in paragraph at lines 14--15
+ [][] 
+ []
+
+\openout5 = `Main.pyg'.
+
+(./_minted-Main/AB601D32CB20E6E9A63D32313C43FCDCC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/BDDD03CC982E09D53DF80C7B0E720061C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/83B566DE27EFAF1A357F2C4D5DB3642BC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/4B53775B1C79EF8A8B82841E572ED502C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/3AEF716D7619949F18B50A3F1297CDF1C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [13
+
+
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.28 \end{table}
+                 <./svg-inkscape/flowchart_option.drawio_svg-raw.pdf>]
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/AB4AD7F230160B2C08375225D04B1A32C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
@@ -781,37 +845,7 @@ Chapter 3.
  (./_minted-Main/C911FA1590510A7ADCA3F96B06D82BCDC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
- (./_minted-Main/0D7A001FF3BCD5D4956A678B7D1A36F6C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
-\openout5 = `Main.pyg'.
-
  (./_minted-Main/AD0B16CF5874199F6EABD94705CFA35FC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
-\openout5 = `Main.pyg'.
-
- (./_minted-Main/AB601D32CB20E6E9A63D32313C43FCDCC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
-\openout5 = `Main.pyg'.
-
- (./_minted-Main/BDDD03CC982E09D53DF80C7B0E720061C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
-\openout5 = `Main.pyg'.
-
- (./_minted-Main/83B566DE27EFAF1A357F2C4D5DB3642BC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
-\openout5 = `Main.pyg'.
-
- (./_minted-Main/4B53775B1C79EF8A8B82841E572ED502C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
-\openout5 = `Main.pyg'.
-
- (./_minted-Main/3AEF716D7619949F18B50A3F1297CDF1C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [13
-
-
-pdfTeX warning (ext4): destination with the same identifier (name{table.3.1}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.40 
-     
-pdfTeX warning (ext4): destination with the same identifier (name{table.3.2}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.40 
-     ]
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/937D1B8A60E1776BF436457851B18BB1C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
@@ -823,7 +857,17 @@ l.40
  (./_minted-Main/ABFC80933BD65E700DBB8A5035DEB9DDC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
- (./_minted-Main/25711F0C332211078ED48D44CFAAEDE6C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+ (./_minted-Main/25711F0C332211078ED48D44CFAAEDE6C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [14
+pdfTeX warning (ext4): destination with the same identifier (name{table.3.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.58 
+     
+pdfTeX warning (ext4): destination with the same identifier (name{table.3.2}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.58 
+     ]
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/139C6C212D9F961775D5C64C1AA77219C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
@@ -838,7 +882,7 @@ l.40
  (./_minted-Main/20A882C5C27D7D7200ED5F431204314FC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout4 = `Main.pyg'.
 
- (./_minted-Main/096453BE469FE694C1F0DB4A01A588D61C9A5E1B3B258A01D10CB79E2F9215FF.pygtex)
+ (./_minted-Main/370C3BC3655B82E091A40B1FC7185E26C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/43BE2F60A6DB7BF23ED742E2B13AB659C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
@@ -847,16 +891,71 @@ l.40
  (./_minted-Main/0B30CF6B168EA1D831A5FE28A209E73BC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
- (./_minted-Main/CA8E9C0698754D3EB13AE53DD275A724C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [14]
+ (./_minted-Main/20A882C5C27D7D7200ED5F431204314FC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout4 = `Main.pyg'.
+
+ (./_minted-Main/ABD3044870602F2BBFB8D66FC23B3B97C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+Overfull \vbox (2.67754pt too high) detected at line 128
+ []
+
+[15]
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/63EFF9EC0FBD30773E24036EAF4EB0BEC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/FA41C351B27D8DD930DEBDC1D9696245C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/20A882C5C27D7D7200ED5F431204314FC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/5ED875A0B10D74BF967464EC7EC99784C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout4 = `Main.pyg'.
+
+ (./_minted-Main/82B5435EBB57FBC2149CA47D2B9D7073C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex
+LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
+(Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 4.
+)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/937D1B8A60E1776BF436457851B18BB1C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/D3E353A4E7798AEF768776B10C29ECC7C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/E4AF4CA18C4651B5D703649E8B623395C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [16]
+\openout4 = `Main.pyg'.
+
+ (./_minted-Main/0D9518984455FD6CC6E735148E73C597C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/D3E353A4E7798AEF768776B10C29ECC7C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/37A3FAB496E94840DC9C9B236A23DE0AC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout4 = `Main.pyg'.
+
+ (./_minted-Main/5C2B5E30896623B09E4FD8FE9049AEF3C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [17]
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/D3E353A4E7798AEF768776B10C29ECC7C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/937D1B8A60E1776BF436457851B18BB1C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/CA8E9C0698754D3EB13AE53DD275A724C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/036F7D56EBBFE24680869D5353E1B1DFC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout4 = `Main.pyg'.
 
- (./_minted-Main/0A50E54556228D18DB39F5F87AD8B8FC1C9A5E1B3B258A01D10CB79E2F9215FF.pygtex)
+ [18] (./_minted-Main/0A50E54556228D18DB39F5F87AD8B8FCC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout4 = `Main.pyg'.
 
- (./_minted-Main/638F59A3D5EDFF78F17BA52AFA1F0C811C9A5E1B3B258A01D10CB79E2F9215FF.pygtex) [15]
+ (./_minted-Main/638F59A3D5EDFF78F17BA52AFA1F0C81C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/95FB5538615BCA02A52C9C21BA51501FC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
@@ -868,21 +967,21 @@ l.40
  (./_minted-Main/A7F8A33CBEF694610E864DEB0885AD0EC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout4 = `Main.pyg'.
 
- (./_minted-Main/B99A7D6A4390BD5986FA48633D63B7A81C9A5E1B3B258A01D10CB79E2F9215FF.pygtex)
-<./images//mc_trajectories.jpeg, id=393, 505.89pt x 361.35pt>
+ (./_minted-Main/B99A7D6A4390BD5986FA48633D63B7A8C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+<./images//mc_trajectories.jpeg, id=441, 505.89pt x 361.35pt>
 File: ./images//mc_trajectories.jpeg Graphic file (type jpg)
 <use ./images//mc_trajectories.jpeg>
-Package pdftex.def Info: ./images//mc_trajectories.jpeg  used on input line 121.
+Package pdftex.def Info: ./images//mc_trajectories.jpeg  used on input line 265.
 (pdftex.def)             Requested size: 252.94437pt x 180.67456pt.
- [16
-pdfTeX warning (ext4): destination with the same identifier (name{figure.3.1}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.140 \end{align}
-                  <./images//mc_trajectories.jpeg>]
+ [19]
 \openout4 = `Main.pyg'.
 
- (./_minted-Main/4A71060630C33E3B3FFCF834E197F5871C9A5E1B3B258A01D10CB79E2F9215FF.pygtex)
+ (./_minted-Main/4A71060630C33E3B3FFCF834E197F587C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [20
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.2}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.298 \end{Rminted}
+                    <./images//mc_trajectories.jpeg>]
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/41FF0912A07FDC52799FF27B38E7F140C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
@@ -895,9 +994,12 @@ l.140 \end{align}
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/6F941C0362134481DF444188ED5C4644C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/6F941C0362134481DF444188ED5C4644C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout4 = `Main.pyg'.
 
- (./_minted-Main/481317C118763A59A05A0C3152DD364B1C9A5E1B3B258A01D10CB79E2F9215FF.pygtex)
+ (./_minted-Main/481317C118763A59A05A0C3152DD364BC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/772ECF8FB90FC1920B27824DFDB31196C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
@@ -912,7 +1014,7 @@ l.140 \end{align}
  (./_minted-Main/14D64E3D4B7F8E5EA698633773131049C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout4 = `Main.pyg'.
 
- [17] (./_minted-Main/1C2F05C47D318A0954A2B1B3C9241A491C9A5E1B3B258A01D10CB79E2F9215FF.pygtex)
+ (./_minted-Main/1C2F05C47D318A0954A2B1B3C9241A49C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [21]
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/D122B23CACADE5BAB9FC7E4AE01AA12BC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
@@ -925,48 +1027,169 @@ l.140 \end{align}
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/14D64E3D4B7F8E5EA698633773131049C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/63668CA4921326FD9B857525DB0FD5A6C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/01C17316B7D2C4BBFF2213377D6059F8C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout4 = `Main.pyg'.
 
- (./_minted-Main/4D3FA1DC87E38A9AB21AAC4426B466A21C9A5E1B3B258A01D10CB79E2F9215FF.pygtex)
+ (./_minted-Main/C904BFD04624091C929CA7233A53EF02C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+<./images//mc_profile.jpeg, id=464, 909.3975pt x 527.72156pt>
+File: ./images//mc_profile.jpeg Graphic file (type jpg)
+<use ./images//mc_profile.jpeg>
+Package pdftex.def Info: ./images//mc_profile.jpeg  used on input line 363.
+(pdftex.def)             Requested size: 409.2251pt x 237.4725pt.
+ [22]
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/01C17316B7D2C4BBFF2213377D6059F8C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/14D64E3D4B7F8E5EA698633773131049C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout4 = `Main.pyg'.
 
- (./_minted-Main/805107EB6425336BD54F2ED1ACD0EB7C1C9A5E1B3B258A01D10CB79E2F9215FF.pygtex) [18]
+ (./_minted-Main/4D3FA1DC87E38A9AB21AAC4426B466A2C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/14D64E3D4B7F8E5EA698633773131049C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout4 = `Main.pyg'.
+
+ [23
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3.3}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.393 \end{Rminted}
+                    <./images//mc_profile.jpeg>] (./_minted-Main/805107EB6425336BD54F2ED1ACD0EB7CC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/B39BFC0E26A30024C76E4DCB8A1EAE87C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/6AA2BFF30EAD46C17D0A5E424C4496B3C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout4 = `Main.pyg'.
 
- (./_minted-Main/04110E19943767C1BD2FA033DB4776A41C9A5E1B3B258A01D10CB79E2F9215FF.pygtex)
+ (./_minted-Main/04110E19943767C1BD2FA033DB4776A4C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/33A3313205E7CBE1CF7FC3936B7F8067C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/26AB0DB90D72E28AD0BA1E22EE510510C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/A6F919FC48A0C6DC5005C9188E3F7460C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/65DB27307AA0CDF0B3C0323431E08A15C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout4 = `Main.pyg'.
 
- (./_minted-Main/33B74030187A80BC374324D84B6247DD1C9A5E1B3B258A01D10CB79E2F9215FF.pygtex) [19]) (./Chapter 4.tex
-Chapter 4.
-[20
+ (./_minted-Main/33B74030187A80BC374324D84B6247DDC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
 
-]) (./Main.bbl) [21
+ (./_minted-Main/44CDE3A4303F8B087B03827C167F188AC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/CE0F3F62D03B315A70A4D3DD5D926E79C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [24]
+\openout4 = `Main.pyg'.
+
+ (./_minted-Main/B9FE372DBD41279C0EDEA8B5FA7B8BADC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/33A3313205E7CBE1CF7FC3936B7F8067C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/78666C11B72F650390910B97C6F5D759C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout4 = `Main.pyg'.
+
+ (./_minted-Main/A576D43D8FC1B2C8E6FCE8533625479CC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout4 = `Main.pyg'.
+
+ (./_minted-Main/805107EB6425336BD54F2ED1ACD0EB7CC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout4 = `Main.pyg'.
+
+ (./_minted-Main/7E3E1F75EA5F7D4083E3239CBE988E48C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/E1709C2FB6E4EAB198CADC16341DEEC3C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/BF072E9119077B4E76437A93986787EFC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/9C38BFC2106CB5971BF605F766DB4AA3C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/1159184937F1A52D70A06A50D63B5947C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/30CF3D7D133B08543CB6C8933C29DFD7C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/779460B9D4096C47796145C9CCDE2027C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [25]
+\openout4 = `Main.pyg'.
+
+ (./_minted-Main/B41FBD99424C1333DFCE15F331FAE4AAC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/779460B9D4096C47796145C9CCDE2027C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout4 = `Main.pyg'.
+
+ (./_minted-Main/94C076A86B32937A24B25A4D93A9BC3CC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/62837AA2DCCC0969CB89928EE4FCCDDBC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/1159184937F1A52D70A06A50D63B5947C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout4 = `Main.pyg'.
+
+ (./_minted-Main/C328414E0A49E03DEE227E387EE2138BC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/33A3313205E7CBE1CF7FC3936B7F8067C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout4 = `Main.pyg'.
+
+ (./_minted-Main/234FB3150949EB850FF4C461EEB6B559C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/9C7F2E85DD7D3347E876E645F4611653C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+Overfull \hbox (28.47673pt too wide) in paragraph at lines 514--515
+[]\OT1/cmr/m/n/10 And the vec-tor con-tain-ing the sim-u-lated prices at ma-tu-rity can be done with the same []
+ []
+
+[26]
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/B39BFC0E26A30024C76E4DCB8A1EAE87C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout4 = `Main.pyg'.
+
+ (./_minted-Main/3E37693A5E645809A52BB0517BAE7AB1C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [27]) (./Chapter 4.tex
+Chapter 4.
+[28
+
+]) (./Main.bbl) [29
 
 ] (./Main.aux)
 Package rerunfilecheck Info: File `Main.out' has not changed.
-(rerunfilecheck)             Checksum: 31FB2EA8220D978632A7649CF38A0B03;4991.
+(rerunfilecheck)             Checksum: 2A8E4D3D1EE3BDC814FC9DDC0C2BC8F1;5459.
 runsystem(del Main.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 24987 strings out of 475066
- 503121 string characters out of 5770797
- 846558 words of memory out of 5000000
- 45670 multiletter control sequences out of 15000+600000
+ 26177 strings out of 475066
+ 545349 string characters out of 5770797
+ 911142 words of memory out of 5000000
+ 46670 multiletter control sequences out of 15000+600000
  479688 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 89i,13n,92p,1114b,913s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,13n,95p,1140b,913s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {d:/Application/Programming/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on Main.pdf (22 pages, 3522748 bytes).
+Output written on Main.pdf (30 pages, 3705335 bytes).
 PDF statistics:
- 551 PDF objects out of 1000 (max. 8388607)
- 474 compressed objects within 5 object streams
- 96 named destinations out of 1000 (max. 500000)
- 303 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 633 PDF objects out of 1000 (max. 8388607)
+ 543 compressed objects within 6 object streams
+ 111 named destinations out of 1000 (max. 500000)
+ 329 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,0 +1,25 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{student} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{age}\PYG{p}{,} \PYG{n}{gender}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n}{obj} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{list}\PYG{p}{(}
+        \PYG{l+s}{\PYGZdq{}age\PYGZdq{}} \PYG{o}{=} \PYG{n}{age}\PYG{p}{,}
+        \PYG{l+s}{\PYGZdq{}gender\PYGZdq{}} \PYG{o}{=} \PYG{n}{gender}
+    \PYG{p}{)}
+    \PYG{n+nf}{class}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{)} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{l+s}{\PYGZdq{}student\PYGZdq{}}
+    \PYG{n}{obj}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{John} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{student}\PYG{p}{(}
+    \PYG{l+s}{\PYGZdq{}age\PYGZdq{}} \PYG{o}{=} \PYG{l+m}{20}\PYG{p}{,}
+    \PYG{l+s}{\PYGZdq{}gender\PYGZdq{}} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}male\PYGZdq{}}
+\PYG{p}{)}
+
+\PYG{n}{John}
+\PYG{c+c1}{\PYGZsh{} \PYGZdl{}age}
+\PYG{c+c1}{\PYGZsh{} [1] 20}
+\PYG{c+c1}{\PYGZsh{}}
+\PYG{c+c1}{\PYGZsh{} \PYGZdl{}gender}
+\PYG{c+c1}{\PYGZsh{} [1] \PYGZdq{}male\PYGZdq{}}
+\PYG{c+c1}{\PYGZsh{}}
+\PYG{c+c1}{\PYGZsh{} attr(,\PYGZdq{}class\PYGZdq{})}
+\PYG{c+c1}{\PYGZsh{} [1] \PYGZdq{}student\PYGZdq{}}
+\end{Verbatim}

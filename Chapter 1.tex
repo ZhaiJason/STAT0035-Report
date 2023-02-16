@@ -2,7 +2,7 @@
 
 \section{Abstract}
 
-This report discusses the development of the R package \mintinline{R}{rmcop}, an fully R-based package for pricing financial options (see Section \ref{sec:Literature Review} for definitions). Pricing financial options is an essensial fragment of financial engineering and quantitative finance. Because options consider future in time, determining their fair price involves modelling uncertainty, so statistical methods are widely applied. Modern option pricing methods can be complex and product-specific, but most works are still built upon the basic frameworks of Black-Scholes formula and Monte Carlo simulations. The package \mintinline{R}{rmcop} covers the R implementation of some of these fundamental option price models on various option types and styles, and can be a good reference for constructing more complex R opiton pricing algorithms.
+This report discusses the development of the R package \mintinline{R}{rmcop}, an fully R-based package for pricing financial options (see Section \ref{sec:Literature Review} for definitions). Pricing financial options is an essensial fragment of financial engineering and quantitative finance. Because options consider future in time, determining their fair price involves modelling uncertainty, so statistical methods are widely applied. Modern option pricing methods can be complex and product-specific, but most works are still built upon the basic frameworks of Black-Scholes formula and Monte Carlo simulations. The package \mintinline{R}{rmcop} covers the R implementation of some of these fundamental option price models on various option types and styles, and can be a good reference for constructing more complex R opiton pricing algorithms. The report also contains some R programming techniques that one may found useful in reducing computational cost.
 
 \section{Report Structure}
 
@@ -20,9 +20,17 @@ Finally in Chapter \ref{cpt:Results}, we will demonstrate examples and interpret
 
 Unlike most existing packages in the R Ecosystem, \mintinline{R}|rmcop| is developed through an object oriented approach. User's argument inputs for pricing functions are encapsulated in corresponding objects, and pricing functions are themselves methods. This introduces ordered arguments control and easier functions application.
 
-\section{Machine Environment}
+\section{Machine Environment} \label{sec:machine_env}
 
-The majority of the development and testing of the package is completed using my laptop. The machine is an Honor MagicBook Pro 2020, with AMD R7-4800H CPU which has 8 cores and 16 strands.
+The majority of the development and testing of the package is completed using my laptop. The laptop' configuration is briefed below.
+
+\begin{listing}[H]
+CPU: AMD Ryzen 7 4800H with Radeon Graphics (base 2.90GHz) \\
+RAM: 16(15.4)GB DDR4 3200MHz \\
+Max TDP: 45W
+\end{listing}
+
+The setup is typical for majority of personal computer devices, so the benchmarking and profiling presented in the report are reasonable references for ordinary package users.
 
 \section{Literature Review} \label{sec:Literature Review}
 
@@ -46,8 +54,8 @@ Options with ``special or unusual features'' are called ``exotic options''. The 
 	\end{itemize}
     \item \textbf{Barrier Options} Barrier options have a payoff that switches on or off depending on whether the asset crosses a pre-defined level (barrier) $B$.
     \begin{itemize}
-		\item A down-and-out call option has a payoff that is zero if the asset crosses some predefined barrier $B<S_0$ at some time in $[0, T]$. If the barrier is not crossed then the payoff becomes that of a European call, $\max(S_T - K, 0)$.
-		\item A down-and-in call option has a payoff that is zero unless the asset crosses some predefined barrier $B<S_0$ at some time in $[0, T]$. If the barrier is crossed then the payoff becomes that of a European call, $\max(S(T) - K, 0)$.
+		\item A down-and-out (knock-out) call option has a payoff that is zero if the asset crosses some predefined barrier $B<S_0$ at some time in $[0, T]$. If the barrier is not crossed then the payoff becomes that of a European call, $\max(S_T - K, 0)$.
+		\item A down-and-in (knock-in) call option has a payoff that is zero unless the asset crosses some predefined barrier $B<S_0$ at some time in $[0, T]$. If the barrier is crossed then the payoff becomes that of a European call, $\max(S(T) - K, 0)$.
     \end{itemize}
     \item \textbf{Binary Options} A binary (a.k.a. cash-or-nothing) option have payoff at expiry being either some specified value $A$ or zero.
     \begin{itemize}
@@ -73,9 +81,9 @@ X(\gamma,\omega):\Gamma\times\Omega\mapsto\mathbb{R}
 
 Where $(\omega,\mathcal{A},P)$ is a probability space described by samples $\omega$, action space $\mathcal{A}$, and probability measure $P$.
 
-For $\Gamma=\mathbb{N}$, we have a \textit{discrete process}, and for $\Gamma\subset\mathbb{R}$, we have a \textit{continuous process}. In our context we will consider $\Gamma$ to represent the scope in time, and takes values from $0$ to option's maturity $T$.
+For $\Gamma=\mathbb{N}$, we have a \textit{discrete process}, and for $\Gamma\subset\mathbb{R}$, we have a \textit{continuous process}. In our context we will consider $\Gamma$ to represent the scope in time, and takes values from $0$ to maturity $T$.
 
-A stochastic process $\{X(t), t\geq 0\}$ is said to be a \textit{Brownian motion} if \cite{Iacus2008}:
+A \textit{stochastic process} $\{X(t), t\geq 0\}$ is said to be a \textit{Brownian motion} if \cite{Iacus2008}:
 
 \begin{enumerate}
 	\item $X(0)=0$;
@@ -83,15 +91,17 @@ A stochastic process $\{X(t), t\geq 0\}$ is said to be a \textit{Brownian motion
 	\item for every $t>0$, $X(t)\sim N(0,\sigma^2 t)$.
 \end{enumerate}
 
+A \textit{Standard Brownian Motion} (i.e. Wiener Process, abbreviated as SBM) inherits the properties above, and have a volatility measure of zero (i.e. $\sigma=0$). So for an SBM $W$, we have $W(t) \sim N(0,t)$.
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale = 0.5]{wiener_process.jpeg}
-	\caption{Wiener Process} \label{img:wiener_process}
+	\caption{Trajectories of Wiener Process} \label{img:wiener_process}
 \end{figure}
 
-Image \ref{img:wiener_process} demonstrates the trajectories of a one-dimensional Standard Brownian Motion (SBM, Wiener Process), where each gray line represents a simulated path of a Wiener process.
+Figure \ref{img:wiener_process} demonstrates the trajectories of a one-dimensional SBM, where each gray line represents a simulated path of a Wiener process.
 
-Notice that the expectation of a SBM at any time $t\geq0$ is zero, this makes the SBM a \textit{martingale}, which is a stochastic process that "does not tend to rise or fall \cite{Shreve2004}". If $S_t$ is the value of a SBM at time $t$, assume $S_0=0$, its SBM dynamics can be defined by the Stochastic Differential Equation (SDE):
+Notice that the expectation of a SBM at any time $t\geq0$ is zero, this makes a SBM a \textit{martingale}, which is a stochastic process that ``does not tend to rise or fall\footnote{That is, $E[W(t+k)]=W(t)$ for any $k$.} \cite{Shreve2004}''. If $S_t$ is the value of a SBM at time $t$, assume $S_0=0$, its SBM dynamics can be defined by the Stochastic Differential Equation (SDE):
 
 \begin{align*}
 dS_t = S_t dW_t

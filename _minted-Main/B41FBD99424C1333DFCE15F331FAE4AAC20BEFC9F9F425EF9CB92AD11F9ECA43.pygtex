@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{option}\PYG{p}{(}\PYG{n}{style} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}european\PYGZdq{}}\PYG{p}{,} \PYG{n}{option} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}binary\PYGZdq{}}\PYG{p}{,} \PYG{n}{type} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}call\PYGZdq{}}\PYG{p}{,} \PYG{n}{K} \PYG{o}{=} \PYG{l+m}{20}\PYG{p}{,} \PYG{n}{t} \PYG{o}{=} \PYG{l+m}{1}\PYG{p}{,} \PYG{n}{payout} \PYG{o}{=} \PYG{l+m}{5}\PYG{p}{)}
+\end{Verbatim}

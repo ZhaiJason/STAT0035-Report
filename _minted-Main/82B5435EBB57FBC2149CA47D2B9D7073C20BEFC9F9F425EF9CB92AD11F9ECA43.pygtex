@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{inherits}\PYG{p}{(}\PYG{n}{Sara}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}student\PYGZdq{}}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} True}
+\PYG{n+nf}{inherits}\PYG{p}{(}\PYG{n}{John}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}student\PYGZdq{}}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} True}
+\PYG{n+nf}{inherits}\PYG{p}{(}\PYG{n}{John}\PYG{p}{,} \PYG{n+nf}{c}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}international\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}student\PYGZdq{}}\PYG{p}{),} \PYG{n}{which} \PYG{o}{=} \PYG{k+kc}{TRUE}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} 0 1}
+\end{Verbatim}

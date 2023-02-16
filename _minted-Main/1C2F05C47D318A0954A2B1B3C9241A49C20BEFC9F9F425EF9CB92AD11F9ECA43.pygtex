@@ -1,4 +1,4 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+\begin{Verbatim}[commandchars=\\\{\}]
     \PYG{n}{mc.engine} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{type}\PYG{p}{,} \PYG{n}{K}\PYG{p}{,} \PYG{n}{t}\PYG{p}{,} \PYG{n}{S0}\PYG{p}{,} \PYG{n}{r}\PYG{p}{,} \PYG{n}{q}\PYG{p}{,} \PYG{n}{sigma}\PYG{p}{,} \PYG{n}{n}\PYG{p}{,} \PYG{n}{steps}\PYG{p}{)} \PYG{p}{\PYGZob{}}
 
     \PYG{n}{dt} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{t} \PYG{o}{/} \PYG{n}{steps}

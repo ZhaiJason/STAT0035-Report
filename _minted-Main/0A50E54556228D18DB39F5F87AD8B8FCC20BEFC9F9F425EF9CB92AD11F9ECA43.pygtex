@@ -1,4 +1,4 @@
-\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8\relax}]
+\begin{Verbatim}[commandchars=\\\{\}]
 \PYG{c+c1}{\PYGZsh{} Setup arguments for calculation}
 \PYG{n}{t} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{l+m}{2} \PYG{c+c1}{\PYGZsh{} Expiration}
 \PYG{n}{n} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{l+m}{100} \PYG{c+c1}{\PYGZsh{} Number of trajectories to simulate}

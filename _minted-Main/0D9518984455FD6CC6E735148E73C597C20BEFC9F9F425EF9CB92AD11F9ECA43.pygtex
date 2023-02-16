@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{option} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{style}\PYG{p}{,} \PYG{n}{type}\PYG{p}{,} \PYG{n}{K}\PYG{p}{,} \PYG{n}{t}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n}{obj} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{list}\PYG{p}{(}
+        \PYG{l+s}{\PYGZdq{}style\PYGZdq{}} \PYG{o}{=} \PYG{n}{style}\PYG{p}{,}
+        \PYG{l+s}{\PYGZdq{}type\PYGZdq{}} \PYG{o}{=} \PYG{n}{type}\PYG{p}{,}
+        \PYG{l+s}{\PYGZdq{}K\PYGZdq{}} \PYG{o}{=} \PYG{n}{K}\PYG{p}{,}
+        \PYG{l+s}{\PYGZdq{}t\PYGZdq{}} \PYG{o}{=} \PYG{n}{t}
+    \PYG{p}{)}
+    \PYG{n+nf}{class}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{)} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{l+s}{\PYGZdq{}option\PYGZdq{}} \PYG{c+c1}{\PYGZsh{} Specifying class attribute to the S3 object}
+    \PYG{n}{obj}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}
