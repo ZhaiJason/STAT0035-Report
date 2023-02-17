@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.11.2)  16 FEB 2023 23:08
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.11.2)  17 FEB 2023 02:14
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -711,7 +711,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.28 ...{3.5}Monte Carlo Methods}{18}{section.3.5}
+l.28 ...nomial Lattice Tree}{20}{subsection.3.5.2}
                                                   % [1
 
 ])
@@ -758,7 +758,7 @@ Chapter 1.
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/937D1B8A60E1776BF436457851B18BB1C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [4] [5]
-<./images//wiener_process.jpeg, id=292, 505.89pt x 361.35pt>
+<./images//wiener_process.jpeg, id=305, 505.89pt x 361.35pt>
 File: ./images//wiener_process.jpeg Graphic file (type jpg)
 <use ./images//wiener_process.jpeg>
 Package pdftex.def Info: ./images//wiener_process.jpeg  used on input line 98.
@@ -796,7 +796,7 @@ Chapter 3.
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/E4AF4CA18C4651B5D703649E8B623395C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
-<./svg-inkscape/flowchart_option.drawio_svg-raw.pdf, id=390, 518.2276pt x 226.59656pt>
+<./svg-inkscape/flowchart_option.drawio_svg-raw.pdf, id=402, 518.2276pt x 226.59656pt>
 File: ./svg-inkscape/flowchart_option.drawio_svg-raw.pdf Graphic file (type pdf)
 <use ./svg-inkscape/flowchart_option.drawio_svg-raw.pdf>
 Package pdftex.def Info: ./svg-inkscape/flowchart_option.drawio_svg-raw.pdf  used on input line 14.
@@ -848,26 +848,47 @@ l.28 \end{table}
  (./_minted-Main/AD0B16CF5874199F6EABD94705CFA35FC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
+ (./_minted-Main/AB4AD7F230160B2C08375225D04B1A32C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/7BB411A67D2E335012B92C2146804F11C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/7BB411A67D2E335012B92C2146804F11C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/7FD3ACAD6B19291496464F6C11CECC44C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/035209ABA134B69194DCC87E7769D42EC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/C911FA1590510A7ADCA3F96B06D82BCDC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/AD0B16CF5874199F6EABD94705CFA35FC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
  (./_minted-Main/937D1B8A60E1776BF436457851B18BB1C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/D3E353A4E7798AEF768776B10C29ECC7C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
- (./_minted-Main/ABFC80933BD65E700DBB8A5035DEB9DDC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
-\openout5 = `Main.pyg'.
-
- (./_minted-Main/25711F0C332211078ED48D44CFAAEDE6C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [14
+ (./_minted-Main/ABFC80933BD65E700DBB8A5035DEB9DDC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [14
 pdfTeX warning (ext4): destination with the same identifier (name{table.3.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.58 
-     
+l.55 T
+      he codes below demonstrates the calculation of an theoretical European...
 pdfTeX warning (ext4): destination with the same identifier (name{table.3.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.58 
-     ]
+l.55 T
+      he codes below demonstrates the calculation of an theoretical European...]
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/25711F0C332211078ED48D44CFAAEDE6C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/139C6C212D9F961775D5C64C1AA77219C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
@@ -882,7 +903,7 @@ l.58
  (./_minted-Main/20A882C5C27D7D7200ED5F431204314FC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout4 = `Main.pyg'.
 
- (./_minted-Main/370C3BC3655B82E091A40B1FC7185E26C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+ (./_minted-Main/5DA91A51616A59099493514887340FD1C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/43BE2F60A6DB7BF23ED742E2B13AB659C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
@@ -894,11 +915,7 @@ l.58
  (./_minted-Main/20A882C5C27D7D7200ED5F431204314FC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout4 = `Main.pyg'.
 
- (./_minted-Main/ABD3044870602F2BBFB8D66FC23B3B97C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
-Overfull \vbox (2.67754pt too high) detected at line 128
- []
-
-[15]
+ [15] (./_minted-Main/C443D69EBF1D032F2B08B9C0B26EF2D3C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/63EFF9EC0FBD30773E24036EAF4EB0BEC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
@@ -913,10 +930,10 @@ Overfull \vbox (2.67754pt too high) detected at line 128
  (./_minted-Main/5ED875A0B10D74BF967464EC7EC99784C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout4 = `Main.pyg'.
 
- (./_minted-Main/82B5435EBB57FBC2149CA47D2B9D7073C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex
+ (./_minted-Main/A15DAB94E434C074FBEC9E5AD3B11E48C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 4.
-)
+) [16]
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/937D1B8A60E1776BF436457851B18BB1C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
@@ -925,7 +942,7 @@ LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
  (./_minted-Main/D3E353A4E7798AEF768776B10C29ECC7C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
- (./_minted-Main/E4AF4CA18C4651B5D703649E8B623395C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [16]
+ (./_minted-Main/E4AF4CA18C4651B5D703649E8B623395C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout4 = `Main.pyg'.
 
  (./_minted-Main/0D9518984455FD6CC6E735148E73C597C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
@@ -943,16 +960,118 @@ LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
  (./_minted-Main/D3E353A4E7798AEF768776B10C29ECC7C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
+ (./_minted-Main/8D849A330CFD246A6882D9623BD2C46AC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/71123D452CD2B42E20FF586745EBCD88C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/28809F7A489E686F2C3572091906B38AC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/BA09825E5A3F420061CB70E7BFCE6BCEC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/D3E353A4E7798AEF768776B10C29ECC7C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/FC3A6EA2607B3D42D902FC62CE4D7F73C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/79ADAC8C671790504A142AB2392CF927C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout4 = `Main.pyg'.
+
+ (./_minted-Main/FB3714E3B2C4909D7C9DC2E3831AD853C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/44CDE3A4303F8B087B03827C167F188AC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/CE0F3F62D03B315A70A4D3DD5D926E79C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/20A882C5C27D7D7200ED5F431204314FC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/FB2EE51B838AEBB9DAEB3F4A97FDF2B9C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/E4AF4CA18C4651B5D703649E8B623395C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/FE13119FB084FE8BBF5FE3AB7CC89B3BC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/D122B23CACADE5BAB9FC7E4AE01AA12BC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [18]
+\openout4 = `Main.pyg'.
+
+ (./_minted-Main/419211698F5EA5DCD1CB4B9C4A22A839C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/3A6FD3EF9394EFD432419B3104389683C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/C07C7E131C6012DF82E1B71DF6F15A13C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/FE13119FB084FE8BBF5FE3AB7CC89B3BC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/D122B23CACADE5BAB9FC7E4AE01AA12BC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/CA35C56C0C379F292F8FAB68B3A19F61C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/01C17316B7D2C4BBFF2213377D6059F8C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/7BB411A67D2E335012B92C2146804F11C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout4 = `Main.pyg'.
+
+ (./_minted-Main/EACF92F40EAD4CEB165CE43CA24A4160C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/133122E868D447A648C85FD2EF61E81EC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/AD0B16CF5874199F6EABD94705CFA35FC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/BCF67E6CFE3E93E8320283D0C6858F24C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [19]
+\openout4 = `Main.pyg'.
+
+ (./_minted-Main/7C289B05285243CACAAD2AB6BA4EA5EFC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/BB46B24F8DE6ADC44558158D64DAB41BC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/5BD640C4BD96195621DFB8873D7AEA3AC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/3A6FD3EF9394EFD432419B3104389683C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/DEC5FB5DFEBAAEF7D8DD234F02086A6DC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/C47D80EC940B1F63A694B9D0CC7D167EC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/D706BAFD25A29B231AB51C6A990D5E40C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+\openout5 = `Main.pyg'.
+
  (./_minted-Main/937D1B8A60E1776BF436457851B18BB1C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/CA8E9C0698754D3EB13AE53DD275A724C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
- (./_minted-Main/036F7D56EBBFE24680869D5353E1B1DFC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+ (./_minted-Main/036F7D56EBBFE24680869D5353E1B1DFC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [20]
 \openout4 = `Main.pyg'.
 
- [18] (./_minted-Main/0A50E54556228D18DB39F5F87AD8B8FCC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+ (./_minted-Main/0A50E54556228D18DB39F5F87AD8B8FCC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout4 = `Main.pyg'.
 
  (./_minted-Main/638F59A3D5EDFF78F17BA52AFA1F0C81C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
@@ -968,19 +1087,19 @@ LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <10> not available
 \openout4 = `Main.pyg'.
 
  (./_minted-Main/B99A7D6A4390BD5986FA48633D63B7A8C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
-<./images//mc_trajectories.jpeg, id=441, 505.89pt x 361.35pt>
+<./images//mc_trajectories.jpeg, id=464, 505.89pt x 361.35pt>
 File: ./images//mc_trajectories.jpeg Graphic file (type jpg)
 <use ./images//mc_trajectories.jpeg>
-Package pdftex.def Info: ./images//mc_trajectories.jpeg  used on input line 265.
+Package pdftex.def Info: ./images//mc_trajectories.jpeg  used on input line 340.
 (pdftex.def)             Requested size: 252.94437pt x 180.67456pt.
- [19]
+ [21]
 \openout4 = `Main.pyg'.
 
- (./_minted-Main/4A71060630C33E3B3FFCF834E197F587C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [20
+ (./_minted-Main/4A71060630C33E3B3FFCF834E197F587C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [22
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.298 \end{Rminted}
+l.373 \end{Rminted}
                     <./images//mc_trajectories.jpeg>]
 \openout5 = `Main.pyg'.
 
@@ -999,7 +1118,7 @@ l.298 \end{Rminted}
  (./_minted-Main/6F941C0362134481DF444188ED5C4644C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout4 = `Main.pyg'.
 
- (./_minted-Main/481317C118763A59A05A0C3152DD364BC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
+ (./_minted-Main/FD3B015A8566ED016ED506021D2CF5E7C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/772ECF8FB90FC1920B27824DFDB31196C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
@@ -1014,7 +1133,10 @@ l.298 \end{Rminted}
  (./_minted-Main/14D64E3D4B7F8E5EA698633773131049C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout4 = `Main.pyg'.
 
- (./_minted-Main/1C2F05C47D318A0954A2B1B3C9241A49C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [21]
+ (./_minted-Main/1CCAD6237F67FB6561988F3FC5CD4A4FC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [23]
+\openout5 = `Main.pyg'.
+
+ (./_minted-Main/D122B23CACADE5BAB9FC7E4AE01AA12BC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/D122B23CACADE5BAB9FC7E4AE01AA12BC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
@@ -1036,12 +1158,12 @@ l.298 \end{Rminted}
 \openout4 = `Main.pyg'.
 
  (./_minted-Main/C904BFD04624091C929CA7233A53EF02C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
-<./images//mc_profile.jpeg, id=464, 909.3975pt x 527.72156pt>
+<./images//mc_profile.jpeg, id=487, 909.3975pt x 527.72156pt>
 File: ./images//mc_profile.jpeg Graphic file (type jpg)
 <use ./images//mc_profile.jpeg>
-Package pdftex.def Info: ./images//mc_profile.jpeg  used on input line 363.
+Package pdftex.def Info: ./images//mc_profile.jpeg  used on input line 440.
 (pdftex.def)             Requested size: 409.2251pt x 237.4725pt.
- [22]
+ [24]
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/01C17316B7D2C4BBFF2213377D6059F8C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
@@ -1056,11 +1178,11 @@ Package pdftex.def Info: ./images//mc_profile.jpeg  used on input line 363.
  (./_minted-Main/14D64E3D4B7F8E5EA698633773131049C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout4 = `Main.pyg'.
 
- [23
+ [25
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.393 \end{Rminted}
+l.470 \end{Rminted}
                     <./images//mc_profile.jpeg>] (./_minted-Main/805107EB6425336BD54F2ED1ACD0EB7CC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
@@ -1091,7 +1213,7 @@ l.393 \end{Rminted}
  (./_minted-Main/44CDE3A4303F8B087B03827C167F188AC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
- (./_minted-Main/CE0F3F62D03B315A70A4D3DD5D926E79C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [24]
+ (./_minted-Main/CE0F3F62D03B315A70A4D3DD5D926E79C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [26]
 \openout4 = `Main.pyg'.
 
  (./_minted-Main/B9FE372DBD41279C0EDEA8B5FA7B8BADC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
@@ -1127,7 +1249,7 @@ l.393 \end{Rminted}
  (./_minted-Main/30CF3D7D133B08543CB6C8933C29DFD7C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout5 = `Main.pyg'.
 
- (./_minted-Main/779460B9D4096C47796145C9CCDE2027C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [25]
+ (./_minted-Main/779460B9D4096C47796145C9CCDE2027C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [27]
 \openout4 = `Main.pyg'.
 
  (./_minted-Main/B41FBD99424C1333DFCE15F331FAE4AAC20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
@@ -1155,41 +1277,45 @@ l.393 \end{Rminted}
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/9C7F2E85DD7D3347E876E645F4611653C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
-Overfull \hbox (28.47673pt too wide) in paragraph at lines 514--515
+Overfull \hbox (28.47673pt too wide) in paragraph at lines 591--592
 []\OT1/cmr/m/n/10 And the vec-tor con-tain-ing the sim-u-lated prices at ma-tu-rity can be done with the same []
  []
 
-[26]
+[28]
 \openout5 = `Main.pyg'.
 
  (./_minted-Main/B39BFC0E26A30024C76E4DCB8A1EAE87C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex)
 \openout4 = `Main.pyg'.
 
- (./_minted-Main/3E37693A5E645809A52BB0517BAE7AB1C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [27]) (./Chapter 4.tex
+ (./_minted-Main/3E37693A5E645809A52BB0517BAE7AB1C20BEFC9F9F425EF9CB92AD11F9ECA43.pygtex) [29]) (./Chapter 4.tex
 Chapter 4.
-[28
+[30
 
-]) (./Main.bbl) [29
+]) (./Appendix.tex
+Appendix A.
+[31
+
+]) (./Main.bbl) [32
 
 ] (./Main.aux)
 Package rerunfilecheck Info: File `Main.out' has not changed.
-(rerunfilecheck)             Checksum: 2A8E4D3D1EE3BDC814FC9DDC0C2BC8F1;5459.
+(rerunfilecheck)             Checksum: 2C4AF2EDB5C1D73F63B1001CE635BFFF;5672.
 runsystem(del Main.pyg)...executed.
 
  ) 
 Here is how much of TeX's memory you used:
- 26177 strings out of 475066
- 545349 string characters out of 5770797
- 911142 words of memory out of 5000000
- 46670 multiletter control sequences out of 15000+600000
+ 26363 strings out of 475066
+ 559896 string characters out of 5770797
+ 921558 words of memory out of 5000000
+ 46741 multiletter control sequences out of 15000+600000
  479688 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  99i,13n,95p,1140b,913s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {d:/Application/Programming/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><d:/Application/Programming/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on Main.pdf (30 pages, 3705335 bytes).
+Output written on Main.pdf (33 pages, 3713756 bytes).
 PDF statistics:
- 633 PDF objects out of 1000 (max. 8388607)
- 543 compressed objects within 6 object streams
- 111 named destinations out of 1000 (max. 500000)
- 329 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 662 PDF objects out of 1000 (max. 8388607)
+ 569 compressed objects within 6 object streams
+ 117 named destinations out of 1000 (max. 500000)
+ 345 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -19,18 +19,18 @@
 \PYG{p}{)}
 
 \PYG{n}{Sara}
-\PYG{c+c1}{\PYGZsh{} \PYGZdl{}age}
-\PYG{c+c1}{\PYGZsh{} [1] 21}
-\PYG{c+c1}{\PYGZsh{}}
-\PYG{c+c1}{\PYGZsh{} \PYGZdl{}gender}
-\PYG{c+c1}{\PYGZsh{} [1] \PYGZdq{}female\PYGZdq{}}
-\PYG{c+c1}{\PYGZsh{}}
-\PYG{c+c1}{\PYGZsh{} \PYGZdl{}nationality}
-\PYG{c+c1}{\PYGZsh{} [1] \PYGZdq{}Singapore\PYGZdq{}}
-\PYG{c+c1}{\PYGZsh{}}
-\PYG{c+c1}{\PYGZsh{} \PYGZdl{}language}
-\PYG{c+c1}{\PYGZsh{} [1] \PYGZdq{}Chinese\PYGZdq{}}
-\PYG{c+c1}{\PYGZsh{}}
-\PYG{c+c1}{\PYGZsh{} attr(,\PYGZdq{}class\PYGZdq{})}
-\PYG{c+c1}{\PYGZsh{} [1] \PYGZdq{}international\PYGZdq{} \PYGZdq{}student\PYGZdq{}}
+\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZdl{}}\PYG{n}{age}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{1}\PYG{p}{]} \PYG{l+m}{21}
+\PYG{o}{\PYGZgt{}}
+\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZdl{}}\PYG{n}{gender}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{1}\PYG{p}{]} \PYG{l+s}{\PYGZdq{}female\PYGZdq{}}
+\PYG{o}{\PYGZgt{}}
+\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZdl{}}\PYG{n}{nationality}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{1}\PYG{p}{]} \PYG{l+s}{\PYGZdq{}Singapore\PYGZdq{}}
+\PYG{o}{\PYGZgt{}}
+\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZdl{}}\PYG{n}{language}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{1}\PYG{p}{]} \PYG{l+s}{\PYGZdq{}Chinese\PYGZdq{}}
+\PYG{o}{\PYGZgt{}}
+\PYG{o}{\PYGZgt{}} \PYG{n+nf}{attr}\PYG{p}{(,}\PYG{l+s}{\PYGZdq{}class\PYGZdq{}}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{1}\PYG{p}{]} \PYG{l+s}{\PYGZdq{}international\PYGZdq{}} \PYG{l+s}{\PYGZdq{}student\PYGZdq{}}
 \end{Verbatim}

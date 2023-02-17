@@ -22,16 +22,18 @@
 \contentsline {section}{\numberline {3.3}Objective Oriented Programming}{14}{section.3.3}%
 \contentsline {subsection}{\numberline {3.3.1}R Framework for OOP}{14}{subsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.3.2}Option and Environment Class Objects}{17}{subsection.3.3.2}%
-\contentsline {section}{\numberline {3.4}Deterministic Methods}{18}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}Black-Scholes Model}{18}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}Binomial Lattice Tree}{18}{subsection.3.4.2}%
-\contentsline {section}{\numberline {3.5}Monte Carlo Methods}{18}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}Simulating Price Trajectories}{18}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}vanilla.mc}{23}{subsection.3.5.2}%
-\contentsline {subsection}{\numberline {3.5.3}asian.mc}{24}{subsection.3.5.3}%
-\contentsline {subsection}{\numberline {3.5.4}barrier.mc}{25}{subsection.3.5.4}%
-\contentsline {subsection}{\numberline {3.5.5}binary.mc}{26}{subsection.3.5.5}%
-\contentsline {subsection}{\numberline {3.5.6}lookback.mc}{26}{subsection.3.5.6}%
-\contentsline {chapter}{\numberline {4}Results}{28}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Examples}{28}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Further Discussions}{28}{section.4.2}%
+\contentsline {section}{\numberline {3.4}price.option}{19}{section.3.4}%
+\contentsline {section}{\numberline {3.5}Deterministic Methods}{20}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Black-Scholes Model}{20}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Binomial Lattice Tree}{20}{subsection.3.5.2}%
+\contentsline {section}{\numberline {3.6}Monte Carlo Methods}{21}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Simulating Price Trajectories}{21}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}vanilla.mc}{25}{subsection.3.6.2}%
+\contentsline {subsection}{\numberline {3.6.3}asian.mc}{26}{subsection.3.6.3}%
+\contentsline {subsection}{\numberline {3.6.4}barrier.mc}{27}{subsection.3.6.4}%
+\contentsline {subsection}{\numberline {3.6.5}binary.mc}{28}{subsection.3.6.5}%
+\contentsline {subsection}{\numberline {3.6.6}lookback.mc}{28}{subsection.3.6.6}%
+\contentsline {chapter}{\numberline {4}Results}{30}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Examples}{30}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Further Discussions}{30}{section.4.2}%
+\contentsline {chapter}{\numberline {A}Appendix 1}{31}{appendix.A}%

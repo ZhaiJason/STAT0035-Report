@@ -27,24 +27,22 @@ As Figure \ref{img:flowchart_option} indicates, there are only three exported\fo
     \caption{Functions to Call} \label{tab:pkg_functions}
 \end{table}
     
-
-
-The package consists of 7 R scripts, with their functionalities defined as below:
+To keep the functions (exported and internal) organised and to make each script restricted to a maintainable length, they are divided to 7 R scripts listed below:
 
 \begin{table}[H]
 \begin{tabular}{p{0.25\linewidth} | p{0.65\linewidth}}
 File                           & Contents \\ \hline
 \mintinline{R}|Option.R|       & Methods creating and updating option and option.env objects \\
 \mintinline{R}|Price.R|        & Pricing functions takes objects input and calls specific pricing engines \\
-\mintinline{R}|MonteCarlo.R|   & Monte Carlo option pricing method engine functions \\
-\mintinline{R}|BlackScholes.R| & Black-Scholes option pricing method engine functions \\
-\mintinline{R}|Binomial.R|     & Binomial option pricing method engine functions \\
-\mintinline{R}|Tools.R|        & Other supplementary functions used in package, including objects integrity check and plottign functions
+\mintinline{R}|MonteCarlo.R|   & Monte Carlo option pricing method engine \\
+\mintinline{R}|BlackScholes.R| & Black-Scholes option pricing method engine \\
+\mintinline{R}|Binomial.R|     & Binomial option pricing method engine \\
+\mintinline{R}|Tools.R|        & Supplementary functions used in the package
 \end{tabular}
 \caption{Package R Scripts} \label{tab:pkg_scripts}
 \end{table} 
 
-For the simplicity of user access, only three functions are exported, they are:
+\mintinline{R}|Option.R| and \mintinline{R}|Price.R| contains all constructor functions for S3 class objects. \mintinline{R}|Price.R| contains the overlying pricing functions which will trigger the pricing engine functions that are contained in \mintinline{R}|MonteCarlo.R|, \mintinline{R}|BlackScholes.R|, and \mintinline{R}|Binomial.R|. \mintinline{R}|Tools.R| includes supplementary functions, including checking of inputs integrity and plotting of Monte Carlo price trajectories.
 
 \section{Objective Oriented Programming}
 
@@ -76,14 +74,14 @@ John <- student(
 )
 
 John
-# $age
-# [1] 20
-# 
-# $gender
-# [1] "male"
-# 
-# attr(,"class")
-# [1] "student"
+> $age
+> [1] 20
+> 
+> $gender
+> [1] "male"
+> 
+> attr(,"class")
+> [1] "student"
 \end{Rminted}
 
 We first define a new \mintinline{R}|list| object named ``John'', which contains two items/properties, age and gender. Then, we redefined the class of this list using the \mintinline{R}|class()| function to ``student''. Now, we have created a new object named ``John'' of the class ``student'' under the S3 scheme.
@@ -111,20 +109,20 @@ Sara <- international.student(
 )
 
 Sara
-# $age
-# [1] 21
-# 
-# $gender
-# [1] "female"
-# 
-# $nationality
-# [1] "Singapore"
-# 
-# $language
-# [1] "Chinese"
-# 
-# attr(,"class")
-# [1] "international" "student"     
+> $age
+> [1] 21
+> 
+> $gender
+> [1] "female"
+> 
+> $nationality
+> [1] "Singapore"
+> 
+> $language
+> [1] "Chinese"
+> 
+> attr(,"class")
+> [1] "international" "student"    
 \end{Rminted}
 
 Here, we see that the object representing Sara not only contains the properties as a "student" class object has, but also contains two extra properties "nationality" and "language". In this case, the objects from class \mintinline{R}|international student| are inherited from the father class \mintinline{R}|student|, which is reflected by the \mintinline{R}|class| attribute being a vector and has the last item named "student". To check whether an object is from a class, we can use the \mintinline{R}|inherits| function. For example:
@@ -132,6 +130,7 @@ Here, we see that the object representing Sara not only contains the properties 
 \begin{Rminted}
 inherits(Sara, "student") # True
 inherits(John, "student") # True
+inherits(Sara, c("international", "student"), which = TRUE) # 1 1
 inherits(John, c("international", "student"), which = TRUE) # 0 1
 \end{Rminted}
 
@@ -143,7 +142,7 @@ As we mentioned in Section \ref{sec:Pkg Structure}, \mintinline{R}|rmcop| requir
 
 The option class object should contains properties that defines an option, or elements that are common to be pre-specified when the option is issued. This includes the option's style, type, strike price $K$, and maturity $T$.
 
-First, it is reasonable and convenient to assume that all options should have specified style, type, strike price, and maturity. We should therefore make these properties that are included in the most overlying class.
+First, it is reasonable and convenient to assume that all options should have specified style, type, strike price, and maturity. We should therefore make these properties contained by the overlying class.
 
 \begin{Rminted}
 option <- function(style, type, K, t) {
@@ -158,7 +157,7 @@ option <- function(style, type, K, t) {
 }
 \end{Rminted}
 
-This would be sufficient to deal with vanilla options in the market. However, when defining exotic options, extra properties may be required. For instance, a binary option would require an additional property to specify the fixed payoff it would generate; a barrier option, in contrast, would require a different property to classify whether it is a ``knock-in'' or ``knock-out'' option.
+This would be sufficient to deal with vanilla options in the market. However, when defining exotic options, extra properties may be required. For instance, a binary option would require an additional property to specify the fixed payoff it would generate; a barrier option, in contrast, would require a different property to specify a price barrier and another property to classify whether it is a ``knock-in'' or ``knock-out'' option.
 
 To address these differences, creating ``sub-classes'' and using inheritance techniques via OOP framework is an intuitive and proper approach. We shall update our previous function by including a new argument named \mintinline{R}|option|, which allows user to specify the family/name of the (exotic) option the user wish to define\footnote{The default value is set to \mintinline{R}|"vanilla"|, since this is the most common family of options.}.
 
@@ -182,12 +181,88 @@ option <- function(style, option = "vanilla", type, K, t, ...) {
 }
 \end{Rminted}
 
-As shown by the codes above, depending on the value of input for the argument \mintinline{R}|option|, 
+As shown by the codes above, depending on the value of input for the argument \mintinline{R}|option|, the constructor calls one of the two sub-class constructors. The function \mintinline{R}|option.vanilla| will take the list created with four basic properties and assign it with a \mintinline{R}|"vanilla" "option"|\footnote{This is the printted form of the vector \mintinline{R}|c("vanilla", "option")|} class attribute. On the other hand, the function \mintinline{R}|option.exotic| will take the input for argument \mintinline{R}|option| together with additional user inputs, and return an object of class \mintinline{R}|"XXX" "option"|, where \mintinline{R}|XXX| is the family of option that the user specified. An example is demonstrated below:
 
+\begin{Rminted}
+option(style = "european",
+       option = "barrier",
+       type = "call",
+       K = 20,
+       t = 1,
+       barrier = 21,
+       is.knockout = TRUE)
+> $style
+> [1] "european"
+> 
+> $type
+> [1] "call"
+> 
+> $K
+> [1] 20
+> 
+> $t
+> [1] 1
+> 
+> $barrier
+> [1] 21
+> 
+> $is.knockout
+> [1] TRUE
+> 
+> attr(,"class")
+> [1] "barrier" "option"
+\end{Rminted}
 
+In this example, the user specified the option to be a ``barrier'' option, which required additional parameters \mintinline{R}|barrier| and \mintinline{R}|is.knockout| (detailed discuss see sections below on individual pricing functions). As we can see, the \mintinline{R}|class| attribute became \mintinline{R}|"barrier" "option"|, which follows what we have discussed earlier.
 
+After completing the constructor for option class, we need to build the constructor for the environment class. For an object of the class \mintinline{R}|env|, we wish to encapsulate some market conditions that will be considered during our pricing procedure. The parameters we considered here are: pricing method, current underlying asset price $S$, interest rate $r$, dividend yield rate $q$, volatility measure $sigma$, and two supporting parameters \mintinline{R}|n| and \mintinline{R}|steps|. Following the standard procedure of creating an S3 object, we have the following algorithm:
 
+\begin{Rminted}
+option.env <- function(method = "mc", S, r, q = 0, sigma, n = NULL, steps = NULL) {
+    env <- list(
+        "method" = method,
+        "S" = S,
+        "r" = r,
+        "q" = q,
+        "sigma" = sigma,
+        "n" = n,
+        "steps" = steps
+    )
+    class(env) <- "env"
+    env
+}
+\end{Rminted}
 
+Since Monte Carlo method is the most commonly used pricing method (and the core of this package), we set the default value of the argument \mintinline{R}|method| to the abbreviation \mintinline{R}|"mc"|. The parameters of current price, interest rate, and volatility measure are mandatory, as they are essensial inputs for the pricing functions. The dividend yield rate is set to a default zero to cover the majority of non-dividend bearing options. Finally, the two supplementary parameters \mintinline{R}|n| and \mintinline{R}|steps| are allowed to be left as \mintinline{R}|NULL| depending on whether the specified pricing method requires these arguments to be specified.
+
+\section{price.option}
+
+As we mentioned in Section \ref{sec:Pkg Structure}, \mintinline{R}|price.option| is the overlying function in the script \mintinline{R}|Price.R|. It act as a medium that connects user input and pricing algorithms, making the package structure more operable.
+
+To do this, we require this function to: 1. take objects/arguments input from user, 2. trigger corresponding pricing engines based on specified method, and 3. return the estimation of option price. We can do so starting from the codes below:
+
+\begin{Rminted}
+price.option <- function(obj, env, method = env$method, n = env$n, ... , all = FALSE) {
+    check.method(method)
+    res <- get(paste0("price.option.", method))(obj = obj, env = env, n = n, ..., all = all)
+    res
+}
+\end{Rminted}
+
+\mintinline{R}|check.method| is a function in \mintinline{R}|Tools.R| which checks if a pricing method is specified and if it is supported by the package.
+
+The following \mintinline{R}|get(<function name>)(<arguments>)| structure in line 3 executes the function with the name provided and takes specified argument inputs. This line triggers corresponding sub-functions that evoke specific pricing engines. For example, the sub-function for Binomial tree option pricing is shown below:
+
+\begin{Rminted}
+price.option.binomial <- function(obj, env, n, u, d, all) {
+    res <- get(paste0(class(obj)[1], ".binomial"))(obj = obj, env = env, n = n, u = u, d = d, all = all)
+    res
+}
+\end{Rminted}
+
+These sub-functions are all named in the format \mintinline{R}|"price.option.XXX"|, where \mintinline{R}|"XXX"| is the string defined by argument \mintinline{R}|method|. These sub-functions also used the similar structure to trigger corresponding pricing engines for different family of options. The pricing engines are all named in the format \mintinline{R}|"family.method"|. For instance, the Monte Carlo pricing engine for lookback option is named \mintinline{R}|lookback.mc|. Using the trick of \mintinline{R}|get()()| allowed us to tirgger subordinate functions without using lengthy if-else statements.
+
+% TODO: writting this section now!!!
 
 \section{Deterministic Methods}
 
@@ -309,20 +384,20 @@ microbenchmark::microbenchmark(
     mc.mat()
 )
 
-    Unit: microseconds
-    expr     min      lq      mean   median      uq     max neval
-mc.for() 18327.2 19872.8 26257.504 25396.45 27853.6 60920.1   100
-mc.mat()   831.8   964.9  1200.425  1039.30  1094.5  8045.3   100
+>     Unit: microseconds
+>     expr     min      lq      mean   median      uq     max neval
+> mc.for() 18327.2 19872.8 26257.504 25396.45 27853.6 60920.1   100
+> mc.mat()   831.8   964.9  1200.425  1039.30  1094.5  8045.3   100
 \end{Rminted}
 
 From the result we see that \mintinline{R}|mc.mat| is substantially faster than \mintinline{R}|mc.for|. We shoud thus prefer the former to obtain better estimation efficiency.
 
 The matrix method can also be implemented via the form shown in Equation \ref{eq:mc_explicit} using cumulative product \mintinline{R}|cumprod| function. However, the running time for single multiplication is slightly longer than addition. One may decide to use either methods considering redability and efficiency.
 
-The full look of the \mintinline{R}|mc.engine| is as such:
+The full look of the \mintinline{R}|mc.engine| is shown below:
 
 \begin{Rminted}
-    mc.engine <- function(type, K, t, S0, r, q, sigma, n, steps) {
+mc.engine <- function(type, K, t, S0, r, q, sigma, n, steps) {
 
     dt <- t / steps
 
@@ -340,6 +415,8 @@ The full look of the \mintinline{R}|mc.engine| is as such:
     S
 }
 \end{Rminted}
+
+Notice that the argument specifying the number of time steps to simulate per trajectory, $m$, is now specified under the name \mintinline{R}|steps|.
 
 Here, the drift coefficient is decomposed to (fixed) annual interest rate $r$ and (fixed) annual dividend yield rate $q$ according to Equation \ref{eq:mc_explicit_rq}. The number of time steps $m$ is directly named as \mintinline{R}|steps|.
 

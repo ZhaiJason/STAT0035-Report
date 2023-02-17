@@ -14,12 +14,12 @@
 \PYG{p}{)}
 
 \PYG{n}{John}
-\PYG{c+c1}{\PYGZsh{} \PYGZdl{}age}
-\PYG{c+c1}{\PYGZsh{} [1] 20}
-\PYG{c+c1}{\PYGZsh{}}
-\PYG{c+c1}{\PYGZsh{} \PYGZdl{}gender}
-\PYG{c+c1}{\PYGZsh{} [1] \PYGZdq{}male\PYGZdq{}}
-\PYG{c+c1}{\PYGZsh{}}
-\PYG{c+c1}{\PYGZsh{} attr(,\PYGZdq{}class\PYGZdq{})}
-\PYG{c+c1}{\PYGZsh{} [1] \PYGZdq{}student\PYGZdq{}}
+\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZdl{}}\PYG{n}{age}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{1}\PYG{p}{]} \PYG{l+m}{20}
+\PYG{o}{\PYGZgt{}}
+\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZdl{}}\PYG{n}{gender}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{1}\PYG{p}{]} \PYG{l+s}{\PYGZdq{}male\PYGZdq{}}
+\PYG{o}{\PYGZgt{}}
+\PYG{o}{\PYGZgt{}} \PYG{n+nf}{attr}\PYG{p}{(,}\PYG{l+s}{\PYGZdq{}class\PYGZdq{}}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{1}\PYG{p}{]} \PYG{l+s}{\PYGZdq{}student\PYGZdq{}}
 \end{Verbatim}
