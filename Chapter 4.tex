@@ -1,8 +1,31 @@
 \chapter{Results} \label{cpt:Results}
+
+This Chapter will discuss the outcome of the programming implementation discussed in previous chapters. The ``outcome'' will be presented using numerous option pricing examples based on our package, as well as some comments on the effectiveness of the result.
+
+The second part of the chapter will discuss the limitations of the package and potential directions of furture development.
+
 \section{Examples}
 
-\section{Further Discussions}
+\subsection{Black-Scholes}
 
-% rmcop provides NO COMPUTATIONAL ADVANTAGE compare to lower level programming techniques provided by packages such as RQuantLib.
+\subsection{Binomial Tree} \label{ex:binomial_tree}
+
+
+
+The below example uses the binomial tree method to price an option undering an 
+
+% \begin{Rminted} \label{ex:binomial_1000}
+% test
+% \end{Rminted}
+
+\subsection{Monte Carlo}
+
+\section{Limitations and Future Development}
+
+Currently, \mintinline{R}|rmcop| only supports a few types of options. The derivative market is varying, and it is infesible for a single package to contain tools that can address all possible scenarios. One of the necessary future development of \mintinline{R}|rmcop| will be extending its support to more cases. This includes the support of pricing American and Bermudian styles options via Monte Carlo method, and the support of more types of exotic options pricing.
+
+Though the development of the package includes several R-programming tricks to speed up the computation, one cannot guarantee the implementation here is the most efficient way of encoding the pricing methods. Also, as we discussed in Section \ref{cpt:Existing Packages}, \mintinline{R}|rmcop| being an R-based package has fundamentally no computational advantage comparing to algorithms developed via lower level programming languages. The main focus of this pacakge is for demonstration of model implementations, and the C++ based programmes should be more desirable when conducting more practical and computationally-intensive option pricing projects.
+
+Until the time when this report is completed, the development of \mintinline{R}|rmcop| is still active. One may found resources in Appendix A useful in terms of tracking future updates of the package.
 
 \newpage

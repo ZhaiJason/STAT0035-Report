@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{style} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}american\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{q} \PYG{o}{!=} \PYG{l+m}{0} \PYG{o}{|} \PYG{n}{type} \PYG{o}{!=} \PYG{l+s}{\PYGZdq{}call\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n+nf}{warning}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Black\PYGZhy{}Scholes formula not suitable, numerical evaluation should be used instead.\PYGZdq{}}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

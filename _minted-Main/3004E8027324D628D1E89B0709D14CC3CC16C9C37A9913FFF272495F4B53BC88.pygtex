@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{bs.d1} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{S}\PYG{p}{,} \PYG{n}{K}\PYG{p}{,} \PYG{n}{t}\PYG{p}{,} \PYG{n}{r}\PYG{p}{,} \PYG{n}{q}\PYG{p}{,} \PYG{n}{sigma}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{p}{(}\PYG{n+nf}{log}\PYG{p}{(}\PYG{n}{S} \PYG{o}{/} \PYG{n}{K}\PYG{p}{)} \PYG{o}{+} \PYG{p}{(}\PYG{n}{r} \PYG{o}{\PYGZhy{}} \PYG{n}{q} \PYG{o}{+} \PYG{n}{sigma}\PYG{o}{\PYGZca{}}\PYG{l+m}{2} \PYG{o}{/} \PYG{l+m}{2}\PYG{p}{)} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{o}{/} \PYG{p}{(}\PYG{n}{sigma} \PYG{o}{*} \PYG{n+nf}{sqrt}\PYG{p}{(}\PYG{n}{t}\PYG{p}{))}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{S.min} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{apply}\PYG{p}{(}\PYG{n}{S}\PYG{p}{,} \PYG{l+m}{2}\PYG{p}{,} \PYG{n}{min}\PYG{p}{)}
+\PYG{n}{S.max} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{apply}\PYG{p}{(}\PYG{n}{S}\PYG{p}{,} \PYG{l+m}{2}\PYG{p}{,} \PYG{n}{max}\PYG{p}{)}
+\PYG{n}{is.cross} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{p}{(}\PYG{n}{S.min} \PYG{o}{\PYGZlt{}} \PYG{n}{barrier} \PYG{o}{\PYGZam{}} \PYG{n}{S.max} \PYG{o}{\PYGZgt{}} \PYG{n}{barrier}\PYG{p}{)}
+\end{Verbatim}

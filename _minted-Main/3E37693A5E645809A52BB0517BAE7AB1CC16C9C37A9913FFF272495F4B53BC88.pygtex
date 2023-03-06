@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{type} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}call\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{is.fixed}\PYG{p}{)} \PYG{p}{\PYGZob{}} \PYG{c+c1}{\PYGZsh{} Fixed strike}
+        \PYG{n}{C} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{r} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{o}{*} \PYG{n+nf}{pmax}\PYG{p}{(}\PYG{n}{S.max} \PYG{o}{\PYGZhy{}} \PYG{n}{K}\PYG{p}{,} \PYG{l+m}{0}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{p}{\PYGZob{}} \PYG{c+c1}{\PYGZsh{} Float strike}
+        \PYG{n}{C} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{r} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{o}{*} \PYG{p}{(}\PYG{n}{S}\PYG{p}{[}\PYG{n}{steps} \PYG{o}{+} \PYG{l+m}{1}\PYG{p}{,} \PYG{p}{]} \PYG{o}{\PYGZhy{}} \PYG{n}{S.min}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{type} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}put\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{is.fixed}\PYG{p}{)} \PYG{p}{\PYGZob{}} \PYG{c+c1}{\PYGZsh{} Fixed strike}
+        \PYG{n}{C} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{r} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{o}{*} \PYG{n+nf}{pmax}\PYG{p}{(}\PYG{n}{K} \PYG{o}{\PYGZhy{}} \PYG{n}{S.min}\PYG{p}{,} \PYG{l+m}{0}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{p}{\PYGZob{}} \PYG{c+c1}{\PYGZsh{} Float strike}
+        \PYG{n}{C} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{r} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{o}{*} \PYG{p}{(}\PYG{n}{S.max} \PYG{o}{\PYGZhy{}} \PYG{n}{S}\PYG{p}{[}\PYG{n}{steps} \PYG{o}{+} \PYG{l+m}{1}\PYG{p}{,} \PYG{p}{])}
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

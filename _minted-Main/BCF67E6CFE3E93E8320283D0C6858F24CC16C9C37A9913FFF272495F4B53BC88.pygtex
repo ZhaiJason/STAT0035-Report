@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{get}\PYG{p}{(}\PYG{o}{\PYGZlt{}}\PYG{n}{function} \PYG{n}{name}\PYG{o}{\PYGZgt{}}\PYG{p}{)(}\PYG{o}{\PYGZlt{}}\PYG{n}{arguments}\PYG{o}{\PYGZgt{}}\PYG{p}{)}
+\end{Verbatim}

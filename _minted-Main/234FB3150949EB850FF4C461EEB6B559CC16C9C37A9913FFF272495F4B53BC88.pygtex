@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{S.min} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{apply}\PYG{p}{(}\PYG{n}{S}\PYG{p}{,} \PYG{l+m}{2}\PYG{p}{,} \PYG{n}{min}\PYG{p}{)}
+\PYG{n}{S.max} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{apply}\PYG{p}{(}\PYG{n}{S}\PYG{p}{,} \PYG{l+m}{2}\PYG{p}{,} \PYG{n}{max}\PYG{p}{)}
+\end{Verbatim}

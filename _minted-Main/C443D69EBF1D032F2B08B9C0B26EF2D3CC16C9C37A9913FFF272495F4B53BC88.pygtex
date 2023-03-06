@@ -1,0 +1,36 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{international.student} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{age}\PYG{p}{,} \PYG{n}{gender}\PYG{p}{,} \PYG{n}{nationality}\PYG{p}{,} \PYG{n}{language}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+
+    \PYG{n}{obj} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{student}\PYG{p}{(}\PYG{n}{age}\PYG{p}{,} \PYG{n}{gender}\PYG{p}{)}
+    \PYG{n}{obj} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{c}\PYG{p}{(}
+        \PYG{n}{obj}\PYG{p}{,}
+        \PYG{l+s}{\PYGZdq{}nationality\PYGZdq{}} \PYG{o}{=} \PYG{n}{nationality}\PYG{p}{,}
+        \PYG{l+s}{\PYGZdq{}language\PYGZdq{}} \PYG{o}{=} \PYG{n}{language}
+    \PYG{p}{)}
+    \PYG{n+nf}{class}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{)} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{c}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}international\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}student\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{obj}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{Sara} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{international.student}\PYG{p}{(}
+    \PYG{n}{age} \PYG{o}{=} \PYG{l+m}{21}\PYG{p}{,}
+    \PYG{n}{gender} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}female\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{nationality} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}Singapore\PYGZdq{}}\PYG{p}{,}
+    \PYG{n}{language} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}Chinese\PYGZdq{}}
+\PYG{p}{)}
+
+\PYG{n}{Sara}
+\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZdl{}}\PYG{n}{age}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{1}\PYG{p}{]} \PYG{l+m}{21}
+\PYG{o}{\PYGZgt{}}
+\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZdl{}}\PYG{n}{gender}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{1}\PYG{p}{]} \PYG{l+s}{\PYGZdq{}female\PYGZdq{}}
+\PYG{o}{\PYGZgt{}}
+\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZdl{}}\PYG{n}{nationality}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{1}\PYG{p}{]} \PYG{l+s}{\PYGZdq{}Singapore\PYGZdq{}}
+\PYG{o}{\PYGZgt{}}
+\PYG{o}{\PYGZgt{}} \PYG{o}{\PYGZdl{}}\PYG{n}{language}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{1}\PYG{p}{]} \PYG{l+s}{\PYGZdq{}Chinese\PYGZdq{}}
+\PYG{o}{\PYGZgt{}}
+\PYG{o}{\PYGZgt{}} \PYG{n+nf}{attr}\PYG{p}{(,}\PYG{l+s}{\PYGZdq{}class\PYGZdq{}}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{1}\PYG{p}{]} \PYG{l+s}{\PYGZdq{}international\PYGZdq{}} \PYG{l+s}{\PYGZdq{}student\PYGZdq{}}
+\end{Verbatim}

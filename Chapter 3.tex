@@ -334,7 +334,7 @@ q <- 1 - p # Compute riskless probability for a downward price movement
 
 Where variables \mintinline{R}|p| and \mintinline{R}|q| represents $\hat{p}$ and $\hat{q}$, respectively.
 
-Second, to generate a binomial tree we require four known parameters: the current underlying asset price $S$ (or $S_0$), ratio of an upward jump $u$, ratio of an downward jump $d$, and the number of steps to compute $n$. By observing the Binomial tree through Graph \ref{gph:binomial_tree}, we see we can store all nodes of the tree into an $(n+1)\times (n+1)$ matrix, as displayed in the following form:
+Second, to generate a binomial tree, we require four known parameters: the current underlying asset price $S$ (or $S_0$), ratio of an upward jump $u$, ratio of an downward jump $d$, and the number of steps to compute $n$. By observing the Binomial tree through Graph \ref{gph:binomial_tree}, we see we can store all nodes of the tree into an $(n+1)\times (n+1)$ triangular matrix, as displayed in the following form:
 
 \begin{figure}[H]
     \centering
@@ -355,7 +355,7 @@ Second, to generate a binomial tree we require four known parameters: the curren
     \caption{Matrix Representing the Binomial Tree} \label{gph:tree_matrix}
 \end{figure}
 
-To create such matrix shown in Figure \ref{gph:tree_matrix}, we can use the algorithm below:
+As shown by Graph \ref{gph:tree_matrix}, each row of the lower triangular matrix represent a step of the binomial tree. To create such matrix shown in Figure \ref{gph:tree_matrix}, we can use the algorithm below:
 
 \begin{Rminted}
 Binomial.tree <- function(S0, u, d, n) {
@@ -370,15 +370,57 @@ Binomial.tree <- function(S0, u, d, n) {
 }
 \end{Rminted}
 
-We first build an empty matrix of the required size $(n+1)\times(n+1)$\footnote{In R, this is represented by a matrix containing only \mintinline{R}|NA|s.}
+We first build an empty matrix of the required size $(n+1)\times(n+1)$\footnote{In R, this is represented by a matrix containing only \mintinline{R}|NA|s. By defining the size of the matrix ahead allows us to speed up the computation.} and assign the current price $S_0$ to be the only element of row $1$.
 
-Here, starting from the current price $S_0$
+As we see from Graph \ref{gph:tree_matrix}, each row can be created via the upper row by: 1. Multiply the upper row's first element by the downward jump ratio $d$; 2. Multiply all elements (including the first) by an upward jump, and; 3. storing these new values into a vector which is $1$ unit longer than the previous row.
 
-% TODO: continue from here!!!!!!!
+We encoded the above procedure using the for-loop shown in code lines 5-8 above. Here, \mintinline{R}|temp| is a record of each ``upper row's'' non-NA elements in the above context, and \mintinline{R}|c(temp, rep(NA, dim - i))| allows us to fill each new row's length to $n+1$, so that we can directly update the rows in the predefined empty matrix.
 
-Noticing that when the computer runs a recursive algorithm, the data will not be returned until the recurrsion reaches to an end. This means the memory useage will accumulate continuously as the recurrsing layers stacks deeper and deeper. For instance, a binomial tree with steps $n=1000$ will consume over 6GB of system memory and noticably long time to complete, and a binomial tree with steps $n=10000$ cannot be executed in R as the number of recurrsing layers will exceed the default limit (and RAM capacity of many personal devices).
+A typical output of the \mintinline{R}|Binomial.tree| function is shown below:
 
-% TODO: publish the n=1000 profvis profile to RPub and use hyperref to cite it.
+\begin{Rminted}
+Binomial.tree(S0 = 8, u = 2, d = 0.5, n = 4)
+>      [,1] [,2] [,3] [,4] [,5]
+> [1,]  8.0   NA   NA   NA   NA
+> [2,]  4.0   16   NA   NA   NA
+> [3,]  2.0    8   32   NA   NA
+> [4,]  1.0    4   16   64   NA
+> [5,]  0.5    2    8   32  128
+\end{Rminted}
+
+The third step is calculating the payoff at the terminal state of the binomial tree. In our setup, this would be the payoff calculuated using the prices shown in the last row of the matrix. Recall the payoff of different types of options form Section \ref{sec:Literature Review}, we will use an if-else statement to decide which payoff function to use:
+
+\begin{Rminted}
+if (type == "call") {
+    fn <- sapply(Sn, function(x) {max(x - K, 0)}) # Payoff for call option
+} else if (type == "put") {
+    fn <- sapply(Sn, function(x) {max(K - x, 0)}) # Payoff for put option
+}
+\end{Rminted}
+
+Here, variable \mintinline{R}|Sn| is a vector storing the last row of the constructed price matrix, and \mintinline{R}|fn| would represent the corresponding final step's payoffs. This will be used as an initial vector of our next recursive price valuation.
+
+The fourth and final step is to use risk-neutral valuation to compute the current payoff from the final steps payoffs. For each step backwards in time, the recursive formula is shown by Equation \ref{eq:binomial_recursive}. A simple pseudocode of the function enconding this formula would be:
+
+% FIXME: change the pseudo to correct format using algorithmic
+% \begin{algorithmic}
+rnv <- function(step i payoffs) {
+    if (length of step i payoffs == 1) {
+        return result payoff
+    } else {
+        compute step i-1 payoffs from step i payoffs
+        rnv(step i-1 payoffs)
+    }
+}
+% \end{algorithmic}
+
+For each layer of recurrsion, we will take the current step's payoff vector as imput. Using the Equation \ref{eq:binomial_recursive}, the output of each recurrsion will be a vector that is $1$ unit shorter than the input vector (meaning we are moving forward by one step in the binomial tree). When the length of the vector finally reduced to $1$, we will be reaching step $0$, or the current time under the binomial tree setup. The result singular payoff will be the desired current payoff, or the fair price of the target option.
+
+The detailed implementation of the recursive method can be found in the package's source code under Appendix \ref{apd:source_code}.
+
+Noticing that when the computer runs a recursive algorithm, the data will not be returned until the recurrsion reaches to an end. This means the memory useage will accumulate continuously as the recurrsing layers stacks deeper. Therefore, a binomial tree with steps $n=1000$ will consume over 6GB of system memory and noticably long time to complete, and a binomial tree with steps $n=10000$ cannot be executed in R as the number of recurrsing layers will exceed the default limit (and RAM capacity of many personal devices).
+
+To demonstrate this effect better, an example code is presented under Section \ref{ex:binomial_tree}.
 
 \section{Monte Carlo Methods}
 

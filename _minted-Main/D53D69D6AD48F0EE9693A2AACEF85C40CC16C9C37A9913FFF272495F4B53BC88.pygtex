@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{type} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}call\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n}{fn} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{sapply}\PYG{p}{(}\PYG{n}{Sn}\PYG{p}{,} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)} \PYG{p}{\PYGZob{}}\PYG{n+nf}{max}\PYG{p}{(}\PYG{n}{x} \PYG{o}{\PYGZhy{}} \PYG{n}{K}\PYG{p}{,} \PYG{l+m}{0}\PYG{p}{)\PYGZcb{})} \PYG{c+c1}{\PYGZsh{} Payoff for call option}
+\PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{type} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}put\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n}{fn} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{sapply}\PYG{p}{(}\PYG{n}{Sn}\PYG{p}{,} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)} \PYG{p}{\PYGZob{}}\PYG{n+nf}{max}\PYG{p}{(}\PYG{n}{K} \PYG{o}{\PYGZhy{}} \PYG{n}{x}\PYG{p}{,} \PYG{l+m}{0}\PYG{p}{)\PYGZcb{})} \PYG{c+c1}{\PYGZsh{} Payoff for put option}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

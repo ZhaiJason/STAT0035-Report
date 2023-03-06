@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{price.option} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{env}\PYG{p}{,} \PYG{n}{method} \PYG{o}{=} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{method}\PYG{p}{,} \PYG{n}{n} \PYG{o}{=} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{n}\PYG{p}{,} \PYG{k+kc}{...} \PYG{p}{,} \PYG{n}{all} \PYG{o}{=} \PYG{k+kc}{FALSE}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n+nf}{check.method}\PYG{p}{(}\PYG{n}{method}\PYG{p}{)}
+    \PYG{n}{res} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{get}\PYG{p}{(}\PYG{n+nf}{paste0}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}price.option.\PYGZdq{}}\PYG{p}{,} \PYG{n}{method}\PYG{p}{))(}\PYG{n}{obj} \PYG{o}{=} \PYG{n}{obj}\PYG{p}{,} \PYG{n}{env} \PYG{o}{=} \PYG{n}{env}\PYG{p}{,} \PYG{n}{n} \PYG{o}{=} \PYG{n}{n}\PYG{p}{,} \PYG{k+kc}{...}\PYG{p}{,} \PYG{n}{all} \PYG{o}{=} \PYG{n}{all}\PYG{p}{)}
+    \PYG{n}{res}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

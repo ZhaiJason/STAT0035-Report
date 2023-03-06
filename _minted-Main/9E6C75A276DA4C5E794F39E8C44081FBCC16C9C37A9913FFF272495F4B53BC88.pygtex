@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{Binomial.tree}\PYG{p}{(}\PYG{n}{S0} \PYG{o}{=} \PYG{l+m}{8}\PYG{p}{,} \PYG{n}{u} \PYG{o}{=} \PYG{l+m}{2}\PYG{p}{,} \PYG{n}{d} \PYG{o}{=} \PYG{l+m}{0.5}\PYG{p}{,} \PYG{n}{n} \PYG{o}{=} \PYG{l+m}{4}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}}      \PYG{p}{[,}\PYG{l+m}{1}\PYG{p}{]} \PYG{p}{[,}\PYG{l+m}{2}\PYG{p}{]} \PYG{p}{[,}\PYG{l+m}{3}\PYG{p}{]} \PYG{p}{[,}\PYG{l+m}{4}\PYG{p}{]} \PYG{p}{[,}\PYG{l+m}{5}\PYG{p}{]}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{1}\PYG{p}{,]}  \PYG{l+m}{8.0}   \PYG{k+kc}{NA}   \PYG{k+kc}{NA}   \PYG{k+kc}{NA}   \PYG{k+kc}{NA}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{2}\PYG{p}{,]}  \PYG{l+m}{4.0}   \PYG{l+m}{16}   \PYG{k+kc}{NA}   \PYG{k+kc}{NA}   \PYG{k+kc}{NA}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{3}\PYG{p}{,]}  \PYG{l+m}{2.0}    \PYG{l+m}{8}   \PYG{l+m}{32}   \PYG{k+kc}{NA}   \PYG{k+kc}{NA}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{4}\PYG{p}{,]}  \PYG{l+m}{1.0}    \PYG{l+m}{4}   \PYG{l+m}{16}   \PYG{l+m}{64}   \PYG{k+kc}{NA}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{5}\PYG{p}{,]}  \PYG{l+m}{0.5}    \PYG{l+m}{2}    \PYG{l+m}{8}   \PYG{l+m}{32}  \PYG{l+m}{128}
+\end{Verbatim}
