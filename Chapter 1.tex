@@ -223,16 +223,22 @@ P(S(T))=(S(T)-K)^+
 
 The probability $\hat{p}$ is set to be ``risk neutral'' in a way such that:
 
-\begin{align}
+\begin{align*}
 S(t_{i}) &= e^{-r\Delta t}\mathbb{E}[S(t_{i+1})] \\
 		 &= e^{-r\Delta t}[\hat{p}uS(t_i)+\hat{q}dS(t_i)],\quad\text{for }i=0,...,n-1
+\end{align*}
+
+And it can be calculated using the formula:
+
+\begin{align} \label{eq:binomial_riskless_p}
+\hat{p} = \frac{e^{r\Delta t}-d}{u-d}
 \end{align}
 
-Meaning that the current node's stock price is equal to the expected value of the two future nodes it can go in the next time step, discounting the interest. In such way, a portfolio which consist only of this stock would have a fixed return under price movement.
+Meaning that the current node's stock price is equal to the expected value of the two future nodes it can go in the next time step, discounting the interest. In such way, a portfolio which consist only of this stock would have a fixed return independent from price movement.
 
 Under such setting, the option payoff at each node is computed in similar way. Suppose payoff $P_{ij}$ denotes the payoff of the $j$th node at time step $i$, it can be computed via recursive form:
 
-\begin{align}
+\begin{align} \label{eq:binomial_recursive}
 P_{ij} &= e^{-rT}[\hat{p}P_{(i+1),j+1} + \hat{q}P_{(i+1),j}]
 \end{align}
 

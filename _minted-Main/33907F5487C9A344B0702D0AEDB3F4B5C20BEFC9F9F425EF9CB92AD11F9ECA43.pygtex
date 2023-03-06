@@ -1,0 +1,12 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{Binomial.tree} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{S0}\PYG{p}{,} \PYG{n}{u}\PYG{p}{,} \PYG{n}{d}\PYG{p}{,} \PYG{n}{n}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n}{dim} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{n} \PYG{o}{+} \PYG{l+m}{1}
+    \PYG{n}{S} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{matrix}\PYG{p}{(}\PYG{n}{nrow} \PYG{o}{=} \PYG{n}{dim}\PYG{p}{,} \PYG{n}{ncol} \PYG{o}{=} \PYG{n}{dim}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} Predefine the size}
+    \PYG{n}{temp} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{c}\PYG{p}{(}\PYG{n}{S0}\PYG{p}{)}
+    \PYG{n+nf}{for }\PYG{p}{(}\PYG{n}{i} \PYG{n}{in} \PYG{l+m}{1}\PYG{o}{:}\PYG{n}{dim}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{S}\PYG{p}{[}\PYG{n}{i}\PYG{p}{,} \PYG{p}{]} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{c}\PYG{p}{(}\PYG{n}{temp}\PYG{p}{,} \PYG{n+nf}{rep}\PYG{p}{(}\PYG{k+kc}{NA}\PYG{p}{,} \PYG{n}{dim} \PYG{o}{\PYGZhy{}} \PYG{n}{i}\PYG{p}{))}
+        \PYG{n}{temp} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{c}\PYG{p}{(}\PYG{n}{temp}\PYG{p}{[}\PYG{l+m}{1}\PYG{p}{]} \PYG{o}{*} \PYG{n}{d}\PYG{p}{,} \PYG{n}{temp} \PYG{o}{*} \PYG{n}{u}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}}
+    \PYG{n}{S}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

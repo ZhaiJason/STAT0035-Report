@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{d1} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{bs.d1}\PYG{p}{(}\PYG{n}{S}\PYG{p}{,} \PYG{n}{K}\PYG{p}{,} \PYG{n}{t}\PYG{p}{,} \PYG{n}{r}\PYG{p}{,} \PYG{n}{q}\PYG{p}{,} \PYG{n}{sigma}\PYG{p}{)}
+\PYG{n}{d2} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{d1} \PYG{o}{\PYGZhy{}} \PYG{n}{sigma} \PYG{o}{*} \PYG{n+nf}{sqrt}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)}
+
+\PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{type} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}call\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n}{price} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{q} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{o}{*} \PYG{n}{S} \PYG{o}{*} \PYG{n+nf}{pnorm}\PYG{p}{(}\PYG{n}{d1}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{r} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{o}{*} \PYG{n}{K} \PYG{o}{*} \PYG{n+nf}{pnorm}\PYG{p}{(}\PYG{n}{d2}\PYG{p}{)}
+\PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{type} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}put\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n}{price} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{r} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{o}{*} \PYG{n}{K} \PYG{o}{*} \PYG{n+nf}{pnorm}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{d2}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{q} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{o}{*} \PYG{n}{S} \PYG{o}{*} \PYG{n+nf}{pnorm}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{d1}\PYG{p}{)}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

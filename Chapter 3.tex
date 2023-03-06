@@ -249,7 +249,17 @@ price.option <- function(obj, env, method = env$method, n = env$n, ... , all = F
 }
 \end{Rminted}
 
-\mintinline{R}|check.method| is a function in \mintinline{R}|Tools.R| which checks if a pricing method is specified and if it is supported by the package.
+As we see, the input argument of the function are:
+
+\begin{itemize}
+    \item \mintinline{R}|obj| the pre-defined option object.
+    \item \mintinline{R}|env| the pre-defined environment object.
+    \item \mintinline{R}|method| a string to determine which pricing method to use.
+    \item \mintinline{R}|...| additional arguments that are required/provided by specific pricing methods.
+    \item \mintinline{R}|all| a boolean\footnote{i.e. logical value, which evaluated to either true or false} value to determine whether only a number of estimate should be returned or should all relevant data used in the computation should be returned as well.
+\end{itemize}
+
+Going through the code with more details, in line 2, \mintinline{R}|check.method| is a function in \mintinline{R}|Tools.R| which checks if a pricing method is specified and if it is supported by the package.
 
 The following \mintinline{R}|get(<function name>)(<arguments>)| structure in line 3 executes the function with the name provided and takes specified argument inputs. This line triggers corresponding sub-functions that evoke specific pricing engines. For example, the sub-function for Binomial tree option pricing is shown below:
 
@@ -260,9 +270,9 @@ price.option.binomial <- function(obj, env, n, u, d, all) {
 }
 \end{Rminted}
 
-These sub-functions are all named in the format \mintinline{R}|"price.option.XXX"|, where \mintinline{R}|"XXX"| is the string defined by argument \mintinline{R}|method|. These sub-functions also used the similar structure to trigger corresponding pricing engines for different family of options. The pricing engines are all named in the format \mintinline{R}|"family.method"|. For instance, the Monte Carlo pricing engine for lookback option is named \mintinline{R}|lookback.mc|. Using the trick of \mintinline{R}|get()()| allowed us to tirgger subordinate functions without using lengthy if-else statements.
+These sub-functions are all named in the format \mintinline{R}|"price.option.XXX"|, where \mintinline{R}|"XXX"| is the string defined by argument \mintinline{R}|method|. These sub-functions also used the similar structure to trigger corresponding pricing engines for different family of options. The pricing engines are all named in the format \mintinline{R}|"family.method"|. For instance, the Monte Carlo pricing engine for lookback option is named \mintinline{R}|lookback.mc|. Using the trick of \mintinline{R}|get()()| allowed us to decide which subordinate function to call without using lengthy if-else statements.
 
-% TODO: writting this section now!!!
+The input objects and method-specific arguments will then be passed to the pricing engine, where the information encapsulated within the objects will be extracted and used to compute the estimation of the option's price. The detailed construction of these engines will be discussed in the sections below.
 
 \section{Deterministic Methods}
 
@@ -272,9 +282,42 @@ The deterministic methods that are included in \mintinline{R}|rmcop| are Black-S
 
 \subsection{Black-Scholes Model}
 
-\mintinline{R}|vanilla.bs| is the function for option pricing via Black-Scholes formula, as we see from Equation \ref{eq:BS Formula Call} and \ref{eq:BS Formula Put}.
+\mintinline{R}|vanilla.bs| is the pricing engine function for Black-Scholes formula. The solution of call and put options are specified by Equation \ref{eq:BS Formula Call} and \ref{eq:BS Formula Put}, respectively.
 
-The implementation is simple, as we shall simply ``translate'' the formula to R code. This can be done with the code below:
+The implementation is simple, as we shall only ``translate'' the formula to R code. This can be done with the algorithm below:
+
+\begin{Rminted}
+d1 <- bs.d1(S, K, t, r, q, sigma)
+d2 <- d1 - sigma * sqrt(t)
+
+if (type == "call") {
+    price <- exp(-q * t) * S * pnorm(d1) - exp(-r * t) * K * pnorm(d2)
+} else if (type == "put") {
+    price <- exp(-r * t) * K * pnorm(-d2) - exp(-q * t) * S * pnorm(-d1)
+}
+\end{Rminted}
+
+Where $d_1$ is computed by the function:
+
+\begin{Rminted}
+bs.d1 <- function(S, K, t, r, q, sigma) {
+    (log(S / K) + (r - q + sigma^2 / 2) * t) / (sigma * sqrt(t))
+}
+\end{Rminted}
+
+Which is the excat same formula that is specified under Equation \ref{eq:BS Formula Put}. The engine will then simply return the variable \mintinline{R}|price| as the output.
+
+Notice that by definition seen in Section \ref{sec:Literature Review}, only non-dividend bearing American call option can be priced using Black-Scholes formula as well. This is because under such case, the option isn't worthwile to be exercised earlier than maturity, so the resulted price will be the same as a European call with other arguments being identical. In other cases, American option's price cannot be expressed in a closed-form, and should thus be calculated using numerical methods.
+
+To identify this issue and prevent users from pricing American style options wrongly, we add the following code to generate a warning message:
+
+\begin{Rminted}
+if (style == "american") {
+    if (q != 0 | type != "call") {
+        warning("Black-Scholes formula not suitable, numerical evaluation should be used instead.")
+    }
+}
+\end{Rminted}
 
 \subsection{Binomial Lattice Tree}
 
@@ -282,15 +325,58 @@ The implementation is simple, as we shall simply ``translate'' the formula to R 
 
 The R algorithm can be roughly divided into four segments: 1. compute the risk-neutral probability 2. generating binomial tree; 3. computing the payoff at the end step of the binomial tree; and 4. using backward recursive methods to compute the expected payoff of the option at current time under the risk-neutral assumption.
 
-To generate a binomial tree
+First, after extracting the information from input objects, we can compute the risk-neutral probability using Euqation \ref{eq:binomial_riskless_p}. This can be translated to the following code:
 
+\begin{Rminted}
+p <- (exp(r * dt) - d) / (u - d) # Compute riskless probability for an upward price movement
+q <- 1 - p # Compute riskless probability for a downward price movement
+\end{Rminted}
 
+Where variables \mintinline{R}|p| and \mintinline{R}|q| represents $\hat{p}$ and $\hat{q}$, respectively.
 
+Second, to generate a binomial tree we require four known parameters: the current underlying asset price $S$ (or $S_0$), ratio of an upward jump $u$, ratio of an downward jump $d$, and the number of steps to compute $n$. By observing the Binomial tree through Graph \ref{gph:binomial_tree}, we see we can store all nodes of the tree into an $(n+1)\times (n+1)$ matrix, as displayed in the following form:
 
+\begin{figure}[H]
+    \centering
+    \[\tikz{
+        \node (a) at (0, 2) {$S$};
+        \node (b) at (0, 1.5) {$dS$};
+        \node (c) at (2, 1.5) {$uS$};
+        \node (d) at (0, 1) {$d^2S$};
+        \node (e) at (2, 1) {$duS$};
+        \node (f) at (4, 1) {$u^2S$};
+        \node (g) at (4, 0.5) {$...$};
+        \node (h) at (0, 0) {$d^nS$};
+        \node (i) at (2, 0) {$d^{n-1}uS$};
+        \node (j) at (4, 0) {$d^{n-2}u^2S$};
+        \node (k) at (6, 0) {$...$};
+        \node (l) at (8, 0) {$u^nS$};
+    }\]
+    \caption{Matrix Representing the Binomial Tree} \label{gph:tree_matrix}
+\end{figure}
 
-Noticing that when the computer runs a recursive algorithm, the data will not be returned until the recurrsion reaches to an end. This means the memory useage will accumulate continuously as the recurrsing layers stacks deeper and deeper. For instance, a binomial tree with steps $n=1000$ will consume over 6GB of system memory and noticably long time to complete, and a binomial tree with steps $n=10000$ cannot be executed in R as the number of recurrsing layers will exceed R's default limit.
+To create such matrix shown in Figure \ref{gph:tree_matrix}, we can use the algorithm below:
 
-Test reload
+\begin{Rminted}
+Binomial.tree <- function(S0, u, d, n) {
+    dim <- n + 1
+    S <- matrix(nrow = dim, ncol = dim) # Predefine the size
+    temp <- c(S0)
+    for (i in 1:dim) {
+        S[i, ] <- c(temp, rep(NA, dim - i))
+        temp <- c(temp[1] * d, temp * u)
+    }
+    S
+}
+\end{Rminted}
+
+We first build an empty matrix of the required size $(n+1)\times(n+1)$\footnote{In R, this is represented by a matrix containing only \mintinline{R}|NA|s.}
+
+Here, starting from the current price $S_0$
+
+% TODO: continue from here!!!!!!!
+
+Noticing that when the computer runs a recursive algorithm, the data will not be returned until the recurrsion reaches to an end. This means the memory useage will accumulate continuously as the recurrsing layers stacks deeper and deeper. For instance, a binomial tree with steps $n=1000$ will consume over 6GB of system memory and noticably long time to complete, and a binomial tree with steps $n=10000$ cannot be executed in R as the number of recurrsing layers will exceed the default limit (and RAM capacity of many personal devices).
 
 % TODO: publish the n=1000 profvis profile to RPub and use hyperref to cite it.
 
