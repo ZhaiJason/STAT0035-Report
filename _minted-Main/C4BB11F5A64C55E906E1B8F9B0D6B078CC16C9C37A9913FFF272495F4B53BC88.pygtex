@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Defining options of interest}
+\PYG{n}{op1} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{option}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}european\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}vanilla\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}call\PYGZdq{}}\PYG{p}{,} \PYG{l+m}{10}\PYG{p}{,} \PYG{l+m}{2}\PYG{p}{)}
+\PYG{n}{op2} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{option}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}european\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}vanilla\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}put\PYGZdq{}}\PYG{p}{,} \PYG{l+m}{12}\PYG{p}{,} \PYG{l+m}{2}\PYG{p}{)}
+\PYG{n}{op3} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{option}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}european\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}binary\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}call\PYGZdq{}}\PYG{p}{,} \PYG{l+m}{10}\PYG{p}{,} \PYG{l+m}{2}\PYG{p}{,} \PYG{n}{payout} \PYG{o}{=} \PYG{l+m}{5}\PYG{p}{)}
+\PYG{n}{op.list} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{list}\PYG{p}{(}\PYG{n}{op1}\PYG{p}{,} \PYG{n}{op2}\PYG{p}{,} \PYG{n}{op3}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} Create a list contining the three options of interest}
+
+\PYG{c+c1}{\PYGZsh{} Defining the fixed environment}
+\PYG{n}{env} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{option.env}\PYG{p}{(}\PYG{n}{method} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}mc\PYGZdq{}}\PYG{p}{,} \PYG{n}{S} \PYG{o}{=} \PYG{l+m}{10}\PYG{p}{,} \PYG{n}{r} \PYG{o}{=} \PYG{l+m}{0.05}\PYG{p}{,} \PYG{n}{sigma} \PYG{o}{=} \PYG{l+m}{0.01}\PYG{p}{,} \PYG{n}{n} \PYG{o}{=} \PYG{l+m}{100000}\PYG{p}{,} \PYG{n}{steps} \PYG{o}{=} \PYG{l+m}{1}\PYG{p}{)}
+\end{Verbatim}

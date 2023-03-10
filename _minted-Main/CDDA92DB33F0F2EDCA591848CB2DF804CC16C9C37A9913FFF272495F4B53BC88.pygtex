@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{op.binary} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{option}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}european\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}binary\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}put\PYGZdq{}}\PYG{p}{,} \PYG{n}{K} \PYG{o}{=} \PYG{l+m}{50}\PYG{p}{,} \PYG{n}{t} \PYG{o}{=} \PYG{l+m}{2}\PYG{p}{,} \PYG{n}{payout} \PYG{o}{=} \PYG{l+m}{10}\PYG{p}{)}
+\PYG{n}{env} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{option.env}\PYG{p}{(}\PYG{n}{method} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}mc\PYGZdq{}}\PYG{p}{,} \PYG{n}{S} \PYG{o}{=} \PYG{l+m}{15}\PYG{p}{,} \PYG{n}{r} \PYG{o}{=} \PYG{l+m}{0.5}\PYG{p}{,} \PYG{n}{sigma} \PYG{o}{=} \PYG{l+m}{0.1}\PYG{p}{)}
+\end{Verbatim}

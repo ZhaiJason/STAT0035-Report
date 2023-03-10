@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Specified when defining environment}
+\PYG{n}{env} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{option.env}\PYG{p}{(}\PYG{n}{method} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}bs\PYGZdq{}}\PYG{p}{,} \PYG{n}{S} \PYG{o}{=} \PYG{l+m}{15}\PYG{p}{,} \PYG{n}{r} \PYG{o}{=} \PYG{l+m}{0.5}\PYG{p}{,} \PYG{n}{sigma} \PYG{o}{=} \PYG{l+m}{0.1}\PYG{p}{)}
+
+\PYG{c+c1}{\PYGZsh{} Specified when calling pricing function}
+\PYG{n+nf}{price.option}\PYG{p}{(}\PYG{n}{obj} \PYG{o}{=} \PYG{n}{option.vanilla}\PYG{p}{,} \PYG{n}{env} \PYG{o}{=} \PYG{n}{env}\PYG{p}{,} \PYG{n}{method} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}bs\PYGZdq{}}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{1}\PYG{p}{]} \PYG{l+m}{2.877561}
+\end{Verbatim}

@@ -4,6 +4,20 @@
 
 In this chapter, we will elaborate on the development of \mintinline{R}|rmcop|. We will first present the general structure of the package. Then, we will discuss the implementation of pricing models mentioned in the literature review in Section \ref{sec:Literature Review} in details.
 
+\section{Machine Environment} \label{sec:machine_env}
+
+The majority of the development and testing of the package is completed using my laptop. The configuration is briefed below.
+
+\begin{listing}[H]
+CPU: AMD Ryzen 7 4800H with Radeon Graphics (base 2.90GHz) \\
+RAM: 16(15.4)GB DDR4 3200MHz \\
+Max TDP: 45W
+\end{listing}
+
+The setup is typical for majority of personal computer devices, so the benchmarking and profiling presented in the report are reasonable references for ordinary package users.
+
+We have used the most up-to-date software setup until March 2023. The running environment is R version 4.2.2 via RStudio version 2022.12.0. The package framework is constructed using package \mintinline{R}|devtools| version 2.4.5.
+
 \section{Package Structure} \label{sec:Pkg Structure}
 
 The overlying workflow of using \mintinline{R}|rmcop| package to price financial option is displayed in Figure \ref{img:flowchart_option} below. One shall see that with the OOP framework, we encapsulate most arguments into two classes of objects: \mintinline{R}|option| and \mintinline{R}|env|.
@@ -274,7 +288,7 @@ These sub-functions are all named in the format \mintinline{R}|"price.option.XXX
 
 The input objects and method-specific arguments will then be passed to the pricing engine, where the information encapsulated within the objects will be extracted and used to compute the estimation of the option's price. The detailed construction of these engines will be discussed in the sections below.
 
-\section{Deterministic Methods}
+\section{Deterministic Methods} \label{sec:det_dev}
 
 Deterministic methods provide closed-form formulas which builds upon their relevant assumptions to price options. When pricing an option using deterministic method, given the same initial conditions, the result estimates should always be the same.
 
@@ -422,7 +436,7 @@ Noticing that when the computer runs a recursive algorithm, the data will not be
 
 To demonstrate this effect better, an example code is presented under Section \ref{ex:binomial_tree}.
 
-\section{Monte Carlo Methods}
+\section{Monte Carlo Methods} \label{sec:mc_dev}
 
 \subsection{Simulating Price Trajectories}
 

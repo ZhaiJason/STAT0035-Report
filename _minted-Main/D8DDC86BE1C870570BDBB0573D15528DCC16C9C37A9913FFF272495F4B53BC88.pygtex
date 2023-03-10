@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{option.env}\PYG{p}{(}\PYG{n}{S} \PYG{o}{=} \PYG{l+m}{30}\PYG{p}{,} \PYG{n}{r} \PYG{o}{=} \PYG{l+m}{0.03}\PYG{p}{,} \PYG{n}{q} \PYG{o}{=} \PYG{l+m}{0.02}\PYG{p}{,} \PYG{n}{sigma} \PYG{o}{=} \PYG{l+m}{0.01}\PYG{p}{)}
+\end{Verbatim}

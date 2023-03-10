@@ -1,0 +1,14 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Changed n = 4 for better demonstration}
+\PYG{n}{res} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{price.option}\PYG{p}{(}\PYG{n}{obj} \PYG{o}{=} \PYG{n}{option.vanilla}\PYG{p}{,} \PYG{n}{env} \PYG{o}{=} \PYG{n}{env}\PYG{p}{,} \PYG{n}{method} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}binomial\PYGZdq{}}\PYG{p}{,} \PYG{n}{u} \PYG{o}{=} \PYG{l+m}{1.2}\PYG{p}{,} \PYG{n}{d} \PYG{o}{=} \PYG{l+m}{0.9}\PYG{p}{,} \PYG{n}{n} \PYG{o}{=} \PYG{l+m}{4}\PYG{p}{,} \PYG{n}{all} \PYG{o}{=} \PYG{k+kc}{TRUE}\PYG{p}{)}
+
+\PYG{n}{res}\PYG{o}{\PYGZdl{}}\PYG{n}{p} \PYG{c+c1}{\PYGZsh{} Extract the risk\PYGZhy{}neutral probability}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{1}\PYG{p}{]} \PYG{l+m}{0.7771615}
+\PYG{n}{res}\PYG{o}{\PYGZdl{}}\PYG{n}{price\PYGZus{}tree} \PYG{c+c1}{\PYGZsh{} Extract the binomial price tree matrix}
+\PYG{o}{\PYGZgt{}}         \PYG{p}{[,}\PYG{l+m}{1}\PYG{p}{]}   \PYG{p}{[,}\PYG{l+m}{2}\PYG{p}{]}   \PYG{p}{[,}\PYG{l+m}{3}\PYG{p}{]}   \PYG{p}{[,}\PYG{l+m}{4}\PYG{p}{]}   \PYG{p}{[,}\PYG{l+m}{5}\PYG{p}{]}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{1}\PYG{p}{,]} \PYG{l+m}{15.0000}     \PYG{k+kc}{NA}     \PYG{k+kc}{NA}     \PYG{k+kc}{NA}     \PYG{k+kc}{NA}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{2}\PYG{p}{,]} \PYG{l+m}{13.5000} \PYG{l+m}{18.000}     \PYG{k+kc}{NA}     \PYG{k+kc}{NA}     \PYG{k+kc}{NA}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{3}\PYG{p}{,]} \PYG{l+m}{12.1500} \PYG{l+m}{16.200} \PYG{l+m}{21.600}     \PYG{k+kc}{NA}     \PYG{k+kc}{NA}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{4}\PYG{p}{,]} \PYG{l+m}{10.9350} \PYG{l+m}{14.580} \PYG{l+m}{19.440} \PYG{l+m}{25.920}     \PYG{k+kc}{NA}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{5}\PYG{p}{,]}  \PYG{l+m}{9.8415} \PYG{l+m}{13.122} \PYG{l+m}{17.496} \PYG{l+m}{23.328} \PYG{l+m}{31.104}
+\end{Verbatim}

@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{res} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{price.option}\PYG{p}{(}\PYG{n}{op.binary}\PYG{p}{,} \PYG{n}{env}\PYG{p}{,} \PYG{n}{n} \PYG{o}{=} \PYG{l+m}{1000}\PYG{p}{,} \PYG{n}{steps} \PYG{o}{=} \PYG{l+m}{1}\PYG{p}{,} \PYG{n}{all} \PYG{o}{=} \PYG{k+kc}{TRUE}\PYG{p}{)}
+\PYG{n+nf}{head}\PYG{p}{(}\PYG{n}{res}\PYG{o}{\PYGZdl{}}\PYG{n}{C}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} C is the keyword for extracting option payoffs}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{1}\PYG{p}{]} \PYG{l+m}{3.678794} \PYG{l+m}{3.678794} \PYG{l+m}{3.678794} \PYG{l+m}{3.678794} \PYG{l+m}{3.678794} \PYG{l+m}{3.678794}
+\PYG{n+nf}{summary}\PYG{p}{(}\PYG{n}{res}\PYG{o}{\PYGZdl{}}\PYG{n}{C}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}}  \PYG{n}{Min.} \PYG{l+m}{1}\PYG{n}{st} \PYG{n}{Qu.}  \PYG{n}{Median}    \PYG{n}{Mean} \PYG{l+m}{3}\PYG{n}{rd} \PYG{n}{Qu.}    \PYG{n}{Max.}
+\PYG{o}{\PYGZgt{}} \PYG{l+m}{0.000}   \PYG{l+m}{3.679}   \PYG{l+m}{3.679}   \PYG{l+m}{3.447}   \PYG{l+m}{3.679}   \PYG{l+m}{3.679}
+\end{Verbatim}

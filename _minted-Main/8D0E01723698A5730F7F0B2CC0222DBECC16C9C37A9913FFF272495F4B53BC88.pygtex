@@ -1,0 +1,10 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{set.seed}\PYG{p}{(}\PYG{l+m}{10}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} Set seed for random number generator}
+\PYG{n+nf}{unlist}\PYG{p}{(}\PYG{n+nf}{lapply}\PYG{p}{(}\PYG{n}{op.list}\PYG{p}{,} \PYG{n}{price.option}\PYG{p}{,} \PYG{n}{env} \PYG{o}{=} \PYG{n}{env}\PYG{p}{))}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{1}\PYG{p}{]} \PYG{l+m}{0.9518262} \PYG{l+m}{0.8611994} \PYG{l+m}{4.5241871}
+
+\PYG{c+c1}{\PYGZsh{} Equivalently, we can write the pricing function separatedly for each option}
+\PYG{n+nf}{price.option}\PYG{p}{(}\PYG{n}{op1}\PYG{p}{,} \PYG{n}{env}\PYG{p}{)}
+\PYG{n+nf}{price.option}\PYG{p}{(}\PYG{n}{op2}\PYG{p}{,} \PYG{n}{env}\PYG{p}{)}
+\PYG{n+nf}{price.option}\PYG{p}{(}\PYG{n}{op3}\PYG{p}{,} \PYG{n}{env}\PYG{p}{)}
+\end{Verbatim}

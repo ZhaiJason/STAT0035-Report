@@ -1,0 +1,45 @@
+\contentsline {chapter}{\numberline {1}Introduction}{3}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Abstract}{3}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Report Structure}{3}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Package Description}{4}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Literature Review}{4}{section.1.4}%
+\contentsline {subsection}{\numberline {1.4.1}Pricing of Financial Options}{4}{subsection.1.4.1}%
+\contentsline {subsection}{\numberline {1.4.2}Brownian Motion}{5}{subsection.1.4.2}%
+\contentsline {subsection}{\numberline {1.4.3}Black-Scholes Model}{7}{subsection.1.4.3}%
+\contentsline {subsection}{\numberline {1.4.4}Binomial Lattice Model}{8}{subsection.1.4.4}%
+\contentsline {subsection}{\numberline {1.4.5}Monte Carlo Option Pricing}{10}{subsection.1.4.5}%
+\contentsline {chapter}{\numberline {2}Existing Option Pricing Packages within R Ecosystem}{12}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Introduction}{12}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Packages Review}{12}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}derivmkts}{12}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}fOptions}{12}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}RQuantLib}{12}{subsection.2.2.3}%
+\contentsline {section}{\numberline {2.3}General Comments}{12}{section.2.3}%
+\contentsline {chapter}{\numberline {3}Package Development}{13}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Introduction}{13}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Machine Environment}{13}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Package Structure}{13}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Objective Oriented Programming}{15}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}R Framework for OOP}{15}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Option and Environment Class Objects}{17}{subsection.3.4.2}%
+\contentsline {section}{\numberline {3.5}price.option}{20}{section.3.5}%
+\contentsline {section}{\numberline {3.6}Deterministic Methods}{21}{section.3.6}%
+\contentsline {subsection}{\numberline {3.6.1}Black-Scholes Model}{21}{subsection.3.6.1}%
+\contentsline {subsection}{\numberline {3.6.2}Binomial Lattice Tree}{22}{subsection.3.6.2}%
+\contentsline {section}{\numberline {3.7}Monte Carlo Methods}{24}{section.3.7}%
+\contentsline {subsection}{\numberline {3.7.1}Simulating Price Trajectories}{24}{subsection.3.7.1}%
+\contentsline {subsection}{\numberline {3.7.2}vanilla.mc}{28}{subsection.3.7.2}%
+\contentsline {subsection}{\numberline {3.7.3}asian.mc}{29}{subsection.3.7.3}%
+\contentsline {subsection}{\numberline {3.7.4}barrier.mc}{30}{subsection.3.7.4}%
+\contentsline {subsection}{\numberline {3.7.5}binary.mc}{31}{subsection.3.7.5}%
+\contentsline {subsection}{\numberline {3.7.6}lookback.mc}{31}{subsection.3.7.6}%
+\contentsline {chapter}{\numberline {4}Results}{33}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Examples}{33}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Defining Option and Environment Objects}{33}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Black-Scholes}{34}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Binomial Tree}{35}{subsection.4.1.3}%
+\contentsline {subsection}{\numberline {4.1.4}Monte Carlo}{36}{subsection.4.1.4}%
+\contentsline {subsection}{\numberline {4.1.5}Comparing Multiple Option-Environment Setups}{37}{subsection.4.1.5}%
+\contentsline {section}{\numberline {4.2}Limitations and Future Development}{38}{section.4.2}%
+\contentsline {chapter}{\numberline {A}Appendix 1}{39}{appendix.A}%
+\contentsline {section}{\numberline {A.1}Package Source Code}{39}{section.A.1}%

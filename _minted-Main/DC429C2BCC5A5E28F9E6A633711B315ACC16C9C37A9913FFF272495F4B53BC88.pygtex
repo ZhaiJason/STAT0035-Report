@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{set.seed}\PYG{p}{(}\PYG{l+m}{10}\PYG{p}{)}
+\PYG{n+nf}{price.option}\PYG{p}{(}\PYG{n}{op.binary}\PYG{p}{,} \PYG{n}{env}\PYG{p}{,} \PYG{n}{n} \PYG{o}{=} \PYG{l+m}{1000}\PYG{p}{,} \PYG{n}{steps} \PYG{o}{=} \PYG{l+m}{1}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}} \PYG{p}{[}\PYG{l+m}{1}\PYG{p}{]} \PYG{l+m}{3.487497}
+\end{Verbatim}

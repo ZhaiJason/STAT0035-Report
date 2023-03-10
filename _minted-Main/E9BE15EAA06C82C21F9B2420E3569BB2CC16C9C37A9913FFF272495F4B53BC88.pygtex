@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nf}{option}\PYG{p}{(}
+    \PYG{c+c1}{\PYGZsh{} Common arguments for the father class \PYGZdq{}option\PYGZdq{}}
+    \PYG{n}{style} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}european\PYGZdq{}}\PYG{p}{,} \PYG{n}{type} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}call\PYGZdq{}}\PYG{p}{,} \PYG{n}{option} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}barrier\PYGZdq{}}\PYG{p}{,} \PYG{n}{K} \PYG{o}{=} \PYG{l+m}{20}\PYG{p}{,} \PYG{n}{t} \PYG{o}{=} \PYG{l+m}{1}\PYG{p}{,}
+    \PYG{c+c1}{\PYGZsh{} Arguments for the subclass \PYGZdq{}barrier option\PYGZdq{}}
+    \PYG{n}{barrier} \PYG{o}{=} \PYG{l+m}{10}\PYG{p}{,} \PYG{n}{is.knockout} \PYG{o}{=} \PYG{k+kc}{TRUE}
+\PYG{p}{)}
+\end{Verbatim}

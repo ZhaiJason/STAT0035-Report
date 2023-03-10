@@ -1,0 +1,4 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} For better demonstration, we set steps = 50}
+\PYG{n+nf}{price.option}\PYG{p}{(}\PYG{n}{op.binary}\PYG{p}{,} \PYG{n}{env}\PYG{p}{,} \PYG{n}{n} \PYG{o}{=} \PYG{l+m}{1000}\PYG{p}{,} \PYG{n}{steps} \PYG{o}{=} \PYG{l+m}{50}\PYG{p}{,} \PYG{n}{plot} \PYG{o}{=} \PYG{k+kc}{TRUE}\PYG{p}{)}
+\end{Verbatim}
