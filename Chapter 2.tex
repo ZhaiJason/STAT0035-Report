@@ -2,17 +2,57 @@
 
 \section{Introduction}
 
-In this chapter, we will introduce three common R packages which are used for pricing financial options.
+In this chapter, we will introduce three R packages on CRAN which are used for pricing financial options.
 
 \section{Packages Review}
 
 \subsection{derivmkts} \label{sub:derivmkts}
 
+\mintinline{R}|derivmkts|, which abbreviates for ``derivative markets'' is an R pacakge that provides a collection of functions for pricing and analysing financial derivatives. It includes options pricing methods, including Monte Carlo simulations and binomial tree method, as well as other market analysis tools including calculating Greeks, implied volatility, and etc.
+
+The market functions are easy to use, and are very functional-specific. For instance, its \mintinline{R}|asianmc| functions provides pricing calculations exclusively for Asian options using Monte Carlo method, and \mintinline{R}|perpetual| functions provides pricing for perpetual options\footnote{Options with maturity $T=\infty$, i.e. an option that never matures.} only. Implement these functions are simple, however, this structure of defining independent functions lacks expandibility. As a result, the package only provides only limited functions.
+
+On the other hand, the documentation of the package is sparse and sometimes uncomplete. The algorithms used, including the \mintinline{R}|binom| function for calling Binomial tree method, and \mintinline{R}|simprice| function for performing Monte Carlo price simulations, have not been benchmarked against other sources and are computationally inefficient.
+
+For example, one of the price simulation engine \mintinline{R}|derivmkts| used is its \mintinline{R}|simprice| function. The belowed codes benchmarked this function against the pricing function we used for \mintinline{R}|rmcop|.
+
+\begin{Rminted}
+func.rmcop <- function() { # Monte Carlo pricie simulation using rmcop
+    op <- option("european", type = "call", K = 40, t = 0.25)
+    op.env <- option.env(S = 40, r = 0.08, q = 0, sigma = 0.3, n = 100, steps = 100)
+    price.option(op, op.env)
+}
+
+func.derivmkts <- function() { # Monte Carlo pricie simulation using derivmkts
+    simprice(s0 = 40, v = 0.3, r = 0.08, tt = 0.25, d = 0,  trials = 100, periods = 100, jump = FALSE)
+}
+
+microbenchmark::microbenchmark(
+    func.rmcop(),
+    func.derivmkts()
+)
+\end{Rminted}
+
+The results are:
+
+\begin{Rminted}
+> Unit: microseconds
+>             expr     min      lq      mean  median       uq     max neval cld
+>     func.rmcop()   859.9   951.0  1040.669   985.4  1055.45  2985.8   100  a 
+> func.derivmkts() 28316.3 28691.1 31946.188 29055.6 29936.10 74694.6   100  b
+\end{Rminted}
+
+From which we can the the average computing of simulating 100 trajectories with 100 times steps on each trajectory, is over 30 times longer for \mintinline{R}|derivmkts| than \mintinline{R}|rmcop|.
+
 
 
 \subsection{fOptions} \label{sub:fOptions}
 
+\mintinline{R}|fOptions| provides 
 
+The R package fOptions provides a collection of functions for pricing and analyzing various financial options, such as European, American, Asian, exotic, and barrier options. The package also includes methods for calculating implied volatility, greeks, and binomial trees. The package is useful for researchers and practitioners who want to apply option pricing models to real-world data and scenarios. Some of the strengths of the package are its wide range of supported option types and models, its consistency with other R packages in the fSeries family, and its clear documentation and examples. Some of the weaknesses of the package are its dependency on other packages for some functionality (such as Monte Carlo simulation), its lack of support for some newer or more complex option models (such as stochastic volatility or jump-diffusion models), and its potential numerical instability or inaccuracy for some option parameters or methods.
+
+\mintinline{R}|fOptions| is a package that is used as a supplement
 
 \subsection{RQuantLib} \label{sub:RQuantLib}
 
@@ -20,6 +60,18 @@ The QuantLib is a C++ based open-source library for quantitative finance. The pa
 
 
 An R interface to the QuantLib library, which embeded C++ programming.
+
+RQuantLib is an R package that provides access to the QuantLib library, which is a free and open-source software for quantitative finance. The purpose of RQuantLib is to enable R users to perform complex financial calculations and simulations using the functionality of QuantLib. Some of the strengths of RQuantLib are:
+
+- It covers a wide range of financial instruments and models, such as bonds, options, swaps, interest rate models, volatility models, etc.
+- It allows for easy integration with other R packages and data sources, such as time series analysis, graphics, optimization, etc.
+- It offers high performance and reliability due to the use of C++ code and rigorous testing.
+
+Some of the weaknesses of RQuantLib are:
+
+- It requires installation and configuration of QuantLib on the system, which can be challenging for some users.
+- It may not support all the features and updates of QuantLib due to lag in development or compatibility issues.
+- It may have limited documentation and examples compared to other R packages or QuantLib itself.
 
 \section{General Comments}
 
