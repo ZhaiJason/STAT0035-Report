@@ -44,7 +44,9 @@ The results are:
 
 From which we can the the average computing of simulating 100 trajectories with 100 times steps on each trajectory, is over 30 times longer for \mintinline{R}|derivmkts| than \mintinline{R}|rmcop|.
 
+The reason is because \mintinline{R}|derivmkts|'s programme pervasively uses for-loops in R without using any techniques in speeding up computation.
 
+% TODO: left out here
 
 \subsection{fOptions} \label{sub:fOptions}
 
@@ -56,12 +58,9 @@ The R package fOptions provides a collection of functions for pricing and analyz
 
 \subsection{RQuantLib} \label{sub:RQuantLib}
 
-The QuantLib is a C++ based open-source library for quantitative finance. The package \mintinline{R}|RQuantLib| is simply an R interface to QuantLib
+Both \mintinline{R}|derivmkts| and \mintinline{R}|fOptions| are supplementary materials for educational purpose. \mintinline{R}|RQuantLib|, on the other hand, is a professional tool box for industrial computational finance.
 
-
-An R interface to the QuantLib library, which embeded C++ programming.
-
-RQuantLib is an R package that provides access to the QuantLib library, which is a free and open-source software for quantitative finance. The purpose of RQuantLib is to enable R users to perform complex financial calculations and simulations using the functionality of QuantLib. Some of the strengths of RQuantLib are:
+\mintinline{R}|RQuantLib| is an R interface to the QuantLib software, an open-source library for quantitative finance based on C++. The purpose of RQuantLib is to enable R users to perform complex financial calculations and simulations using the functionality of QuantLib. Some of the strengths of RQuantLib are:
 
 - It covers a wide range of financial instruments and models, such as bonds, options, swaps, interest rate models, volatility models, etc.
 - It allows for easy integration with other R packages and data sources, such as time series analysis, graphics, optimization, etc.
@@ -73,6 +72,6 @@ Some of the weaknesses of RQuantLib are:
 - It may not support all the features and updates of QuantLib due to lag in development or compatibility issues.
 - It may have limited documentation and examples compared to other R packages or QuantLib itself.
 
-\section{General Comments}
+\section{General Comments}-
 
 \newpage

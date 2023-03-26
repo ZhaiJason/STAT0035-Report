@@ -1,0 +1,6 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{o}{\PYGZgt{}} \PYG{n}{Unit}\PYG{o}{:} \PYG{n}{microseconds}
+\PYG{o}{\PYGZgt{}}             \PYG{n}{expr}     \PYG{n}{min}      \PYG{n}{lq}      \PYG{n}{mean}  \PYG{n}{median}       \PYG{n}{uq}     \PYG{n}{max} \PYG{n}{neval} \PYG{n}{cld}
+\PYG{o}{\PYGZgt{}}     \PYG{n+nf}{func.rmcop}\PYG{p}{()}   \PYG{l+m}{859.9}   \PYG{l+m}{951.0}  \PYG{l+m}{1040.669}   \PYG{l+m}{985.4}  \PYG{l+m}{1055.45}  \PYG{l+m}{2985.8}   \PYG{l+m}{100}  \PYG{n}{a}
+\PYG{o}{\PYGZgt{}} \PYG{n+nf}{func.derivmkts}\PYG{p}{()} \PYG{l+m}{28316.3} \PYG{l+m}{28691.1} \PYG{l+m}{31946.188} \PYG{l+m}{29055.6} \PYG{l+m}{29936.10} \PYG{l+m}{74694.6}   \PYG{l+m}{100}  \PYG{n}{b}
+\end{Verbatim}

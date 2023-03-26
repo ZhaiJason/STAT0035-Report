@@ -1,0 +1,16 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{func.rmcop} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{()} \PYG{p}{\PYGZob{}} \PYG{c+c1}{\PYGZsh{} Monte Carlo pricie simulation using rmcop}
+    \PYG{n}{op} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{option}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}european\PYGZdq{}}\PYG{p}{,} \PYG{n}{type} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}call\PYGZdq{}}\PYG{p}{,} \PYG{n}{K} \PYG{o}{=} \PYG{l+m}{40}\PYG{p}{,} \PYG{n}{t} \PYG{o}{=} \PYG{l+m}{0.25}\PYG{p}{)}
+    \PYG{n}{op.env} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{option.env}\PYG{p}{(}\PYG{n}{S} \PYG{o}{=} \PYG{l+m}{40}\PYG{p}{,} \PYG{n}{r} \PYG{o}{=} \PYG{l+m}{0.08}\PYG{p}{,} \PYG{n}{q} \PYG{o}{=} \PYG{l+m}{0}\PYG{p}{,} \PYG{n}{sigma} \PYG{o}{=} \PYG{l+m}{0.3}\PYG{p}{,} \PYG{n}{n} \PYG{o}{=} \PYG{l+m}{100}\PYG{p}{,} \PYG{n}{steps} \PYG{o}{=} \PYG{l+m}{100}\PYG{p}{)}
+    \PYG{n+nf}{price.option}\PYG{p}{(}\PYG{n}{op}\PYG{p}{,} \PYG{n}{op.env}\PYG{p}{)}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{func.derivmkts} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{()} \PYG{p}{\PYGZob{}} \PYG{c+c1}{\PYGZsh{} Monte Carlo pricie simulation using derivmkts}
+    \PYG{n+nf}{simprice}\PYG{p}{(}\PYG{n}{s0} \PYG{o}{=} \PYG{l+m}{40}\PYG{p}{,} \PYG{n}{v} \PYG{o}{=} \PYG{l+m}{0.3}\PYG{p}{,} \PYG{n}{r} \PYG{o}{=} \PYG{l+m}{0.08}\PYG{p}{,} \PYG{n}{tt} \PYG{o}{=} \PYG{l+m}{0.25}\PYG{p}{,} \PYG{n}{d} \PYG{o}{=} \PYG{l+m}{0}\PYG{p}{,}  \PYG{n}{trials} \PYG{o}{=} \PYG{l+m}{100}\PYG{p}{,} \PYG{n}{periods} \PYG{o}{=} \PYG{l+m}{100}\PYG{p}{,} \PYG{n}{jump} \PYG{o}{=} \PYG{k+kc}{FALSE}\PYG{p}{)}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{n}{microbenchmark}\PYG{o}{::}\PYG{n+nf}{microbenchmark}\PYG{p}{(}
+    \PYG{n+nf}{func.rmcop}\PYG{p}{(),}
+    \PYG{n+nf}{func.derivmkts}\PYG{p}{()}
+\PYG{p}{)}
+\end{Verbatim}
