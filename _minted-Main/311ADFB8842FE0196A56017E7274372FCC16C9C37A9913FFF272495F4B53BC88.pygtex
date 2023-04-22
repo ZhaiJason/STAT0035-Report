@@ -1,0 +1,95 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Creating new option object ===================================================}
+\PYG{c+c1}{\PYGZsh{}\PYGZsq{} Initialise new `option` class object}
+\PYG{c+c1}{\PYGZsh{}\PYGZsq{} Create an S3 class object which characterised an option of interest. The returned object is then used together with a `\PYGZdq{}env\PYGZdq{}` class object together as inputs of the `price.option` function for further option pricing.}
+\PYG{n}{option} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{style}\PYG{p}{,} \PYG{n}{option} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}vanilla\PYGZdq{}}\PYG{p}{,} \PYG{n}{type}\PYG{p}{,} \PYG{n}{K}\PYG{p}{,} \PYG{n}{t}\PYG{p}{,} \PYG{k+kc}{...}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+
+    \PYG{n}{obj} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{list}\PYG{p}{(}
+        \PYG{l+s}{\PYGZdq{}style\PYGZdq{}} \PYG{o}{=} \PYG{n}{style}\PYG{p}{,}
+        \PYG{l+s}{\PYGZdq{}type\PYGZdq{}} \PYG{o}{=} \PYG{n}{type}\PYG{p}{,}
+        \PYG{l+s}{\PYGZdq{}K\PYGZdq{}} \PYG{o}{=} \PYG{n}{K}\PYG{p}{,}
+        \PYG{l+s}{\PYGZdq{}t\PYGZdq{}} \PYG{o}{=} \PYG{n}{t}
+    \PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Distribute to corresponding initialisation function according to specified arguments}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{option} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}vanilla\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{obj} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{option.vanilla}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{p}{\PYGZob{}}
+        \PYG{n}{obj} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{option.exotic}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{option}\PYG{p}{,} \PYG{k+kc}{...}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}}
+    \PYG{n}{obj}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{} Vanilla =====================================================================}
+\PYG{c+c1}{\PYGZsh{}\PYGZsq{} Initialise vanilla option}
+\PYG{n}{option.vanilla} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n+nf}{class}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{)} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{c}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}vanilla\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}option\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{obj}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsh{} Exotic ======================================================================}
+\PYG{c+c1}{\PYGZsh{}\PYGZsq{} Initialise exotic option}
+\PYG{n}{option.exotic} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{option}\PYG{p}{,} \PYG{k+kc}{...}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n}{obj} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{get}\PYG{p}{(}\PYG{n+nf}{paste0}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}option.exotic.\PYGZdq{}}\PYG{p}{,} \PYG{n}{option}\PYG{p}{))(}\PYG{n}{obj}\PYG{p}{,} \PYG{k+kc}{...}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} Direct to corresponding initialisation function}
+    \PYG{n}{obj}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsq{} Initialise Asian option}
+\PYG{n}{option.exotic.asian} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{is.avg\PYGZus{}price} \PYG{o}{=} \PYG{k+kc}{TRUE}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n}{obj} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{c}\PYG{p}{(}
+        \PYG{n}{obj}\PYG{p}{,}
+        \PYG{l+s}{\PYGZdq{}is.avg\PYGZus{}price\PYGZdq{}} \PYG{o}{=} \PYG{n}{is.avg\PYGZus{}price}
+    \PYG{p}{)}
+    \PYG{n+nf}{class}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{)} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{c}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}asian\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}option\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{obj}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsq{} Initialise barrier option}
+\PYG{n}{option.exotic.barrier} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{barrier}\PYG{p}{,} \PYG{n}{is.knockout} \PYG{o}{=} \PYG{k+kc}{TRUE}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n}{obj} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{c}\PYG{p}{(}
+        \PYG{n}{obj}\PYG{p}{,}
+        \PYG{l+s}{\PYGZdq{}barrier\PYGZdq{}} \PYG{o}{=} \PYG{n}{barrier}\PYG{p}{,}
+        \PYG{l+s}{\PYGZdq{}is.knockout\PYGZdq{}} \PYG{o}{=} \PYG{n}{is.knockout}
+    \PYG{p}{)}
+    \PYG{n+nf}{class}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{)} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{c}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}barrier\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}option\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{obj}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsq{} Initialise binary option}
+\PYG{n}{option.exotic.binary} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{payout}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n}{obj} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{c}\PYG{p}{(}
+        \PYG{n}{obj}\PYG{p}{,}
+        \PYG{l+s}{\PYGZdq{}payout\PYGZdq{}} \PYG{o}{=} \PYG{n}{payout}
+    \PYG{p}{)}
+    \PYG{n+nf}{class}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{)} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{c}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}binary\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}option\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{obj}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsq{} Initialise lookback option}
+\PYG{n}{option.exotic.lookback} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{is.fixed} \PYG{o}{=} \PYG{k+kc}{TRUE}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n}{obj} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{c}\PYG{p}{(}
+        \PYG{n}{obj}\PYG{p}{,}
+        \PYG{l+s}{\PYGZdq{}is.fixed\PYGZdq{}} \PYG{o}{=} \PYG{n}{is.fixed}
+    \PYG{p}{)}
+    \PYG{n+nf}{class}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{)} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{c}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}lookback\PYGZdq{}}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}option\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{obj}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{\PYGZsh{} Creating new option environment ==============================================}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsq{} Initialise new `env` class object}
+\PYG{c+c1}{\PYGZsh{}\PYGZsq{} Create an S3 class object which characterised the market environment used when pricing the option of interest. The returned object is used together with an `\PYGZdq{}option\PYGZdq{}` class object as inputs of the pricing function `price.option`.}
+\PYG{n}{option.env} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{method} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}mc\PYGZdq{}}\PYG{p}{,} \PYG{n}{S}\PYG{p}{,} \PYG{n}{r}\PYG{p}{,} \PYG{n}{q} \PYG{o}{=} \PYG{l+m}{0}\PYG{p}{,} \PYG{n}{sigma}\PYG{p}{,} \PYG{n}{n} \PYG{o}{=} \PYG{k+kc}{NULL}\PYG{p}{,} \PYG{n}{steps} \PYG{o}{=} \PYG{k+kc}{NULL}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n}{env} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{list}\PYG{p}{(}
+        \PYG{l+s}{\PYGZdq{}method\PYGZdq{}} \PYG{o}{=} \PYG{n}{method}\PYG{p}{,}
+        \PYG{l+s}{\PYGZdq{}S\PYGZdq{}} \PYG{o}{=} \PYG{n}{S}\PYG{p}{,}
+        \PYG{l+s}{\PYGZdq{}r\PYGZdq{}} \PYG{o}{=} \PYG{n}{r}\PYG{p}{,}
+        \PYG{l+s}{\PYGZdq{}q\PYGZdq{}} \PYG{o}{=} \PYG{n}{q}\PYG{p}{,}
+        \PYG{l+s}{\PYGZdq{}sigma\PYGZdq{}} \PYG{o}{=} \PYG{n}{sigma}\PYG{p}{,}
+        \PYG{l+s}{\PYGZdq{}n\PYGZdq{}} \PYG{o}{=} \PYG{n}{n}\PYG{p}{,}
+        \PYG{l+s}{\PYGZdq{}steps\PYGZdq{}} \PYG{o}{=} \PYG{n}{steps}
+    \PYG{p}{)}
+    \PYG{n+nf}{class}\PYG{p}{(}\PYG{n}{env}\PYG{p}{)} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{l+s}{\PYGZdq{}env\PYGZdq{}}
+    \PYG{n}{env}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{Higham2004}
 D.~Higham, {\em An Introduction to Financial Option Valuation}.
@@ -41,5 +41,37 @@ F.~Black and M.~Scholes, ``The pricing of options and corporate liabilities,''
 J.~C. Cox, S.~A. Ross, and M.~Rubinstein, ``Option pricing: A simplified
   approach,'' {\em Journal of financial economics}, vol.~7, pp.~229--263, 1979.
 \newblock Binomial Lattice Model.
+
+\bibitem{McDonald2022}
+R.~McDonald, {\em Package ‘derivmkts’}.
+\newblock CRAN, 0.2.5~ed., 10 2022.
+
+\bibitem{Mersmann2022}
+O.~Mersmann, C.~Beleites, R.~Hurling, A.~Friedman, and J.~M. Ulrich, {\em
+  Package ‘microbenchmark’}.
+\newblock CRAN, 1.4.9~ed., 10 2022.
+
+\bibitem{Wuertz2017}
+D.~Wuertz, {\em Package ‘fOptions’}.
+\newblock CRAN, 11 2017.
+
+\bibitem{Eddel2022}
+D.~Eddelbuettel, K.~Nguyen, and T.~Leitch, {\em Package ‘RQuantLib’}.
+\newblock CRAN, 10 2022.
+
+\bibitem{Wickham2022}
+H.~Wickham, J.~Hester, W.~Chang, J.~Bryan, and RStudio, {\em Package
+  ‘devtools’}.
+\newblock CRAN, 2.4.5~ed., 10 2022.
+
+\bibitem{Wickham2023}
+H.~Wickham, RStudio, and R.~team, {\em Package ‘testthat’}.
+\newblock CRAN, 3.1.7~ed., 3 2023.
+
+\bibitem{Chang2022}
+W.~Chang, J.~Luraschi, T.~Mastny, RStudio, jQuery Foundation, jQuery
+  contributors, M.~Bostock, D.~contributors, and I.~Sagalaev, {\em Package
+  ‘profvis’}.
+\newblock CRAN, 0.3.7~ed., 10 2022.
 
 \end{thebibliography}

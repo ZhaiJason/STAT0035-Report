@@ -2,19 +2,17 @@
 
 \section{Introduction}
 
-In this chapter, we will introduce three R packages on CRAN which are used for pricing financial options.
+In this chapter, we will introduce three R packages on CRAN which are used for pricing financial options. We will comment on each of their strengths and weaknesses.
 
 \section{Packages Review}
 
 \subsection{derivmkts} \label{sub:derivmkts}
 
-\mintinline{R}|derivmkts|, which abbreviates for ``derivative markets'' is an R pacakge that provides a collection of functions for pricing and analysing financial derivatives. It includes options pricing methods, including Monte Carlo simulations and binomial tree method, as well as other market analysis tools including calculating Greeks, implied volatility, and etc.
+The R package \mintinline{R}|derivmkts| \cite{McDonald2022}, which abbreviates for ``derivative markets'', provides a collection of functions for pricing and analysing financial derivatives. It includes options pricing methods, including Monte Carlo simulations and binomial tree method, as well as other market analysis tools including calculating Greeks, implied volatility, and so on.
 
-The market functions are easy to use, and are very functional-specific. For instance, its \mintinline{R}|asianmc| functions provides pricing calculations exclusively for Asian options using Monte Carlo method, and \mintinline{R}|perpetual| functions provides pricing for perpetual options\footnote{Options with maturity $T=\infty$, i.e. an option that never matures.} only. Implement these functions are simple, however, this structure of defining independent functions lacks expandibility. As a result, the package only provides only limited functions.
+The package \mintinline{R}|derivmkts|'s functions are functional-specific and relatively easy to use. For instance, its \mintinline{R}|asianmc| functions provide pricing calculations exclusively for Asian options using the Monte Carlo method, and \mintinline{R}|perpetual| functions are specialised for pricing perpetual options\footnote{Options with maturity $T=\infty$, i.e. an option that never matures.} only. Implementing these functions is simple, but this high function independence lacks expandability. Without reusing existing functions, new functions have to be created bottom-up. As a result, the package only provides limited functions.
 
-On the other hand, the documentation of the package is sparse and sometimes uncomplete. The algorithms used, including the \mintinline{R}|binom| function for calling Binomial tree method, and \mintinline{R}|simprice| function for performing Monte Carlo price simulations, have not been benchmarked against other sources and are computationally inefficient.
-
-For example, one of the price simulation engine \mintinline{R}|derivmkts| used is its \mintinline{R}|simprice| function. The belowed codes benchmarked this function against the pricing function we used for \mintinline{R}|rmcop|.
+On the other hand, the package document is sparse and sometimes incomplete. Algorithms such as the \mintinline{R}|binom| for generating the Binomial tree and \mintinline{R}|simprice| for running Monte Carlo price simulations have not been benchmarked against other sources and are computationally inefficient. For example, the below codes benchmarked price trajectories sampling using \mintinline{R}|simprice| from \mintinline{R}|derivmkts| against the function in \mintinline{R}|rmcop| using the package \mintinline{R}|microbenchmark| \cite{Mersmann2022}.
 
 \begin{Rminted}
 func.rmcop <- function() { # Monte Carlo pricie simulation using rmcop
@@ -42,23 +40,21 @@ The results are:
 > func.derivmkts() 28316.3 28691.1 31946.188 29055.6 29936.10 74694.6   100  b
 \end{Rminted}
 
-From which we can the the average computing of simulating 100 trajectories with 100 times steps on each trajectory, is over 30 times longer for \mintinline{R}|derivmkts| than \mintinline{R}|rmcop|.
+From which we can see that the average computing time of simulating 100 trajectories with 100 times steps on each trajectory is over 30 times longer for \mintinline{R}|derivmkts| than \mintinline{R}|rmcop|.
 
-The reason is because \mintinline{R}|derivmkts|'s programme pervasively uses for-loops in R without using any techniques in speeding up computation.
+The reason is because \mintinline{R}|derivmkts|, as a supplement programme for educational purposes, had its functions coded in a very direct way corresponding to the underlying formulae. This results in a pervasive use of for-loops in R without any specific adjustments to improve the computation speed.
 
 % TODO: left out here
 
 \subsection{fOptions} \label{sub:fOptions}
 
-\mintinline{R}|fOptions| provides 
+Similar to \mintinline{R}|derivmkts|, \mintinline{R}|fOptions| \cite{Wuertz2017} is also a supplement package for educational purpose. It provides a collection of functions for pricing and analyzing various financial options, such as European, American, Asian, exotic, and barrier options. The package also includes methods for calculating implied volatility, greeks, and binomial trees. It is useful for researchers and practitioners who want to apply option pricing models to real-world data and scenarios.
 
-The R package fOptions provides a collection of functions for pricing and analyzing various financial options, such as European, American, Asian, exotic, and barrier options. The package also includes methods for calculating implied volatility, greeks, and binomial trees. The package is useful for researchers and practitioners who want to apply option pricing models to real-world data and scenarios. Some of the strengths of the package are its wide range of supported option types and models, its consistency with other R packages in the fSeries family, and its clear documentation and examples. Some of the weaknesses of the package are its dependency on other packages for some functionality (such as Monte Carlo simulation), its lack of support for some newer or more complex option models (such as stochastic volatility or jump-diffusion models), and its potential numerical instability or inaccuracy for some option parameters or methods.
-
-\mintinline{R}|fOptions| is a package that is used as a supplement
+In contrast to \mintinline{R}|derivmkts|, it has a clearer documentation and examples. However, the package functions still lacks computing efficiency (having the same issue as the \mintinline{R}|derivmkts|). A more crucial issue with the package is that it is no longer supported by the current R environment, and its development was terminated since 2020.
 
 \subsection{RQuantLib} \label{sub:RQuantLib}
 
-Both \mintinline{R}|derivmkts| and \mintinline{R}|fOptions| are supplementary materials for educational purpose. \mintinline{R}|RQuantLib|, on the other hand, is a professional tool box for industrial computational finance.
+Both \mintinline{R}|derivmkts| and \mintinline{R}|fOptions| are supplementary materials for educational purpose. \mintinline{R}|RQuantLib| \cite{Eddel2022}, on the other hand, is a professional tool for industrial computational finance.
 
 \mintinline{R}|RQuantLib| is an R interface to the QuantLib software, an open-source library for quantitative finance based on C++. The purpose of RQuantLib is to enable R users to perform complex financial calculations and simulations using the functionality of QuantLib. Some of the strengths of RQuantLib are:
 
@@ -66,12 +62,6 @@ Both \mintinline{R}|derivmkts| and \mintinline{R}|fOptions| are supplementary ma
 - It allows for easy integration with other R packages and data sources, such as time series analysis, graphics, optimization, etc.
 - It offers high performance and reliability due to the use of C++ code and rigorous testing.
 
-Some of the weaknesses of RQuantLib are:
-
-- It requires installation and configuration of QuantLib on the system, which can be challenging for some users.
-- It may not support all the features and updates of QuantLib due to lag in development or compatibility issues.
-- It may have limited documentation and examples compared to other R packages or QuantLib itself.
-
-\section{General Comments}-
+However, due to its highly professional nature, it requires pre-installation and configuration of QuantLib software on the system, which may be challenging for many users. Also, because it is a supplement of the QuantLib library, it's own documentation and examples are very limited compared to other R packages, making it not a user-friendly choice for less-intensive option pricing purpose.
 
 \newpage

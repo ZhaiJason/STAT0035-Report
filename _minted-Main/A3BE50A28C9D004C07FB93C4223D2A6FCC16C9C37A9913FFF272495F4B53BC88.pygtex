@@ -1,0 +1,345 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{}\PYGZsq{} Engine for Monte Carlo Simulation on Asset Price Trajectory}
+\PYG{n}{mc.engine} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{type}\PYG{p}{,} \PYG{n}{K}\PYG{p}{,} \PYG{n}{t}\PYG{p}{,} \PYG{n}{S0}\PYG{p}{,} \PYG{n}{r}\PYG{p}{,} \PYG{n}{q}\PYG{p}{,} \PYG{n}{sigma}\PYG{p}{,} \PYG{n}{n}\PYG{p}{,} \PYG{n}{steps}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+
+    \PYG{n}{dt} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{t} \PYG{o}{/} \PYG{n}{steps}
+
+    \PYG{c+c1}{\PYGZsh{} Generate n random samples from N(0,1)}
+    \PYG{n}{Z} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{matrix}\PYG{p}{(}\PYG{n+nf}{rnorm}\PYG{p}{(}\PYG{n}{n} \PYG{o}{*} \PYG{n}{steps}\PYG{p}{),} \PYG{n}{ncol} \PYG{o}{=} \PYG{n}{n}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Get logarithm of price change per step}
+    \PYG{n}{increment} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{p}{(}\PYG{n}{r} \PYG{o}{\PYGZhy{}} \PYG{n}{q} \PYG{o}{\PYGZhy{}} \PYG{n}{sigma}\PYG{o}{\PYGZca{}}\PYG{l+m}{2} \PYG{o}{/} \PYG{l+m}{2}\PYG{p}{)} \PYG{o}{*} \PYG{n}{dt} \PYG{o}{+} \PYG{n}{sigma} \PYG{o}{*} \PYG{n+nf}{sqrt}\PYG{p}{(}\PYG{n}{dt}\PYG{p}{)} \PYG{o}{*} \PYG{n}{Z}
+
+    \PYG{c+c1}{\PYGZsh{} Use vectorised MC method to compute logarithm of S(t) at each time step}
+    \PYG{n}{logS} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{log}\PYG{p}{(}\PYG{n}{S0}\PYG{p}{)} \PYG{o}{+} \PYG{n+nf}{apply}\PYG{p}{(}\PYG{n}{increment}\PYG{p}{,} \PYG{l+m}{2}\PYG{p}{,} \PYG{n}{cumsum}\PYG{p}{)}
+    \PYG{n}{S} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{n}{logS}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} Obtain the simulated stock price by taking exponential}
+    \PYG{n}{S} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{S} \PYG{o}{*} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{q} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} Adjust the asset price for dividends}
+    \PYG{n}{S} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{rbind}\PYG{p}{(}\PYG{n}{S0}\PYG{p}{,} \PYG{n}{S}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} Add column of current price}
+    \PYG{n}{S}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsq{} Compute Monte Carlo Model\PYGZsq{}s Standard Error}
+\PYG{n}{mc.SE} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{C\PYGZus{}i}\PYG{p}{,} \PYG{n}{C.mean}\PYG{p}{,} \PYG{n}{n}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n}{s\PYGZus{}c} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{sqrt}\PYG{p}{(}\PYG{n+nf}{sum}\PYG{p}{(}\PYG{n}{C\PYGZus{}i} \PYG{o}{\PYGZhy{}} \PYG{n}{C.mean}\PYG{p}{)}\PYG{o}{\PYGZca{}}\PYG{l+m}{2} \PYG{o}{/} \PYG{p}{(}\PYG{n}{n} \PYG{o}{\PYGZhy{}} \PYG{l+m}{1}\PYG{p}{))}
+    \PYG{n}{SE} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{s\PYGZus{}c} \PYG{o}{/} \PYG{n+nf}{sqrt}\PYG{p}{(}\PYG{n}{n}\PYG{p}{)}
+    \PYG{n}{SE}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{\PYGZsh{} Model ========================================================================}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsq{} Pricing vanilla option using Monte Carlo method}
+\PYG{n}{vanilla.mc} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{env}\PYG{p}{,} \PYG{n}{n}\PYG{p}{,} \PYG{n}{steps}\PYG{p}{,} \PYG{n}{all} \PYG{o}{=} \PYG{k+kc}{FALSE}\PYG{p}{,} \PYG{n}{plot} \PYG{o}{=} \PYG{k+kc}{FALSE}\PYG{p}{,} \PYG{k+kc}{...}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+
+    \PYG{c+c1}{\PYGZsh{} Check object integrity, CAN BE OMITTED}
+    \PYG{n+nf}{check.args}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{env}\PYG{p}{,} \PYG{n}{option} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}vanilla\PYGZdq{}}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Extract objects properties}
+    \PYG{n}{style} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{style}
+    \PYG{n}{type} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{type}
+    \PYG{n}{K} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{K}
+    \PYG{n}{t} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{t}
+    \PYG{n}{S0} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{S}
+    \PYG{n}{r} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{r}
+    \PYG{n}{q} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{q}
+    \PYG{n}{sigma} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{sigma}
+
+    \PYG{c+c1}{\PYGZsh{} Apply MC}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{style} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}european\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{S} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{mc.engine}\PYG{p}{(}\PYG{n}{type}\PYG{p}{,} \PYG{n}{K}\PYG{p}{,} \PYG{n}{t}\PYG{p}{,} \PYG{n}{S0}\PYG{p}{,} \PYG{n}{r}\PYG{p}{,} \PYG{n}{q}\PYG{p}{,} \PYG{n}{sigma}\PYG{p}{,} \PYG{n}{n}\PYG{p}{,} \PYG{n}{steps}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{style} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}american\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n+nf}{stop}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}American option pricing via MC not supported\PYGZdq{}}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}}
+
+    \PYG{c+c1}{\PYGZsh{} Compute corresponding discounted price at current time}
+    \PYG{c+c1}{\PYGZsh{} Vanilla option only consider option price at maturity, so only take the last column of the price matrix S\PYGZus{}i}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{type} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}call\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{C} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{r} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{o}{*} \PYG{n+nf}{pmax}\PYG{p}{(}\PYG{n}{S}\PYG{p}{[}\PYG{n}{steps} \PYG{o}{+} \PYG{l+m}{1}\PYG{p}{,} \PYG{p}{]} \PYG{o}{\PYGZhy{}} \PYG{n}{K}\PYG{p}{,} \PYG{l+m}{0}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{type} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}put\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{C} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{r} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{o}{*} \PYG{n+nf}{pmax}\PYG{p}{(}\PYG{n}{K} \PYG{o}{\PYGZhy{}} \PYG{n}{S}\PYG{p}{[}\PYG{n}{steps} \PYG{o}{+} \PYG{l+m}{1}\PYG{p}{,} \PYG{p}{],} \PYG{l+m}{0}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}}
+
+    \PYG{c+c1}{\PYGZsh{} Obtain the estimate of option price by taking average of C}
+    \PYG{n}{C.mean} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{mean}\PYG{p}{(}\PYG{n}{C}\PYG{p}{,} \PYG{k+kc}{...}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Compute standard error of the estimate}
+    \PYG{n}{SE} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{mc.SE}\PYG{p}{(}\PYG{n}{C}\PYG{p}{,} \PYG{n}{C.mean}\PYG{p}{,} \PYG{n}{n}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Plot function}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{plot}\PYG{p}{)} \PYG{p}{\PYGZob{}}\PYG{n+nf}{mc.plot}\PYG{p}{(}\PYG{n}{S}\PYG{p}{,} \PYG{k+kc}{...}\PYG{p}{)\PYGZcb{}}
+
+    \PYG{c+c1}{\PYGZsh{} Return result}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{all}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{c+c1}{\PYGZsh{} Return actual object environment used}
+        \PYG{n}{env} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{option.env}\PYG{p}{(}\PYG{n}{method} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}mc\PYGZdq{}}\PYG{p}{,} \PYG{n}{S} \PYG{o}{=} \PYG{n}{S}\PYG{p}{,} \PYG{n}{r} \PYG{o}{=} \PYG{n}{r}\PYG{p}{,} \PYG{n}{q} \PYG{o}{=} \PYG{n}{q}\PYG{p}{,} \PYG{n}{sigma} \PYG{o}{=} \PYG{n}{sigma}\PYG{p}{,} \PYG{n}{n} \PYG{o}{=} \PYG{n}{n}\PYG{p}{,} \PYG{n}{steps} \PYG{o}{=} \PYG{n}{steps}\PYG{p}{)}
+        \PYG{n+nf}{list}\PYG{p}{(}
+            \PYG{l+s}{\PYGZdq{}env\PYGZdq{}} \PYG{o}{=} \PYG{n}{env}\PYG{p}{,}
+            \PYG{l+s}{\PYGZdq{}price\PYGZdq{}} \PYG{o}{=} \PYG{n}{C.mean}\PYG{p}{,}
+            \PYG{l+s}{\PYGZdq{}SE\PYGZdq{}} \PYG{o}{=} \PYG{n}{SE}\PYG{p}{,}
+            \PYG{l+s}{\PYGZdq{}S\PYGZdq{}} \PYG{o}{=} \PYG{n}{S}\PYG{p}{,}
+            \PYG{l+s}{\PYGZdq{}C\PYGZdq{}} \PYG{o}{=} \PYG{n}{C}
+        \PYG{p}{)}
+    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{p}{\PYGZob{}}
+        \PYG{n}{C.mean}
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsq{} Pricing Asian option using Monte Carlo method}
+\PYG{n}{asian.mc} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{env}\PYG{p}{,} \PYG{n}{n}\PYG{p}{,} \PYG{n}{steps}\PYG{p}{,} \PYG{n}{all} \PYG{o}{=} \PYG{k+kc}{FALSE}\PYG{p}{,} \PYG{n}{plot} \PYG{o}{=} \PYG{k+kc}{FALSE}\PYG{p}{,} \PYG{k+kc}{...}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{c+c1}{\PYGZsh{} Check object integrity, CAN BE OMITTED}
+    \PYG{n+nf}{check.args}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{env}\PYG{p}{,} \PYG{n}{option} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}asian\PYGZdq{}}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Extract objects properties}
+    \PYG{n}{style} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{style}
+    \PYG{n}{type} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{type}
+    \PYG{n}{K} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{K}
+    \PYG{n}{t} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{t}
+    \PYG{n}{is.avg\PYGZus{}price} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{is.avg\PYGZus{}price}
+    \PYG{n}{S0} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{S}
+    \PYG{n}{r} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{r}
+    \PYG{n}{q} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{q}
+    \PYG{n}{sigma} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{sigma}
+
+    \PYG{c+c1}{\PYGZsh{} Apply MC}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{style} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}european\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{S} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{mc.engine}\PYG{p}{(}\PYG{n}{type}\PYG{p}{,} \PYG{n}{K}\PYG{p}{,} \PYG{n}{t}\PYG{p}{,} \PYG{n}{S0}\PYG{p}{,} \PYG{n}{r}\PYG{p}{,} \PYG{n}{q}\PYG{p}{,} \PYG{n}{sigma}\PYG{p}{,} \PYG{n}{n}\PYG{p}{,} \PYG{n}{steps}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{style} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}american\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n+nf}{stop}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}American option pricing via MC not supported\PYGZdq{}}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}}
+
+    \PYG{c+c1}{\PYGZsh{} Compute the mean of each replication\PYGZsq{}s price movement, as required to compute Asian option pay\PYGZhy{}off}
+    \PYG{n}{S.mean} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{apply}\PYG{p}{(}\PYG{n}{S}\PYG{p}{,} \PYG{l+m}{2}\PYG{p}{,} \PYG{n}{mean}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Compute corresponding discounted price at current time}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{is.avg\PYGZus{}price}\PYG{p}{)} \PYG{p}{\PYGZob{}} \PYG{c+c1}{\PYGZsh{} Compute payoff for average price Asian option}
+        \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{type} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}call\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+            \PYG{n}{C} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{r} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{o}{*} \PYG{n+nf}{pmax}\PYG{p}{(}\PYG{n}{S.mean} \PYG{o}{\PYGZhy{}} \PYG{n}{K}\PYG{p}{,} \PYG{l+m}{0}\PYG{p}{)}
+        \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{type} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}put\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+            \PYG{n}{C} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{r} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{o}{*} \PYG{n+nf}{pmax}\PYG{p}{(}\PYG{n}{K} \PYG{o}{\PYGZhy{}} \PYG{n}{S.mean}\PYG{p}{,} \PYG{l+m}{0}\PYG{p}{)}
+        \PYG{p}{\PYGZcb{}}
+    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{p}{\PYGZob{}} \PYG{c+c1}{\PYGZsh{} Compute payoff for average strike Asian option}
+        \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{type} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}call\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+            \PYG{n}{C} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{r} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{o}{*} \PYG{n+nf}{pmax}\PYG{p}{(}\PYG{n}{S}\PYG{p}{[}\PYG{n}{steps} \PYG{o}{+} \PYG{l+m}{1}\PYG{p}{,} \PYG{p}{]} \PYG{o}{\PYGZhy{}} \PYG{n}{S.mean}\PYG{p}{,} \PYG{l+m}{0}\PYG{p}{)}
+        \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{type} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}put\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+            \PYG{n}{C} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{r} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{o}{*} \PYG{n+nf}{pmax}\PYG{p}{(}\PYG{n}{S.mean} \PYG{o}{\PYGZhy{}} \PYG{n}{S}\PYG{p}{[}\PYG{n}{steps} \PYG{o}{+} \PYG{l+m}{1}\PYG{p}{,} \PYG{p}{],} \PYG{l+m}{0}\PYG{p}{)}
+        \PYG{p}{\PYGZcb{}}
+    \PYG{p}{\PYGZcb{}}
+
+    \PYG{c+c1}{\PYGZsh{} Obtain the estimate of option price by taking average of C}
+    \PYG{n}{C.mean} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{mean}\PYG{p}{(}\PYG{n}{C}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Compute standard error of the estimate}
+    \PYG{n}{SE} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{mc.SE}\PYG{p}{(}\PYG{n}{C}\PYG{p}{,} \PYG{n}{C.mean}\PYG{p}{,} \PYG{n}{n}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Plot function}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{plot}\PYG{p}{)} \PYG{p}{\PYGZob{}}\PYG{n+nf}{mc.plot}\PYG{p}{(}\PYG{n}{S}\PYG{p}{,} \PYG{k+kc}{...}\PYG{p}{)\PYGZcb{}}
+
+    \PYG{c+c1}{\PYGZsh{} Return result}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{all}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{c+c1}{\PYGZsh{} Return actual object environment used}
+        \PYG{n}{env} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{option.env}\PYG{p}{(}\PYG{n}{method} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}mc\PYGZdq{}}\PYG{p}{,} \PYG{n}{S} \PYG{o}{=} \PYG{n}{S}\PYG{p}{,} \PYG{n}{r} \PYG{o}{=} \PYG{n}{r}\PYG{p}{,} \PYG{n}{q} \PYG{o}{=} \PYG{n}{q}\PYG{p}{,} \PYG{n}{sigma} \PYG{o}{=} \PYG{n}{sigma}\PYG{p}{,} \PYG{n}{n} \PYG{o}{=} \PYG{n}{n}\PYG{p}{,} \PYG{n}{steps} \PYG{o}{=} \PYG{n}{steps}\PYG{p}{)}
+        \PYG{n+nf}{list}\PYG{p}{(}
+            \PYG{l+s}{\PYGZdq{}env\PYGZdq{}} \PYG{o}{=} \PYG{n}{env}\PYG{p}{,}
+            \PYG{l+s}{\PYGZdq{}price\PYGZdq{}} \PYG{o}{=} \PYG{n}{C.mean}\PYG{p}{,}
+            \PYG{l+s}{\PYGZdq{}SE\PYGZdq{}} \PYG{o}{=} \PYG{n}{SE}\PYG{p}{,}
+            \PYG{l+s}{\PYGZdq{}S\PYGZdq{}} \PYG{o}{=} \PYG{n}{S}\PYG{p}{,}
+            \PYG{l+s}{\PYGZdq{}C\PYGZdq{}} \PYG{o}{=} \PYG{n}{C}
+        \PYG{p}{)}
+    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{p}{\PYGZob{}}
+        \PYG{n}{C.mean}
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsq{} Pricing Barrier option using Monte Carlo method}
+\PYG{n}{barrier.mc} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{env}\PYG{p}{,} \PYG{n}{n}\PYG{p}{,} \PYG{n}{steps}\PYG{p}{,} \PYG{n}{all} \PYG{o}{=} \PYG{k+kc}{FALSE}\PYG{p}{,} \PYG{n}{plot} \PYG{o}{=} \PYG{k+kc}{FALSE}\PYG{p}{,} \PYG{k+kc}{...}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{c+c1}{\PYGZsh{} Check object integrity, CAN BE OMITTED}
+    \PYG{n+nf}{check.args}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{env}\PYG{p}{,} \PYG{n}{option} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}barrier\PYGZdq{}}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Extract objects properties}
+    \PYG{n}{style} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{style}
+    \PYG{n}{type} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{type}
+    \PYG{n}{K} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{K}
+    \PYG{n}{t} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{t}
+    \PYG{n}{barrier} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{barrier}
+    \PYG{n}{is.knockout} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{is.knockout}
+    \PYG{n}{S0} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{S}
+    \PYG{n}{r} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{r}
+    \PYG{n}{q} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{q}
+    \PYG{n}{sigma} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{sigma}
+
+    \PYG{c+c1}{\PYGZsh{} Apply MC}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{style} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}european\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{S} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{mc.engine}\PYG{p}{(}\PYG{n}{type}\PYG{p}{,} \PYG{n}{K}\PYG{p}{,} \PYG{n}{t}\PYG{p}{,} \PYG{n}{S0}\PYG{p}{,} \PYG{n}{r}\PYG{p}{,} \PYG{n}{q}\PYG{p}{,} \PYG{n}{sigma}\PYG{p}{,} \PYG{n}{n}\PYG{p}{,} \PYG{n}{steps}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{style} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}american\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n+nf}{stop}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}American option pricing via MC not supported\PYGZdq{}}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}}
+
+    \PYG{c+c1}{\PYGZsh{} Check if price movements corssed the specified barrier}
+    \PYG{n}{S.min} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{apply}\PYG{p}{(}\PYG{n}{S}\PYG{p}{,} \PYG{l+m}{2}\PYG{p}{,} \PYG{n}{min}\PYG{p}{)}
+    \PYG{n}{S.max} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{apply}\PYG{p}{(}\PYG{n}{S}\PYG{p}{,} \PYG{l+m}{2}\PYG{p}{,} \PYG{n}{max}\PYG{p}{)}
+    \PYG{n}{is.cross} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{p}{(}\PYG{n}{S.min} \PYG{o}{\PYGZlt{}} \PYG{n}{barrier} \PYG{o}{\PYGZam{}} \PYG{n}{S.max} \PYG{o}{\PYGZgt{}} \PYG{n}{barrier}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Compute corresponding discounted price at current time}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{type} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}call\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{C} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{r} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{o}{*} \PYG{n+nf}{pmax}\PYG{p}{(}\PYG{n}{S}\PYG{p}{[}\PYG{n}{steps} \PYG{o}{+} \PYG{l+m}{1}\PYG{p}{,} \PYG{p}{]} \PYG{o}{\PYGZhy{}} \PYG{n}{K}\PYG{p}{,} \PYG{l+m}{0}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{type} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}put\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{C} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{r} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{o}{*} \PYG{n+nf}{pmax}\PYG{p}{(}\PYG{n}{K} \PYG{o}{\PYGZhy{}} \PYG{n}{S}\PYG{p}{[}\PYG{n}{steps} \PYG{o}{+} \PYG{l+m}{1}\PYG{p}{,} \PYG{p}{],} \PYG{l+m}{0}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}}
+
+    \PYG{c+c1}{\PYGZsh{} Adjust for knock\PYGZhy{}out \PYGZam{} knock\PYGZhy{}in situations for a barrier option}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{is.knockout}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{C} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{ifelse}\PYG{p}{(}\PYG{n}{is.cross}\PYG{p}{,} \PYG{l+m}{0}\PYG{p}{,} \PYG{n}{C}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{p}{\PYGZob{}}
+        \PYG{n}{C} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{ifelse}\PYG{p}{(}\PYG{n}{is.cross}\PYG{p}{,} \PYG{n}{C}\PYG{p}{,} \PYG{l+m}{0}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}}
+
+    \PYG{c+c1}{\PYGZsh{} Obtain the estimate of option price by taking average of C}
+    \PYG{n}{C.mean} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{mean}\PYG{p}{(}\PYG{n}{C}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Compute standard error of the estimate}
+    \PYG{n}{SE} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{mc.SE}\PYG{p}{(}\PYG{n}{C}\PYG{p}{,} \PYG{n}{C.mean}\PYG{p}{,} \PYG{n}{n}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Plot function}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{plot}\PYG{p}{)} \PYG{p}{\PYGZob{}}\PYG{n+nf}{mc.plot}\PYG{p}{(}\PYG{n}{S}\PYG{p}{,} \PYG{k+kc}{...}\PYG{p}{)\PYGZcb{}}
+
+    \PYG{c+c1}{\PYGZsh{} Return result}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{all}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{c+c1}{\PYGZsh{} Return actual object environment used}
+        \PYG{n}{env} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{option.env}\PYG{p}{(}\PYG{n}{method} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}mc\PYGZdq{}}\PYG{p}{,} \PYG{n}{S} \PYG{o}{=} \PYG{n}{S}\PYG{p}{,} \PYG{n}{r} \PYG{o}{=} \PYG{n}{r}\PYG{p}{,} \PYG{n}{q} \PYG{o}{=} \PYG{n}{q}\PYG{p}{,} \PYG{n}{sigma} \PYG{o}{=} \PYG{n}{sigma}\PYG{p}{,} \PYG{n}{n} \PYG{o}{=} \PYG{n}{n}\PYG{p}{,} \PYG{n}{steps} \PYG{o}{=} \PYG{n}{steps}\PYG{p}{)}
+        \PYG{n+nf}{list}\PYG{p}{(}
+            \PYG{l+s}{\PYGZdq{}env\PYGZdq{}} \PYG{o}{=} \PYG{n}{env}\PYG{p}{,}
+            \PYG{l+s}{\PYGZdq{}price\PYGZdq{}} \PYG{o}{=} \PYG{n}{C.mean}\PYG{p}{,}
+            \PYG{l+s}{\PYGZdq{}SE\PYGZdq{}} \PYG{o}{=} \PYG{n}{SE}\PYG{p}{,}
+            \PYG{l+s}{\PYGZdq{}S\PYGZdq{}} \PYG{o}{=} \PYG{n}{S}\PYG{p}{,}
+            \PYG{l+s}{\PYGZdq{}C\PYGZdq{}} \PYG{o}{=} \PYG{n}{C}
+        \PYG{p}{)}
+    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{p}{\PYGZob{}}
+        \PYG{n}{C.mean}
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsq{} Pricing Barrier option using Monte Carlo method}
+\PYG{n}{binary.mc} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{env}\PYG{p}{,} \PYG{n}{n}\PYG{p}{,} \PYG{n}{steps}\PYG{p}{,} \PYG{n}{all} \PYG{o}{=} \PYG{k+kc}{FALSE}\PYG{p}{,} \PYG{n}{plot} \PYG{o}{=} \PYG{k+kc}{FALSE}\PYG{p}{,} \PYG{k+kc}{...}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+
+    \PYG{c+c1}{\PYGZsh{} Check object integrity, CAN BE OMITTED}
+    \PYG{n+nf}{check.args}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{env}\PYG{p}{,} \PYG{n}{option} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}binary\PYGZdq{}}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Extract objects properties}
+    \PYG{n}{style} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{style}
+    \PYG{n}{type} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{type}
+    \PYG{n}{K} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{K}
+    \PYG{n}{t} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{t}
+    \PYG{n}{payout} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{payout}
+    \PYG{n}{S0} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{S}
+    \PYG{n}{r} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{r}
+    \PYG{n}{q} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{q}
+    \PYG{n}{sigma} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{sigma}
+
+    \PYG{c+c1}{\PYGZsh{} Apply MC}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{style} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}european\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{S} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{mc.engine}\PYG{p}{(}\PYG{n}{type}\PYG{p}{,} \PYG{n}{K}\PYG{p}{,} \PYG{n}{t}\PYG{p}{,} \PYG{n}{S0}\PYG{p}{,} \PYG{n}{r}\PYG{p}{,} \PYG{n}{q}\PYG{p}{,} \PYG{n}{sigma}\PYG{p}{,} \PYG{n}{n}\PYG{p}{,} \PYG{n}{steps}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{style} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}american\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n+nf}{stop}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}American option pricing via MC not supported\PYGZdq{}}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}}
+
+    \PYG{c+c1}{\PYGZsh{} Compute corresponding discounted price at current time}
+    \PYG{c+c1}{\PYGZsh{} Compute uniform payout for each MC replication of a binary option}
+    \PYG{n}{C} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{matrix}\PYG{p}{(}\PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{r} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{o}{*} \PYG{n}{payout}\PYG{p}{,} \PYG{n}{nrow} \PYG{o}{=} \PYG{n}{n}\PYG{p}{,} \PYG{n}{ncol} \PYG{o}{=} \PYG{l+m}{1}\PYG{p}{)}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{type} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}call\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{C} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{ifelse}\PYG{p}{(}\PYG{n}{S}\PYG{p}{[}\PYG{n}{steps} \PYG{o}{+} \PYG{l+m}{1}\PYG{p}{,} \PYG{p}{]} \PYG{o}{\PYGZgt{}} \PYG{n}{K}\PYG{p}{,} \PYG{n}{C}\PYG{p}{,} \PYG{l+m}{0}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{type} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}put\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{C} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{ifelse}\PYG{p}{(}\PYG{n}{S}\PYG{p}{[}\PYG{n}{steps} \PYG{o}{+} \PYG{l+m}{1}\PYG{p}{,} \PYG{p}{]} \PYG{o}{\PYGZlt{}} \PYG{n}{K}\PYG{p}{,} \PYG{n}{C}\PYG{p}{,} \PYG{l+m}{0}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}}
+
+    \PYG{c+c1}{\PYGZsh{} Obtain the estimate of option price by taking average of C}
+    \PYG{n}{C.mean} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{mean}\PYG{p}{(}\PYG{n}{C}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Compute standard error of the estimate}
+    \PYG{n}{SE} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{mc.SE}\PYG{p}{(}\PYG{n}{C}\PYG{p}{,} \PYG{n}{C.mean}\PYG{p}{,} \PYG{n}{n}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Plot function}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{plot}\PYG{p}{)} \PYG{p}{\PYGZob{}}\PYG{n+nf}{mc.plot}\PYG{p}{(}\PYG{n}{S}\PYG{p}{,} \PYG{k+kc}{...}\PYG{p}{)\PYGZcb{}}
+
+    \PYG{c+c1}{\PYGZsh{} Return result}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{all}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{c+c1}{\PYGZsh{} Return actual object environment used}
+        \PYG{n}{env} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{option.env}\PYG{p}{(}\PYG{n}{method} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}mc\PYGZdq{}}\PYG{p}{,} \PYG{n}{S} \PYG{o}{=} \PYG{n}{S}\PYG{p}{,} \PYG{n}{r} \PYG{o}{=} \PYG{n}{r}\PYG{p}{,} \PYG{n}{q} \PYG{o}{=} \PYG{n}{q}\PYG{p}{,} \PYG{n}{sigma} \PYG{o}{=} \PYG{n}{sigma}\PYG{p}{,} \PYG{n}{n} \PYG{o}{=} \PYG{n}{n}\PYG{p}{,} \PYG{n}{steps} \PYG{o}{=} \PYG{n}{steps}\PYG{p}{)}
+        \PYG{n+nf}{list}\PYG{p}{(}
+            \PYG{l+s}{\PYGZdq{}env\PYGZdq{}} \PYG{o}{=} \PYG{n}{env}\PYG{p}{,}
+            \PYG{l+s}{\PYGZdq{}price\PYGZdq{}} \PYG{o}{=} \PYG{n}{C.mean}\PYG{p}{,}
+            \PYG{l+s}{\PYGZdq{}SE\PYGZdq{}} \PYG{o}{=} \PYG{n}{SE}\PYG{p}{,}
+            \PYG{l+s}{\PYGZdq{}S\PYGZdq{}} \PYG{o}{=} \PYG{n}{S}\PYG{p}{,}
+            \PYG{l+s}{\PYGZdq{}C\PYGZdq{}} \PYG{o}{=} \PYG{n}{C}
+        \PYG{p}{)}
+    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{p}{\PYGZob{}}
+        \PYG{n}{C.mean}
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsq{} Pricing Lookback option using Monte Carlo method}
+\PYG{n}{lookback.mc} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{env}\PYG{p}{,} \PYG{n}{n}\PYG{p}{,} \PYG{n}{steps}\PYG{p}{,} \PYG{n}{all} \PYG{o}{=} \PYG{k+kc}{FALSE}\PYG{p}{,} \PYG{n}{plot} \PYG{o}{=} \PYG{k+kc}{FALSE}\PYG{p}{,} \PYG{k+kc}{...}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{c+c1}{\PYGZsh{} Check object integrity, CAN BE OMITTED}
+    \PYG{n+nf}{check.args}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{env}\PYG{p}{,} \PYG{n}{option} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}lookback\PYGZdq{}}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Extract objects properties}
+    \PYG{n}{style} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{style}
+    \PYG{n}{type} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{type}
+    \PYG{n}{K} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{K}
+    \PYG{n}{t} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{t}
+    \PYG{n}{is.fixed} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{is.fixed}
+    \PYG{n}{S0} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{S}
+    \PYG{n}{r} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{r}
+    \PYG{n}{q} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{q}
+    \PYG{n}{sigma} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{sigma}
+
+    \PYG{c+c1}{\PYGZsh{} Apply MC}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{style} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}european\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{S} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{mc.engine}\PYG{p}{(}\PYG{n}{type}\PYG{p}{,} \PYG{n}{K}\PYG{p}{,} \PYG{n}{t}\PYG{p}{,} \PYG{n}{S0}\PYG{p}{,} \PYG{n}{r}\PYG{p}{,} \PYG{n}{q}\PYG{p}{,} \PYG{n}{sigma}\PYG{p}{,} \PYG{n}{n}\PYG{p}{,} \PYG{n}{steps}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{style} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}american\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n+nf}{stop}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}American option pricing via MC not supported\PYGZdq{}}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}}
+
+    \PYG{c+c1}{\PYGZsh{} Check if price movements crossed the specified barrier}
+    \PYG{n}{S.min} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{apply}\PYG{p}{(}\PYG{n}{S}\PYG{p}{,} \PYG{l+m}{2}\PYG{p}{,} \PYG{n}{min}\PYG{p}{)}
+    \PYG{n}{S.max} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{apply}\PYG{p}{(}\PYG{n}{S}\PYG{p}{,} \PYG{l+m}{2}\PYG{p}{,} \PYG{n}{max}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Compute corresponding discounted price at current time}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{type} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}call\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{is.fixed}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+            \PYG{n}{C} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{r} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{o}{*} \PYG{n+nf}{pmax}\PYG{p}{(}\PYG{n}{S.max} \PYG{o}{\PYGZhy{}} \PYG{n}{K}\PYG{p}{,} \PYG{l+m}{0}\PYG{p}{)}
+        \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{p}{\PYGZob{}}
+            \PYG{n}{C} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{r} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{o}{*} \PYG{p}{(}\PYG{n}{S}\PYG{p}{[}\PYG{n}{steps} \PYG{o}{+} \PYG{l+m}{1}\PYG{p}{,} \PYG{p}{]} \PYG{o}{\PYGZhy{}} \PYG{n}{S.min}\PYG{p}{)}
+        \PYG{p}{\PYGZcb{}}
+    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{type} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}put\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{is.fixed}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+            \PYG{n}{C} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{r} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{o}{*} \PYG{n+nf}{pmax}\PYG{p}{(}\PYG{n}{K} \PYG{o}{\PYGZhy{}} \PYG{n}{S.min}\PYG{p}{,} \PYG{l+m}{0}\PYG{p}{)}
+        \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{p}{\PYGZob{}}
+            \PYG{n}{C} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{r} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{o}{*} \PYG{p}{(}\PYG{n}{S.max} \PYG{o}{\PYGZhy{}} \PYG{n}{S}\PYG{p}{[}\PYG{n}{steps} \PYG{o}{+} \PYG{l+m}{1}\PYG{p}{,} \PYG{p}{])}
+        \PYG{p}{\PYGZcb{}}
+    \PYG{p}{\PYGZcb{}}
+
+    \PYG{c+c1}{\PYGZsh{} Obtain the estimate of option price by taking average of C}
+    \PYG{n}{C.mean} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{mean}\PYG{p}{(}\PYG{n}{C}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Compute standard error of the estimate}
+    \PYG{n}{SE} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{mc.SE}\PYG{p}{(}\PYG{n}{C}\PYG{p}{,} \PYG{n}{C.mean}\PYG{p}{,} \PYG{n}{n}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Plot function}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{plot}\PYG{p}{)} \PYG{p}{\PYGZob{}}\PYG{n+nf}{mc.plot}\PYG{p}{(}\PYG{n}{S}\PYG{p}{,} \PYG{k+kc}{...}\PYG{p}{)\PYGZcb{}}
+
+    \PYG{c+c1}{\PYGZsh{} Return result}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{all}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{c+c1}{\PYGZsh{} Return actual object environment used}
+        \PYG{n}{obj} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{option}\PYG{p}{(}\PYG{n}{style} \PYG{o}{=} \PYG{n}{style}\PYG{p}{,} \PYG{n}{option} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}lookback\PYGZdq{}}\PYG{p}{,} \PYG{n}{type} \PYG{o}{=} \PYG{n}{type}\PYG{p}{,} \PYG{n}{K} \PYG{o}{=} \PYG{n}{K}\PYG{p}{,} \PYG{n}{t} \PYG{o}{=} \PYG{n}{t}\PYG{p}{,} \PYG{n}{is.fixed} \PYG{o}{=} \PYG{n}{is.fixed}\PYG{p}{)}
+        \PYG{n}{env} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{option.env}\PYG{p}{(}\PYG{n}{method} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}mc\PYGZdq{}}\PYG{p}{,} \PYG{n}{S} \PYG{o}{=} \PYG{n}{S}\PYG{p}{,} \PYG{n}{r} \PYG{o}{=} \PYG{n}{r}\PYG{p}{,} \PYG{n}{q} \PYG{o}{=} \PYG{n}{q}\PYG{p}{,} \PYG{n}{sigma} \PYG{o}{=} \PYG{n}{sigma}\PYG{p}{,} \PYG{n}{n} \PYG{o}{=} \PYG{n}{n}\PYG{p}{,} \PYG{n}{steps} \PYG{o}{=} \PYG{n}{steps}\PYG{p}{)}
+        \PYG{n+nf}{list}\PYG{p}{(}
+            \PYG{l+s}{\PYGZdq{}env\PYGZdq{}} \PYG{o}{=} \PYG{n}{env}\PYG{p}{,}
+            \PYG{l+s}{\PYGZdq{}C.price\PYGZdq{}} \PYG{o}{=} \PYG{n}{C.mean}\PYG{p}{,}
+            \PYG{l+s}{\PYGZdq{}SE\PYGZdq{}} \PYG{o}{=} \PYG{n}{SE}\PYG{p}{,}
+            \PYG{l+s}{\PYGZdq{}S\PYGZdq{}} \PYG{o}{=} \PYG{n}{S}\PYG{p}{,}
+            \PYG{l+s}{\PYGZdq{}C\PYGZdq{}} \PYG{o}{=} \PYG{n}{C}
+        \PYG{p}{)}
+    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{p}{\PYGZob{}}
+        \PYG{n}{C.mean}
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

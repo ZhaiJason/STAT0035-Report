@@ -2,7 +2,7 @@
 
 \section{Introduction}
 
-In this chapter, we will elaborate on the development of \mintinline{R}|rmcop|. We will first present the general structure of the package. Then, we will discuss the implementation of pricing models mentioned in the literature review in Section \ref{sec:Literature Review} in detail.
+In this chapter, we will elaborate on the development of \mintinline{R}|rmcop|. We will first present the general structure of the package, briefing on the purposes of package files and functions. Then, we will discuss the R implementation of pricing models mentioned in the literature review in Section \ref{sec:Literature Review} in detail.
 
 \section{Machine Environment} \label{sec:machine_env}
 
@@ -16,7 +16,21 @@ Max TDP: 45W
 
 The setup is typical for personal computing devices, so the benchmarking and profiling presented in the report are reasonable references for ordinary package users.
 
-We have used the most up-to-date software setup until March 2023. The running environment is R 4.2.2 on RStudio 2022.12.0. The package framework is constructed using package \mintinline{R}|devtools| version 2.4.5.
+We have used the most up-to-date software setup until March 2023. The running environment is R 4.2.2 on RStudio 2022.12.0. The package framework is constructed using package \mintinline{R}|devtools| \cite{Wickham2022} version 2.4.5.
+
+Until the time drafting this report, exported functions have passed the test using the R package \mintinline{R}|testthat| \cite{Wickham2023} version 3.1.7. The testing functions is structured in the following framework.
+
+\begin{Rminted}
+test_that("test title", {
+    expect_equal(<operation>,
+                 <expected result>,
+                 tolerance = <precision>)
+})
+\end{Rminted}
+
+Using the \mintinline{R}|expect_equal| setup, the test will only pass if the operation's output is equal to the expected result under the specified level of precision.
+
+For the package's deterministic methods, the binomial tree and the Black-Scholes formula pricing, the tolerance is set to \mintinline{R}|1e-5| (i.e. $1\times10^{-5}$) and \mintinline{R}|1e-7|, respectively. For Monte Carlo approximation, tolerance is set to a higher \mintinline{R}|1e-1| to check convergence.
 
 \section{Package Structure} \label{sec:Pkg Structure}
 
@@ -58,7 +72,7 @@ File                           & Contents \\ \hline
 
 \mintinline{R}|Option.R| and \mintinline{R}|Price.R| contains all constructor functions for S3 class objects. \mintinline{R}|Price.R| contains the overlying pricing functions which will trigger the pricing engine functions that are contained in \mintinline{R}|MonteCarlo.R|, \mintinline{R}|BlackScholes.R|, and \mintinline{R}|Binomial.R|. \mintinline{R}|Tools.R| includes supplementary functions, including input integrity checking and Monte Carlo price trajectories plotting.
 
-\section{Objective Oriented Programming}
+\section{Object Oriented Programming}
 
 \subsection{R Framework for OOP}
 
@@ -386,7 +400,7 @@ We first build an empty matrix of the required size $(n+1)\times(n+1)$\footnote{
 
 As we see from Graph \ref{gph:tree_matrix}, each row can be created via the upper row by: 1. Multiply the upper row's first element by the downward jump ratio $d$; 2. Multiply all elements (including the first) by an upward jump, and; 3. store these new values into a vector which is $1$ unit longer than the previous row.
 
-We encoded the above procedure using the for-loop shown in code lines 5-8 above. Here, \mintinline{R}|temp| is a record of each ``upper row's'' non-NA elements in the above context, and \mintinline{R}|c(temp, rep(NA, dim - i))| allows us to fill each new row's length to $n+1$, so that we can directly update the rows in the predefined empty matrix.
+We encoded the above procedure using the for-loop shown in code lines 5-8 above. Here, \mintinline{R}|temp| is a record of each ``upper row's'' non-NA elements in the above context, and \\ \mintinline{R}|c(temp, rep(NA, dim - i))| allows us to fill each new row's length to $n+1$, so that we can directly update the rows in the predefined empty matrix.
 
 A typical output of the \mintinline{R}|Binomial.tree| function is shown below:
 
@@ -414,17 +428,18 @@ Here, variable \mintinline{R}|Sn| is a vector storing the last row of the constr
 
 The fourth and final step is to use risk-neutral valuation to compute the current payoff from the final step's payoffs. For each step backwards in time, the recursive formula is shown by Equation \ref{eq:binomial_recursive}. A simple pseudocode of the function encoding this formula would be:
 
-% FIXME: change the pseudo to correct format using algorithmic
-% \begin{algorithmic}
-rnv <- function(step i payoffs) {
-    if (length of step i payoffs == 1) {
-        return result payoff
-    } else {
-        compute step i-1 payoffs from step i payoffs
-        rnv(step i-1 payoffs)
-    }
+\vbox{
+    \begin{algorithmic}[H]
+        \Procedure{recurse}{$\text{step i payoffs}$}
+        \If{$\text{length of step i payoffs}=1$}
+            \State\Return{$\text{payoff}$}
+        \Else
+            \State Compute step i - 1 payoffs
+            \State\Return{\Call{recurse}{$\text{step i - 1 payoffs}$}}
+        \EndIf
+        \EndProcedure
+    \end{algorithmic}
 }
-% \end{algorithmic}
 
 For each layer of recursion, we will take the current step's payoff vector as input. Using Equation \ref{eq:binomial_recursive}, the output of each recursion will be a vector that is $1$ unit shorter than the input vector (meaning we are moving forward by one step in the binomial tree). When the length of the vector is finally reduced to $1$, we will be reaching step $0$, or the current time under the binomial tree setup. The result singular payoff will be the desired current payoff or the fair price of the target option.
 
@@ -514,7 +529,7 @@ mc.mat <- function() {
 
 Here, we first define \mintinline{R}|Z| to be a matrix that contains all standard normal random variables required for a total of $n\times m$ number of steps. Then we define \mintinline{R}|logdS| as the matrix of all increments. Based on Equation \ref{eq:mc_matrix}, by using $\log(S_0)$ as the starting point and using cumulative sum \mintinline{R}|cumsum| function to add increment $\log(\Delta S)$ along steps of each trajectory, we will obtain the movement of prices in time. By some further post process shown above, we will get the same result as using the for-loops.
 
-To test the difference in computing speed between the two methods, we will test the average running time using the R package \mintinline{R}|microbenchmark|. The device configuration on which the test runs can be found in Section \ref{sec:machine_env}.
+To test the difference in computing speed between the two methods, we will test the average running time using the R package \mintinline{R}|microbenchmark| \cite{Mersmann2022}. The device configuration on which the test runs can be found in Section \ref{sec:machine_env}.
 
 The \mintinline{R}|microbenchmark| function runs individual functions 100 times and records the summary statistics of the running times, as shown below:
 
@@ -562,7 +577,7 @@ Here, the drift coefficient is decomposed to (fixed) annual interest rate $r$ an
 
 Adapting this formulation, \mintinline{R}|rmcop| has a function named \mintinline{R}|mc.engine|, which takes the mentioned input arguments and returns a $(m+1)\times n$ matrix recording all generated trajectories. The rest of the functions described in the following subsections take \mintinline{R}|mc.engine| as an internal component and use the returned matrix to perform further calculations of option payoff.
 
-Using R package \mintinline{R}|profvis|, we can profile the run-time of the function \mintinline{R}|price.option| under a reasonably time-consuming Monte Carlo setup. Here we will simulate 10000 trajectories, each with 1000 time steps. The result trajectory matrix will contain $10000\times1000=10000000$ simulated prices. The code for benchmarking is shown below, and the output is presented in Figure \ref{img:mc_profile}.
+Using R package \mintinline{R}|profvis| \cite{Chang2022}, we can profile the run-time of the function \mintinline{R}|price.option| under a reasonably time-consuming Monte Carlo setup. Here we will simulate 10000 trajectories, each with 1000 time steps. The result trajectory matrix will contain $10000\times1000=10000000$ simulated prices. The code for benchmarking is shown below, and the output is presented in Figure \ref{img:mc_profile}.
 
 \begin{Rminted}
 # Creating option and environment objects

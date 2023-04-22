@@ -1,8 +1,14 @@
 \title{Development Report of\\R Financial Option Pricing Package\\\mintinline{R}|rmcop|}
-\author{Yuze Zhai}
+\author{STAT0035\\Student No. 20019563\\Candidate No. WVTW5\\Word count: 10395}
 \date{\today}
 
 \maketitle
+\newpage
+
+\chapter*{Abstract}
+
+This report discusses the development of the R package \mintinline{R}{rmcop}, a fully R-based package for pricing financial options (see Section \ref{sec:Literature Review} for definitions). Pricing financial options is an essential fragment of financial engineering and quantitative finance. Because options consider the future in time, determining their fair price involves modelling uncertainty, so statistical methods are widely applied. Modern option pricing methods can be complex and product-specific, but most works are still built upon the basic frameworks of the Black-Scholes formula and Monte Carlo simulations. The package \mintinline{R}{rmcop} covers the R implementation of some of these fundamental option price models on various option types and styles and can be a good reference for constructing more complex R option pricing algorithms. The report also contains some R programming techniques that one may find useful in reducing the computational cost.
+
 \newpage
 \tableofcontents
 \newpage

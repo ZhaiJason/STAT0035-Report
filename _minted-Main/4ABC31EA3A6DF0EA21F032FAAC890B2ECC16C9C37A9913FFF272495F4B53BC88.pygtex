@@ -1,0 +1,39 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Top Level Pricing Functions for Options ======================================}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsq{} Pricing `option` Class Object}
+\PYG{c+c1}{\PYGZsh{}\PYGZsq{} The all\PYGZhy{}in\PYGZhy{}one pricing function for `rmcop`. User should predefine an `\PYGZdq{}option\PYGZdq{}` class object and an `\PYGZdq{}env\PYGZdq{}` class object as inputs of `price.option`. According to the pricing method selected, the user shall provide additional inputs as instructions for the pricing function.}
+\PYG{n}{price.option} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{env}\PYG{p}{,} \PYG{n}{method} \PYG{o}{=} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{method}\PYG{p}{,} \PYG{n}{n} \PYG{o}{=} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{n}\PYG{p}{,} \PYG{k+kc}{...} \PYG{p}{,} \PYG{n}{all} \PYG{o}{=} \PYG{k+kc}{FALSE}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n+nf}{check.method}\PYG{p}{(}\PYG{n}{method}\PYG{p}{)}
+    \PYG{n}{res} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{get}\PYG{p}{(}\PYG{n+nf}{paste0}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}price.option.\PYGZdq{}}\PYG{p}{,} \PYG{n}{method}\PYG{p}{))(}\PYG{n}{obj} \PYG{o}{=} \PYG{n}{obj}\PYG{p}{,} \PYG{n}{env} \PYG{o}{=} \PYG{n}{env}\PYG{p}{,} \PYG{n}{n} \PYG{o}{=} \PYG{n}{n}\PYG{p}{,} \PYG{k+kc}{...}\PYG{p}{,} \PYG{n}{all} \PYG{o}{=} \PYG{n}{all}\PYG{p}{)}
+    \PYG{n}{res}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsq{} Option Pricing via Monte Carlo Method}
+\PYG{n}{price.option.mc} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{env}\PYG{p}{,} \PYG{n}{n}\PYG{p}{,} \PYG{n}{steps} \PYG{o}{=} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{steps}\PYG{p}{,} \PYG{n}{all}\PYG{p}{,} \PYG{k+kc}{...}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n+nf}{is.null}\PYG{p}{(}\PYG{n}{n}\PYG{p}{))} \PYG{n+nf}{stop}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}n is not specified\PYGZdq{}}\PYG{p}{)}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n+nf}{is.null}\PYG{p}{(}\PYG{n}{steps}\PYG{p}{))} \PYG{p}{\PYGZob{}}
+        \PYG{n}{steps} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{l+m}{1}
+        \PYG{n+nf}{warning}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}steps is not specified, evaluated to default value 1\PYGZdq{}}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}}
+    \PYG{n}{res} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{get}\PYG{p}{(}\PYG{n+nf}{paste0}\PYG{p}{(}\PYG{n+nf}{class}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{)[}\PYG{l+m}{1}\PYG{p}{],} \PYG{l+s}{\PYGZdq{}.mc\PYGZdq{}}\PYG{p}{))(}\PYG{n}{obj} \PYG{o}{=} \PYG{n}{obj}\PYG{p}{,} \PYG{n}{env} \PYG{o}{=} \PYG{n}{env}\PYG{p}{,} \PYG{n}{n} \PYG{o}{=} \PYG{n}{n}\PYG{p}{,} \PYG{n}{steps} \PYG{o}{=} \PYG{n}{steps}\PYG{p}{,} \PYG{n}{all} \PYG{o}{=} \PYG{n}{all}\PYG{p}{,} \PYG{k+kc}{...}\PYG{p}{)}
+    \PYG{n}{res}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsq{} Option Pricing via Black\PYGZhy{}Scholes Model}
+\PYG{n}{price.option.bs} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{env}\PYG{p}{,} \PYG{n}{n}\PYG{p}{,} \PYG{n}{all}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{style} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}american\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{q} \PYG{o}{!=} \PYG{l+m}{0} \PYG{o}{|} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{type} \PYG{o}{!=} \PYG{l+s}{\PYGZdq{}call\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+            \PYG{n+nf}{warning}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Black Scholes valuation should only apply on European european options or American call option with non\PYGZhy{}dividend paying asset, the result here will be based on European options pricing and may not be accurate.\PYGZdq{}}\PYG{p}{)}
+        \PYG{p}{\PYGZcb{}}
+    \PYG{p}{\PYGZcb{}}
+    \PYG{n}{res} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{get}\PYG{p}{(}\PYG{n+nf}{paste0}\PYG{p}{(}\PYG{n+nf}{class}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{)[}\PYG{l+m}{1}\PYG{p}{],} \PYG{l+s}{\PYGZdq{}.bs\PYGZdq{}}\PYG{p}{))(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{env}\PYG{p}{,} \PYG{n}{all}\PYG{p}{)}
+    \PYG{n}{res}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsq{} Option Pricing via Binomial Lattice Model}
+\PYG{n}{price.option.binomial} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{env}\PYG{p}{,} \PYG{n}{n}\PYG{p}{,} \PYG{n}{u}\PYG{p}{,} \PYG{n}{d}\PYG{p}{,} \PYG{n}{all}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n}{res} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{get}\PYG{p}{(}\PYG{n+nf}{paste0}\PYG{p}{(}\PYG{n+nf}{class}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{)[}\PYG{l+m}{1}\PYG{p}{],} \PYG{l+s}{\PYGZdq{}.binomial\PYGZdq{}}\PYG{p}{))(}\PYG{n}{obj} \PYG{o}{=} \PYG{n}{obj}\PYG{p}{,} \PYG{n}{env} \PYG{o}{=} \PYG{n}{env}\PYG{p}{,} \PYG{n}{n} \PYG{o}{=} \PYG{n}{n}\PYG{p}{,} \PYG{n}{u} \PYG{o}{=} \PYG{n}{u}\PYG{p}{,} \PYG{n}{d} \PYG{o}{=} \PYG{n}{d}\PYG{p}{,} \PYG{n}{all} \PYG{o}{=} \PYG{n}{all}\PYG{p}{)}
+    \PYG{n}{res}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

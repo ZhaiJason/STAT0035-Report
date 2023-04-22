@@ -1,22 +1,18 @@
 \chapter{Introduction} \label{cpt:Introduction}
 
-\section{Abstract}
-
-This report discusses the development of the R package \mintinline{R}{rmcop}, a fully R-based package for pricing financial options (see Section \ref{sec:Literature Review} for definitions). Pricing financial options is an essential fragment of financial engineering and quantitative finance. Because options consider the future in time, determining their fair price involves modelling uncertainty, so statistical methods are widely applied. Modern option pricing methods can be complex and product-specific, but most works are still built upon the basic frameworks of the Black-Scholes formula and Monte Carlo simulations. The package \mintinline{R}{rmcop} covers the R implementation of some of these fundamental option price models on various option types and styles and can be a good reference for constructing more complex R option pricing algorithms. The report also contains some R programming techniques that one may find useful in reducing the computational cost.
-
 \section{Report Structure}
 
 Here in Chapter \ref{cpt:Introduction}, the literature review in Section \ref{sec:Literature Review} will introduce necessary definitions of financial options and option pricing methods that are included in \mintinline{R}|rmcop| package. This is accompanied by some useful formula deductions that will be seen useful in Chapter \ref{cpt:Pkg Dev}, where we will discuss the programming implementation of these models.
 
 In Chapter \ref{cpt:Existing Packages}, we will introduce three existing option pricing packages in R (\mintinline{R}|derivmkts|, \mintinline{R}|fOptions|, \mintinline{R}|RQuantLib|), and explain their functionalities. We will also discuss their advantages and limitations.
 
-In Chapter \ref{cpt:Pkg Dev}, we will discuss the package structure of \mintinline{R}|rmcop|. This includes: 1. a discussion on R's generic Objective Oriented Programming (OOP) environment; 2. an outline of the package's structure; and 3. a detailed elaboration of the R implementation techniques of the financial models introduced in Section \ref{sec:Literature Review}.
+In Chapter \ref{cpt:Pkg Dev}, we will discuss the package structure of \mintinline{R}|rmcop|. This includes: 1. a discussion on R's generic Object Oriented Programming (OOP) environment; 2. an outline of the package's structure; and 3. a detailed elaboration of the R implementation techniques of the financial models introduced in Section \ref{sec:Literature Review}.
 
 Finally, in Chapter \ref{cpt:Results}, we will demonstrate examples and interpretations using \mintinline{R}|rmcop|. The report is then concluded by a discussion on \mintinline{R}|rmcop|'s limitations and plans for further development.
 
 \section{Package Description} \label{sec:Pkg Description}
 
-\mintinline{R}|rmcop| is an R package used for pricing financial options. The name ``rmcop'' stands for ``R Monte Carlo Option Pricing''. The package supports Monte Carlo-based pricing for European vanilla options and European exotic options, including Asian, Barrier, Binary, and Lookback options. It also provides some deterministic methods for both European and American vanilla options pricing, including option pricing via the Binomial lattice tree and Black-Scholes formula.
+The R package \mintinline{R}|rmcop| is developed for pricing financial options. The name ``rmcop'' stands for ``R Monte Carlo Option Pricing''. The package supports Monte Carlo-based pricing for European vanilla options and European exotic options, including Asian, Barrier, Binary, and Lookback options. It also provides some deterministic methods for both European and American vanilla options pricing, including option pricing via the Binomial lattice tree and Black-Scholes formula.
 
 Unlike most existing packages in the R Ecosystem, \mintinline{R}|rmcop| is developed through an object-oriented approach. User's argument inputs for pricing functions are encapsulated in corresponding objects, and pricing functions are themselves methods. This introduces ordered arguments control and easier functions application.
 
@@ -24,16 +20,18 @@ Unlike most existing packages in the R Ecosystem, \mintinline{R}|rmcop| is devel
 
 \subsection{Pricing of Financial Options}
 
-An option is a common financial derivative\footnote{security whose value depends on the value of an underlying (i.e. the related) asset.} in the market. Options can be roughly classified into two types, ``call'' or ``put''. A call option, ``gives its holder the right (but not the obligation) to purchase from the issuer a prescribed asset\footnote{Underlying asset/stock, the word "asset" and "stock" may be used interchangeably through this report.} for a prescribed price (strike price) at a prescribed time (maturity/expiration) in the future.\cite{Higham2004}'' Similarly, a put option gives the right to sell.
+An option is a common financial derivative\footnote{Security whose value depends on the value of an underlying (i.e. the related) asset.} in the market. Options can be roughly classified into two types, ``call'' or ``put''. A call option, ``gives its holder the right (but not the obligation) to purchase from the issuer a prescribed asset\footnote{Underlying asset/stock, the word "asset" and "stock" may be used interchangeably through this report.} for a prescribed price (strike price) at a prescribed time (maturity/expiration date) in the future.\cite{Higham2004}'' Similarly, a put option gives the right to sell an asset at the strike price at maturity.
 
-The two most common styles of financial options are European options and American options. A European option can only be exercised at maturity, whereas an American option can be exercised at any time prior to maturity (which is a more complex setting).
+There are two most common styles of financial options \cite{Higham2004}. A European option can only be exercised (i.e. executed) at maturity, whereas an American option can be exercised at any time prior to maturity (which is a more complex setting). Generally, an American option gives more freedom of exercising, so it is usually priced higher than a European option, giving all other parameters being equal.
 
-The most typical "family" of options are the so-called ``vanilla options'', which include no special or unusual features seen in exotic options (see list below). For vanilla cases, a European call option has a payoff of $(S_T-K)^+ \coloneqq \max{(S_T-K,0)}$, and a European put option has a payoff of $(K-S_T)^+ \coloneqq \max{(K-S_T,0)}$ \cite{Glasserman2003} at the point of exercise $T$ (i.e. maturity). Here, $S_t$ is the underlying asset price at time $t\in[0,T]$, and $K$ is the option's strike price.
+Here is a hypothetical example. Suppose you hold a European call option on Apple's stock with a strike price of 150 and a maturity of 1 year. This option gives you the right to purchase a share of Apple's stock at exactly 150 on the day one year later. Let's assume that after a year, the market price of a share of Apple's stock is 160, and with the option in hand you, can purchase the stock with $160-150=10$ less. The result of £10 would be the benefit, or the \textbf{payoff}, that the option provides you. On the contrary, if after a year, the stock price is 140, which is less than the strike price of 150, there is no point exercising the option and purchasing the stock at a higher price. So the payoff of the option, in this case, would be zero.
 
-Options with ``special or unusual features'' are called ``exotic options''. The exotic options whose pricing is supported by \mintinline{R}|rmcop| package is introduced below based on the definitions given in \textit{An Introduction to Financial Option Valuation} \cite{Higham2004}.
+The most typical "family" of options are the so-called ``vanilla options'' \cite{Higham2004}, which include no special or unusual features. For vanilla cases, a European call option has a payoff of $(S_T-K)^+ \coloneqq \max{(S_T-K,0)}$, and a European put option has a payoff of $(K-S_T)^+ \coloneqq \max{(K-S_T,0)}$ \cite{Glasserman2003} at the point of maturity $T$ in time. Here, $S_t$ is the underlying asset price at some future time $t\in[0,T]$, and $K$ is the option's strike price.
+
+Options with any ``special or unusual features'' are called ``exotic options''. The exotic options whose pricing is supported by \mintinline{R}|rmcop| package is introduced below based on the definitions given in \textit{An Introduction to Financial Option Valuation} \cite{Higham2004}.
 
 \begin{itemize} \label{lst:exotic_options}
-    \item \textbf{Asian Options} Asian options' payoff are determined by the average price of the underlying asset throughout its life span.
+    \item \textbf{Asian Options} Asian options' payoff are determined by the average price of the underlying asset throughout its life span, denoted $\bar{S}$.
     \begin{itemize}
 		\item An average price Asian call option has payoff at the expiry $T$ given by $\max(\bar{S} - K)$.
 		\item An average price Asian put option has payoff at the expiry $T$ given by $\max(K - \bar{S})$.
@@ -79,6 +77,8 @@ A \textit{stochastic process} $\{X(t), t\geq 0\}$ is said to be a \textit{Browni
 	\item for every $t>0$, $X(t)\sim N(0,\sigma^2 t)$.
 \end{enumerate}
 
+In simple terms, a Brownian motion starts at a point in time, and for each time step, we move to a new point which is determined by a distribution centered on the current location.
+
 A \textit{Standard Brownian Motion} (i.e. Wiener Process, abbreviated as SBM) inherits the properties above, and has a volatility measure of zero (i.e. $\sigma=0$). So for an SBM $W$, we have $W(t) \sim N(0,t)$.
 
 \begin{figure}[H]
@@ -89,7 +89,7 @@ A \textit{Standard Brownian Motion} (i.e. Wiener Process, abbreviated as SBM) in
 
 Figure \ref{img:wiener_process} demonstrates the trajectories of a one-dimensional SBM, where each grey line represents a simulated path of a Wiener process.
 
-Notice that the expectation of an SBM at any time $t\geq0$ is zero, this makes an SBM a \textit{martingale}, which is a stochastic process that ``does not tend to rise or fall\footnote{That is, $E[W(t+k)]=W(t)$ for any $k$.} \cite{Shreve2004}''. If $S_t$ is the value of an SBM at time $t$, assume $S_0=0$, its SBM dynamics can be defined by the Stochastic Differential Equation (SDE):
+Notice that the expectation of an SBM at any time $t\geq0$ is zero, this makes an SBM a \textit{martingale}, which is a stochastic process that ``does not tend to rise or fall\footnote{That is, the expectation $E[W(t+k)]=W(t)$ for any increment in time $k$.} \cite{Shreve2004}''. If $S_t$ is the value of an SBM at time $t$, assume $S_0=0$, its SBM dynamics can be defined by the Stochastic Differential Equation (SDE):
 
 \begin{align*}
 dS_t = S_t dW_t
@@ -126,13 +126,13 @@ C(S, T) &= SN(\frac{S - X}{\sigma\sqrt{t}}) - XN(\frac{S - X}{\sigma \sqrt{t}}) 
 P(S, T) &= XN(\frac{S - X}{\sigma \sqrt{t}}) - SN(\frac{S - X}{\sigma \sqrt{t}}) + \sigma\sqrt{t}N(\frac{S - X}{\sigma \sqrt{t}})
 \end{align*}
 
-Being the earliest approach, Bachelier's formula had already outlined the relationship between the option price and asset price $S$, strike price $X$, and volatility measure $\sigma$, which are essential fragments in modern formulas. However, based on limited data, Bachelier's solution was built under some unrealistic assumptions. The normality assumption violates the non-negativity of the stock price, and the formula's discrete measure in time omitted the effect of continuous movements in the stock price. Also, the formula did not discount the effect of interest rates. These errors cause Bachelier's model fails to price options accurately.
+Being the earliest approach, Bachelier's formula had already outlined the relationship between the option price and asset price $S$, strike price $X$, and volatility measure $\sigma$, which are essential fragments in modern formulas. However, based on limited data, Bachelier's solution was built under some unrealistic assumptions \cite{Bachelier1900}. The normality assumption violates the non-negativity of the stock price, and the formula's discrete measure in time omitted the effect of continuous movements in the stock price. Also, the formula did not discount the effect of interest rates. These errors cause Bachelier's model fails to price options accurately.
 
-It wasn't until the 1960s had further improvements been made to quantitative option pricing. In 1961, Case Sprenkle \cite{Sprenkle1961} introduced the Sprenkle formula. The formula addressed the above issues by describing the stock price by the more suitable log-normal distribution and discounting for the effect of interest rate, which successfully explained the time value of an option. In the following decade, improvements have been made by scholars such as Boness and Samuelson \cite{BS1973}, who introduced empirical constants to increase the effectiveness of Sprenkle's model.
+It wasn't until the 1960s had further improvements been made to quantitative option pricing. In 1961, Case Sprenkle \cite{Sprenkle1961} introduced the Sprenkle formula. The formula addressed the above issues by describing the stock price by the more suitable log-normal distribution\footnote{An log-normal distribution is defined on $(0,\infty)$, which addressed the non-negativity issue.} and discounting for the effect of interest rate, which successfully explained the time value of an option. In the following decade, improvements have been made by scholars such as Boness and Samuelson \cite{BS1973}, who introduced empirical constants to increase the effectiveness of Sprenkle's model.
 
 The model was finalised by Black and Scholes in 1973 \cite{BS1973}, who explained the stock price movement by GBM. The GBM was described in the form of a Stochastic Differential Equation (SDE), which effectively models the continuity of price movement. The solution (derived through Itô's lemma) of the Black-Scholes formula under a risk-neutral approach\footnote{The risk-neutral approach, in simple terms, is constructing a portfolio at a moment in time such that the portfolio value will be identical at the next moment in time regardless of the price movement, so the portfolio will be riskless to the price movement.} eliminates the empirical measure of Sprenkle et al's model, which resulted in an objective and deterministic estimation of the option price, as is used by most contemporary pricing methods.
 
-Recall the explicit form of an SDE $f(S_t)$ given by the Itô-Doeblin rule in Equation \ref{eq:GBM_explicit}. We assign $f(S_t)=\log(S_t)$ where $\log$ is the natural logarithm. The solution is:
+Recall the explicit form of an SDE $f(S_t)$ given by the Itô-Doeblin rule in Equation \ref{eq:GBM_explicit}. We assign $f(S_t)=\log(S_t)$\footnote{The transformation constructing the log-normal distribution.} where $\log$ is the natural logarithm. The solution is:
 
 \begin{align} \label{eq:BS_log_explicit}
 \log(S_t) = \log(S_t) + (\mu - \frac{\sigma^2}{2})t + \sigma W_t
@@ -165,7 +165,7 @@ Under the risk-neutral assumption, the payoff of a (European vanilla) call optio
 &P(S(0), T) = e^{-rT}K\Phi(-d_2) - S(0)\Phi(-d_1)
 \end{align*}
 
-Where $\Phi$ is the cumulative normal distribution, $d_1 \coloneqq \frac{\log(S(0)/K)+(r+\frac{1}{2}\sigma^2)T}{\sigma\sqrt{T}}$, and $d_2 = d_1 - \sigma\sqrt{T}$. The Equations \ref{eq:BS Formula Call} and \ref{eq:BS Formula Put} are the so-called Black-Scholes formula.
+Where $\Phi$ is the cumulative normal distribution, $d_1 \coloneqq \frac{\log(S(0)/K)+(r+\frac{1}{2}\sigma^2)T}{\sigma\sqrt{T}}$, and $d_2 = d_1 - \sigma\sqrt{T}$. The Equations \ref{eq:BS Formula Call} and \ref{eq:BS Formula Put} are the so-called Black-Scholes formula for European options' price.
 
 A generalised solution which addressed the impact of the presence of dividends (assuming the option of interest has an annual dividend yield rate of $\delta$) specified as \cite{Glasserman2003}:
 
@@ -174,7 +174,7 @@ A generalised solution which addressed the impact of the presence of dividends (
 	&P(S(0), T) = e^{-rT}K\Phi(-d_2) - e^{-\delta t}S(0)S(0)\Phi(-d_1) \label{eq:BS Formula Put}
 \end{align}
 
-Where now $d_1 \coloneqq \frac{\log(S(0)/K)+(r-\delta+\frac{1}{2}\sigma^2)T}{\sigma\sqrt{T}}$.
+Where now $d_1 \coloneqq \frac{\log(S(0)/K)+(r-\delta+\frac{1}{2}\sigma^2)T}{\sigma\sqrt{T}}$, and $d_2$ has the same relationship described above.
 
 A further result of the American option cases is such that an American call option is never optimal (i.e. the estimated value would be the same as the European call option under the same conditions); and that an American put option's value does not have an analytical form and required numerical methods to calculate\footnote{This is related to the studies on Monte Carlo pricing for American Options, which is beyond the current scope of \mintinline{R}|rmcop|.}.
 
@@ -216,7 +216,7 @@ S(t_{i}) &= e^{-r\Delta t}\mathbb{E}[S(t_{i+1})] \\
 		 &= e^{-r\Delta t}[\hat{p}uS(t_i)+\hat{q}dS(t_i)],\quad\text{for }i=0,...,n-1
 \end{align*}
 
-And it can be calculated using the formula:
+And it can be calculated using the formula \cite{CRR1979}:
 
 \begin{align} \label{eq:binomial_riskless_p}
 \hat{p} = \frac{e^{r\Delta t}-d}{u-d}
@@ -244,7 +244,7 @@ Recall the explicit form of the GBM (Equation \ref{eq:BS_explicit}) introduced i
 S_{t+\Delta t} = S_t\exp{\left\{(\mu-\frac{\sigma^2}{2})\Delta t+\sigma W_{\Delta t}\right\}}
 \end{align*}
 
-Knowing that $W_t\sim N(0,t)$, suppose we have $Z\colonsim N(0,1)$, we have $W_t=Z\sqrt{t}$. So we can modify the above equation to:
+Knowing that $W_t\sim N(0,t)$, suppose we have $Z\colonsim N(0,1)$, we can discretise $W_t=Z\sqrt{t}$. So we can modify the above equation to:
 
 \begin{align*}
 S_{t+\Delta t} = S_t\exp{\left\{(\mu-\frac{\sigma^2}{2})\Delta t+\sigma Z \sqrt{\Delta t}\right\}}
@@ -262,9 +262,9 @@ We can also modify the equation to address the effect of interest rate and divid
 S_{i} = S_{i-1}\exp{\left\{(r-q-\frac{\sigma^2}{2})\Delta t+\sigma Z_i \sqrt{\Delta t}\right\}},\qquad i=1,...,m
 \end{align}
 
-By simulating $m$ standard normal random variables $Z_1,...,Z_m$, we will be able to generate a full trajectory of the price movements.
+By simulating $m$ standard normal random variables $Z_1,...,Z_m$, we will be able to generate a full trajectory of the price movements. We will represent this using the below pseudocode \cite{Glasserman2003}.
 
-\begin{algorithmic}
+\begin{algorithmic}[H]
 \For{$i \gets 1,...,m$}
 	\State $Z_{i} \gets N(0,1)$
 	\State $S_{i} \gets S_{i-1}\exp{\left\{(\mu-\frac{\sigma^2}{2})\Delta t+\sigma Z_i \sqrt{\Delta t}\right\}}$

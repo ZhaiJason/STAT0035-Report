@@ -1,7 +1,647 @@
 \appendix
 
-\chapter{Appendix 1}
+\chapter{Appendix}
 
 \section{Package Source Code} \label{apd:source_code}
+
+This appendix includes \textit{selected} key components of the package functions. Notice that for code readability in this PDF file, some functions and function comments are omitted. Therefore, visiting the package's \hyperref{https://github.com/ZhaiJason/rmcop}{site}{rmcop Repository}{GitHub Repository} is highly recommended. The online repository stores the full directory of the package with detailed installation instructions. This, however, comes with the risk of breaking anonymity, as some parts of the GitHub site may reveal the creator's information.
+
+\newpage
+
+\section{Option.R}
+
+\begin{Rminted}
+# Creating new option object ===================================================
+#' Initialise new `option` class object
+#' Create an S3 class object which characterised an option of interest. The returned object is then used together with a `"env"` class object together as inputs of the `price.option` function for further option pricing.
+option <- function(style, option = "vanilla", type, K, t, ...) {
+
+    obj <- list(
+        "style" = style,
+        "type" = type,
+        "K" = K,
+        "t" = t
+    )
+
+    # Distribute to corresponding initialisation function according to specified arguments
+    if (option == "vanilla") {
+        obj <- option.vanilla(obj)
+    } else {
+        obj <- option.exotic(obj, option, ...)
+    }
+    obj
+}
+
+## Vanilla =====================================================================
+#' Initialise vanilla option
+option.vanilla <- function(obj) {
+    class(obj) <- c("vanilla", "option")
+    obj
+}
+
+## Exotic ======================================================================
+#' Initialise exotic option
+option.exotic <- function(obj, option, ...) {
+    obj <- get(paste0("option.exotic.", option))(obj, ...) # Direct to corresponding initialisation function
+    obj
+}
+
+#' Initialise Asian option
+option.exotic.asian <- function(obj, is.avg_price = TRUE) {
+    obj <- c(
+        obj,
+        "is.avg_price" = is.avg_price
+    )
+    class(obj) <- c("asian", "option")
+    obj
+}
+
+#' Initialise barrier option
+option.exotic.barrier <- function(obj, barrier, is.knockout = TRUE) {
+    obj <- c(
+        obj,
+        "barrier" = barrier,
+        "is.knockout" = is.knockout
+    )
+    class(obj) <- c("barrier", "option")
+    obj
+}
+
+#' Initialise binary option
+option.exotic.binary <- function(obj, payout) {
+    obj <- c(
+        obj,
+        "payout" = payout
+    )
+    class(obj) <- c("binary", "option")
+    obj
+}
+
+#' Initialise lookback option
+option.exotic.lookback <- function(obj, is.fixed = TRUE) {
+    obj <- c(
+        obj,
+        "is.fixed" = is.fixed
+    )
+    class(obj) <- c("lookback", "option")
+    obj
+}
+
+# Creating new option environment ==============================================
+
+#' Initialise new `env` class object
+#' Create an S3 class object which characterised the market environment used when pricing the option of interest. The returned object is used together with an `"option"` class object as inputs of the pricing function `price.option`.
+option.env <- function(method = "mc", S, r, q = 0, sigma, n = NULL, steps = NULL) {
+    env <- list(
+        "method" = method,
+        "S" = S,
+        "r" = r,
+        "q" = q,
+        "sigma" = sigma,
+        "n" = n,
+        "steps" = steps
+    )
+    class(env) <- "env"
+    env
+}
+\end{Rminted}
+
+\newpage
+
+\section{Price.R}
+
+\begin{Rminted}
+# Top Level Pricing Functions for Options ======================================
+
+#' Pricing `option` Class Object
+#' The all-in-one pricing function for `rmcop`. User should predefine an `"option"` class object and an `"env"` class object as inputs of `price.option`. According to the pricing method selected, the user shall provide additional inputs as instructions for the pricing function.
+price.option <- function(obj, env, method = env$method, n = env$n, ... , all = FALSE) {
+    check.method(method)
+    res <- get(paste0("price.option.", method))(obj = obj, env = env, n = n, ..., all = all)
+    res
+}
+
+#' Option Pricing via Monte Carlo Method
+price.option.mc <- function(obj, env, n, steps = env$steps, all, ...) {
+    if (is.null(n)) stop("n is not specified")
+    if (is.null(steps)) {
+        steps <- 1
+        warning("steps is not specified, evaluated to default value 1")
+    }
+    res <- get(paste0(class(obj)[1], ".mc"))(obj = obj, env = env, n = n, steps = steps, all = all, ...)
+    res
+}
+
+#' Option Pricing via Black-Scholes Model
+price.option.bs <- function(obj, env, n, all) {
+    if (obj$style == "american") {
+        if (env$q != 0 | obj$type != "call") {
+            warning("Black Scholes valuation should only apply on European european options or American call option with non-dividend paying asset, the result here will be based on European options pricing and may not be accurate.")
+        }
+    }
+    res <- get(paste0(class(obj)[1], ".bs"))(obj, env, all)
+    res
+}
+
+#' Option Pricing via Binomial Lattice Model
+price.option.binomial <- function(obj, env, n, u, d, all) {
+    res <- get(paste0(class(obj)[1], ".binomial"))(obj = obj, env = env, n = n, u = u, d = d, all = all)
+    res
+}
+\end{Rminted}
+
+\newpage
+
+\section{MonteCarlo.R}
+
+\begin{Rminted}
+#' Engine for Monte Carlo Simulation on Asset Price Trajectory
+mc.engine <- function(type, K, t, S0, r, q, sigma, n, steps) {
+
+    dt <- t / steps
+
+    # Generate n random samples from N(0,1)
+    Z <- matrix(rnorm(n * steps), ncol = n)
+
+    # Get logarithm of price change per step
+    increment <- (r - q - sigma^2 / 2) * dt + sigma * sqrt(dt) * Z
+
+    # Use vectorised MC method to compute logarithm of S(t) at each time step
+    logS <- log(S0) + apply(increment, 2, cumsum)
+    S <- exp(logS) # Obtain the simulated stock price by taking exponential
+    S <- S * exp(-q * t) # Adjust the asset price for dividends
+    S <- rbind(S0, S) # Add column of current price
+    S
+}
+
+#' Compute Monte Carlo Model's Standard Error
+mc.SE <- function(C_i, C.mean, n) {
+    s_c <- sqrt(sum(C_i - C.mean)^2 / (n - 1))
+    SE <- s_c / sqrt(n)
+    SE
+}
+
+# Model ========================================================================
+
+#' Pricing vanilla option using Monte Carlo method
+vanilla.mc <- function(obj, env, n, steps, all = FALSE, plot = FALSE, ...) {
+
+    # Check object integrity, CAN BE OMITTED
+    check.args(obj, env, option = "vanilla")
+
+    # Extract objects properties
+    style <- obj$style
+    type <- obj$type
+    K <- obj$K
+    t <- obj$t
+    S0 <- env$S
+    r <- env$r
+    q <- env$q
+    sigma <- env$sigma
+
+    # Apply MC
+    if (style == "european") {
+        S <- mc.engine(type, K, t, S0, r, q, sigma, n, steps)
+    } else if (style == "american") {
+        stop("American option pricing via MC not supported")
+    }
+
+    # Compute corresponding discounted price at current time
+    # Vanilla option only consider option price at maturity, so only take the last column of the price matrix S_i
+    if (type == "call") {
+        C <- exp(-r * t) * pmax(S[steps + 1, ] - K, 0)
+    } else if (type == "put") {
+        C <- exp(-r * t) * pmax(K - S[steps + 1, ], 0)
+    }
+
+    # Obtain the estimate of option price by taking average of C
+    C.mean <- mean(C, ...)
+
+    # Compute standard error of the estimate
+    SE <- mc.SE(C, C.mean, n)
+
+    # Plot function
+    if (plot) {mc.plot(S, ...)}
+
+    # Return result
+    if (all) {
+        # Return actual object environment used
+        env <- option.env(method = "mc", S = S, r = r, q = q, sigma = sigma, n = n, steps = steps)
+        list(
+            "env" = env,
+            "price" = C.mean,
+            "SE" = SE,
+            "S" = S,
+            "C" = C
+        )
+    } else {
+        C.mean
+    }
+}
+
+#' Pricing Asian option using Monte Carlo method
+asian.mc <- function(obj, env, n, steps, all = FALSE, plot = FALSE, ...) {
+    # Check object integrity, CAN BE OMITTED
+    check.args(obj, env, option = "asian")
+
+    # Extract objects properties
+    style <- obj$style
+    type <- obj$type
+    K <- obj$K
+    t <- obj$t
+    is.avg_price <- obj$is.avg_price
+    S0 <- env$S
+    r <- env$r
+    q <- env$q
+    sigma <- env$sigma
+
+    # Apply MC
+    if (style == "european") {
+        S <- mc.engine(type, K, t, S0, r, q, sigma, n, steps)
+    } else if (style == "american") {
+        stop("American option pricing via MC not supported")
+    }
+
+    # Compute the mean of each replication's price movement, as required to compute Asian option pay-off
+    S.mean <- apply(S, 2, mean)
+
+    # Compute corresponding discounted price at current time
+    if (is.avg_price) { # Compute payoff for average price Asian option
+        if (type == "call") {
+            C <- exp(-r * t) * pmax(S.mean - K, 0)
+        } else if (type == "put") {
+            C <- exp(-r * t) * pmax(K - S.mean, 0)
+        }
+    } else { # Compute payoff for average strike Asian option
+        if (type == "call") {
+            C <- exp(-r * t) * pmax(S[steps + 1, ] - S.mean, 0)
+        } else if (type == "put") {
+            C <- exp(-r * t) * pmax(S.mean - S[steps + 1, ], 0)
+        }
+    }
+
+    # Obtain the estimate of option price by taking average of C
+    C.mean <- mean(C)
+
+    # Compute standard error of the estimate
+    SE <- mc.SE(C, C.mean, n)
+
+    # Plot function
+    if (plot) {mc.plot(S, ...)}
+
+    # Return result
+    if (all) {
+        # Return actual object environment used
+        env <- option.env(method = "mc", S = S, r = r, q = q, sigma = sigma, n = n, steps = steps)
+        list(
+            "env" = env,
+            "price" = C.mean,
+            "SE" = SE,
+            "S" = S,
+            "C" = C
+        )
+    } else {
+        C.mean
+    }
+}
+
+#' Pricing Barrier option using Monte Carlo method
+barrier.mc <- function(obj, env, n, steps, all = FALSE, plot = FALSE, ...) {
+    # Check object integrity, CAN BE OMITTED
+    check.args(obj, env, option = "barrier")
+
+    # Extract objects properties
+    style <- obj$style
+    type <- obj$type
+    K <- obj$K
+    t <- obj$t
+    barrier <- obj$barrier
+    is.knockout <- obj$is.knockout
+    S0 <- env$S
+    r <- env$r
+    q <- env$q
+    sigma <- env$sigma
+
+    # Apply MC
+    if (style == "european") {
+        S <- mc.engine(type, K, t, S0, r, q, sigma, n, steps)
+    } else if (style == "american") {
+        stop("American option pricing via MC not supported")
+    }
+
+    # Check if price movements corssed the specified barrier
+    S.min <- apply(S, 2, min)
+    S.max <- apply(S, 2, max)
+    is.cross <- (S.min < barrier & S.max > barrier)
+
+    # Compute corresponding discounted price at current time
+    if (type == "call") {
+        C <- exp(-r * t) * pmax(S[steps + 1, ] - K, 0)
+    } else if (type == "put") {
+        C <- exp(-r * t) * pmax(K - S[steps + 1, ], 0)
+    }
+
+    # Adjust for knock-out & knock-in situations for a barrier option
+    if (is.knockout) {
+        C <- ifelse(is.cross, 0, C)
+    } else {
+        C <- ifelse(is.cross, C, 0)
+    }
+
+    # Obtain the estimate of option price by taking average of C
+    C.mean <- mean(C)
+
+    # Compute standard error of the estimate
+    SE <- mc.SE(C, C.mean, n)
+
+    # Plot function
+    if (plot) {mc.plot(S, ...)}
+
+    # Return result
+    if (all) {
+        # Return actual object environment used
+        env <- option.env(method = "mc", S = S, r = r, q = q, sigma = sigma, n = n, steps = steps)
+        list(
+            "env" = env,
+            "price" = C.mean,
+            "SE" = SE,
+            "S" = S,
+            "C" = C
+        )
+    } else {
+        C.mean
+    }
+}
+
+#' Pricing Barrier option using Monte Carlo method
+binary.mc <- function(obj, env, n, steps, all = FALSE, plot = FALSE, ...) {
+
+    # Check object integrity, CAN BE OMITTED
+    check.args(obj, env, option = "binary")
+
+    # Extract objects properties
+    style <- obj$style
+    type <- obj$type
+    K <- obj$K
+    t <- obj$t
+    payout <- obj$payout
+    S0 <- env$S
+    r <- env$r
+    q <- env$q
+    sigma <- env$sigma
+
+    # Apply MC
+    if (style == "european") {
+        S <- mc.engine(type, K, t, S0, r, q, sigma, n, steps)
+    } else if (style == "american") {
+        stop("American option pricing via MC not supported")
+    }
+
+    # Compute corresponding discounted price at current time
+    # Compute uniform payout for each MC replication of a binary option
+    C <- matrix(exp(-r * t) * payout, nrow = n, ncol = 1)
+    if (type == "call") {
+        C <- ifelse(S[steps + 1, ] > K, C, 0)
+    } else if (type == "put") {
+        C <- ifelse(S[steps + 1, ] < K, C, 0)
+    }
+
+    # Obtain the estimate of option price by taking average of C
+    C.mean <- mean(C)
+
+    # Compute standard error of the estimate
+    SE <- mc.SE(C, C.mean, n)
+
+    # Plot function
+    if (plot) {mc.plot(S, ...)}
+
+    # Return result
+    if (all) {
+        # Return actual object environment used
+        env <- option.env(method = "mc", S = S, r = r, q = q, sigma = sigma, n = n, steps = steps)
+        list(
+            "env" = env,
+            "price" = C.mean,
+            "SE" = SE,
+            "S" = S,
+            "C" = C
+        )
+    } else {
+        C.mean
+    }
+}
+
+#' Pricing Lookback option using Monte Carlo method
+lookback.mc <- function(obj, env, n, steps, all = FALSE, plot = FALSE, ...) {
+    # Check object integrity, CAN BE OMITTED
+    check.args(obj, env, option = "lookback")
+
+    # Extract objects properties
+    style <- obj$style
+    type <- obj$type
+    K <- obj$K
+    t <- obj$t
+    is.fixed <- obj$is.fixed
+    S0 <- env$S
+    r <- env$r
+    q <- env$q
+    sigma <- env$sigma
+
+    # Apply MC
+    if (style == "european") {
+        S <- mc.engine(type, K, t, S0, r, q, sigma, n, steps)
+    } else if (style == "american") {
+        stop("American option pricing via MC not supported")
+    }
+
+    # Check if price movements crossed the specified barrier
+    S.min <- apply(S, 2, min)
+    S.max <- apply(S, 2, max)
+
+    # Compute corresponding discounted price at current time
+    if (type == "call") {
+        if (is.fixed) {
+            C <- exp(-r * t) * pmax(S.max - K, 0)
+        } else {
+            C <- exp(-r * t) * (S[steps + 1, ] - S.min)
+        }
+    } else if (type == "put") {
+        if (is.fixed) {
+            C <- exp(-r * t) * pmax(K - S.min, 0)
+        } else {
+            C <- exp(-r * t) * (S.max - S[steps + 1, ])
+        }
+    }
+
+    # Obtain the estimate of option price by taking average of C
+    C.mean <- mean(C)
+
+    # Compute standard error of the estimate
+    SE <- mc.SE(C, C.mean, n)
+
+    # Plot function
+    if (plot) {mc.plot(S, ...)}
+
+    # Return result
+    if (all) {
+        # Return actual object environment used
+        obj <- option(style = style, option = "lookback", type = type, K = K, t = t, is.fixed = is.fixed)
+        env <- option.env(method = "mc", S = S, r = r, q = q, sigma = sigma, n = n, steps = steps)
+        list(
+            "env" = env,
+            "C.price" = C.mean,
+            "SE" = SE,
+            "S" = S,
+            "C" = C
+        )
+    } else {
+        C.mean
+    }
+}
+\end{Rminted}
+
+\newpage
+
+\section{BlackScholes.R}
+
+\begin{Rminted}
+#' Compute d1 in Black-Scholes Formula
+bs.d1 <- function(S, K, t, r, q, sigma) {
+    (log(S / K) + (r - q + sigma^2 / 2) * t) / (sigma * sqrt(t))
+}
+
+# Model ========================================================================
+
+#' Pricing vanilla option using Black-Scholes model
+vanilla.bs <- function(obj, env, all = FALSE) {
+    type <- obj$type
+    K <- obj$K
+    t <- obj$t
+    S <- env$S
+    r <- env$r
+    q <- env$q
+    sigma <- env$sigma
+
+    d1 <- bs.d1(S, K, t, r, q, sigma)
+    d2 <- d1 - sigma * sqrt(t)
+
+    if (type == "call") {
+        price <- exp(-q * t) * S * pnorm(d1) - exp(-r * t) * K * pnorm(d2)
+    } else if (type == "put") {
+        price <- exp(-r * t) * K * pnorm(-d2) - exp(-q * t) * S * pnorm(-d1)
+    }
+
+    if (all) {
+        list(
+            obj,
+            env,
+            "price" = price
+        )
+    } else {
+        price
+    }
+}
+\end{Rminted}
+
+\newpage
+
+\section{Binomial.R}
+
+\begin{Rminted}
+# Engine =======================================================================
+#' Generating Binomial Tree Matrix
+Binomial.tree <- function(S0, u, d, n) {
+    if (is.null(n)) stop("Number of binomial tree steps n is not defined.")
+    dim <- n + 1
+    S <- matrix(nrow = dim, ncol = dim) # Predefine the size
+    temp <- c(S0)
+    for (i in 1:dim) {
+        S[i, ] <- c(temp, rep(NA, dim - i))
+        temp <- c(temp[1] * d, temp * u)
+    }
+    S
+}
+
+#' Backward Recursive Risk-neutral Valuation for Binomial Model
+Binomial.rnv <- function(fn, p, q, r, n, dt, K = NULL, S = NULL,
+                         type = "call",
+                         style = "european") {
+    if (style == "european") {
+        rnv.european <- function(fn, p, r, dt, state = n) {
+            if (state <= 0) {
+                fn
+            } else {
+                l <- state # Specify the length l of the vector containing prices of next state looking back by 1 step
+                fm <- sapply(1:l, function(i) {exp(-r * dt) * (p * fn[i + 1] + q * fn[i])})
+                rnv.european(fm, p, r, dt, state = state - 1)
+            }
+        }
+        rnv.european(fn, p, r, dt)
+    } else if (style == "american") {
+        rnv.american <- function(fn, p, r, dt, K, S, type = type, state = n) {
+            if (state <= 0) {
+                fn
+            } else {
+                l <- state
+                fm <- sapply(1:l, function(i) {
+                    if (type == "call") {
+                        max(max(S[state, i] - K, 0), exp(-r * dt) * (p * fn[i + 1] + q * fn[i]))
+                    } else if (type == "put") {
+                        max(max(K - S[state, i], 0), exp(-r * dt) * (p * fn[i + 1] + q * fn[i]))
+                    }
+                })
+                rnv.american(fm, p, r, dt, K, S, type = type, state = state - 1)
+            }
+        }
+        rnv.american(fn, p, r, dt, K, S, type = type)
+    } else {
+        stop("Invalid option style. `style` must be specified to either 'european' or 'american'.")
+    }
+}
+
+# Model ========================================================================
+
+#' Binomial model for pricing vanilla options
+vanilla.binomial <- function(obj, env, n, u, d, all = FALSE) {
+
+    style = obj$style
+    type = obj$type
+    K = obj$K
+    t = obj$t
+    S = env$S
+    r = env$r
+
+    dt <- t / n # Compute delta t
+    p <- (exp(r * dt) - d) / (u - d) # Compute riskless probability for an upward price movement
+    q <- 1 - p # Compute riskless probability for a downward price movement
+
+    # Store the stock prices of the tree for each state in a matrix `price_tree`
+    price_tree <- Binomial.tree(S, u, d, n)
+    Sn <- price_tree[n + 1, ] # Stores the possible stock prices at the terminal steps.
+
+    # Calculate the option value at the final step, i.e. maturity.
+    if (type == "call") {
+        fn <- sapply(Sn, function(x) {max(x - K, 0)})
+    } else if (type == "put") {
+        fn <- sapply(Sn, function(x) {max(K - x, 0)})
+    } else {
+        stop("Invalid option type. `type` must be specified to either 'call' or 'put'.")
+    }
+
+    # Calculate the option value at current time.
+    price <- Binomial.rnv(fn, p, q, r, n, dt, K, S = price_tree, type = type, style = style)
+
+    # Return output
+    if (all) {
+        list(
+            "price" = price,
+            "p" = p,
+            "price_tree" = price_tree
+        )
+    } else {
+        price
+    }
+}
+\end{Rminted}
 
 \newpage

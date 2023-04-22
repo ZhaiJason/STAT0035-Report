@@ -1,0 +1,38 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{}\PYGZsq{} Compute d1 in Black\PYGZhy{}Scholes Formula}
+\PYG{n}{bs.d1} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{S}\PYG{p}{,} \PYG{n}{K}\PYG{p}{,} \PYG{n}{t}\PYG{p}{,} \PYG{n}{r}\PYG{p}{,} \PYG{n}{q}\PYG{p}{,} \PYG{n}{sigma}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{p}{(}\PYG{n+nf}{log}\PYG{p}{(}\PYG{n}{S} \PYG{o}{/} \PYG{n}{K}\PYG{p}{)} \PYG{o}{+} \PYG{p}{(}\PYG{n}{r} \PYG{o}{\PYGZhy{}} \PYG{n}{q} \PYG{o}{+} \PYG{n}{sigma}\PYG{o}{\PYGZca{}}\PYG{l+m}{2} \PYG{o}{/} \PYG{l+m}{2}\PYG{p}{)} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{o}{/} \PYG{p}{(}\PYG{n}{sigma} \PYG{o}{*} \PYG{n+nf}{sqrt}\PYG{p}{(}\PYG{n}{t}\PYG{p}{))}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{\PYGZsh{} Model ========================================================================}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsq{} Pricing vanilla option using Black\PYGZhy{}Scholes model}
+\PYG{n}{vanilla.bs} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{env}\PYG{p}{,} \PYG{n}{all} \PYG{o}{=} \PYG{k+kc}{FALSE}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n}{type} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{type}
+    \PYG{n}{K} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{K}
+    \PYG{n}{t} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{t}
+    \PYG{n}{S} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{S}
+    \PYG{n}{r} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{r}
+    \PYG{n}{q} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{q}
+    \PYG{n}{sigma} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{sigma}
+
+    \PYG{n}{d1} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{bs.d1}\PYG{p}{(}\PYG{n}{S}\PYG{p}{,} \PYG{n}{K}\PYG{p}{,} \PYG{n}{t}\PYG{p}{,} \PYG{n}{r}\PYG{p}{,} \PYG{n}{q}\PYG{p}{,} \PYG{n}{sigma}\PYG{p}{)}
+    \PYG{n}{d2} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{d1} \PYG{o}{\PYGZhy{}} \PYG{n}{sigma} \PYG{o}{*} \PYG{n+nf}{sqrt}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)}
+
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{type} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}call\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{price} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{q} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{o}{*} \PYG{n}{S} \PYG{o}{*} \PYG{n+nf}{pnorm}\PYG{p}{(}\PYG{n}{d1}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{r} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{o}{*} \PYG{n}{K} \PYG{o}{*} \PYG{n+nf}{pnorm}\PYG{p}{(}\PYG{n}{d2}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{type} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}put\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{price} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{r} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{o}{*} \PYG{n}{K} \PYG{o}{*} \PYG{n+nf}{pnorm}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{d2}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{q} \PYG{o}{*} \PYG{n}{t}\PYG{p}{)} \PYG{o}{*} \PYG{n}{S} \PYG{o}{*} \PYG{n+nf}{pnorm}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{d1}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}}
+
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{all}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n+nf}{list}\PYG{p}{(}
+            \PYG{n}{obj}\PYG{p}{,}
+            \PYG{n}{env}\PYG{p}{,}
+            \PYG{l+s}{\PYGZdq{}price\PYGZdq{}} \PYG{o}{=} \PYG{n}{price}
+        \PYG{p}{)}
+    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{p}{\PYGZob{}}
+        \PYG{n}{price}
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

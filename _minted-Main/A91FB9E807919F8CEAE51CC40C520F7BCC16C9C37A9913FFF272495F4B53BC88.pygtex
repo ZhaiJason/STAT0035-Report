@@ -1,0 +1,96 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{c+c1}{\PYGZsh{} Engine =======================================================================}
+\PYG{c+c1}{\PYGZsh{}\PYGZsq{} Generating Binomial Tree Matrix}
+\PYG{n}{Binomial.tree} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{S0}\PYG{p}{,} \PYG{n}{u}\PYG{p}{,} \PYG{n}{d}\PYG{p}{,} \PYG{n}{n}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n+nf}{is.null}\PYG{p}{(}\PYG{n}{n}\PYG{p}{))} \PYG{n+nf}{stop}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Number of binomial tree steps n is not defined.\PYGZdq{}}\PYG{p}{)}
+    \PYG{n}{dim} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{n} \PYG{o}{+} \PYG{l+m}{1}
+    \PYG{n}{S} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{matrix}\PYG{p}{(}\PYG{n}{nrow} \PYG{o}{=} \PYG{n}{dim}\PYG{p}{,} \PYG{n}{ncol} \PYG{o}{=} \PYG{n}{dim}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} Predefine the size}
+    \PYG{n}{temp} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{c}\PYG{p}{(}\PYG{n}{S0}\PYG{p}{)}
+    \PYG{n+nf}{for }\PYG{p}{(}\PYG{n}{i} \PYG{n}{in} \PYG{l+m}{1}\PYG{o}{:}\PYG{n}{dim}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{S}\PYG{p}{[}\PYG{n}{i}\PYG{p}{,} \PYG{p}{]} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{c}\PYG{p}{(}\PYG{n}{temp}\PYG{p}{,} \PYG{n+nf}{rep}\PYG{p}{(}\PYG{k+kc}{NA}\PYG{p}{,} \PYG{n}{dim} \PYG{o}{\PYGZhy{}} \PYG{n}{i}\PYG{p}{))}
+        \PYG{n}{temp} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{c}\PYG{p}{(}\PYG{n}{temp}\PYG{p}{[}\PYG{l+m}{1}\PYG{p}{]} \PYG{o}{*} \PYG{n}{d}\PYG{p}{,} \PYG{n}{temp} \PYG{o}{*} \PYG{n}{u}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}}
+    \PYG{n}{S}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsq{} Backward Recursive Risk\PYGZhy{}neutral Valuation for Binomial Model}
+\PYG{n}{Binomial.rnv} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{fn}\PYG{p}{,} \PYG{n}{p}\PYG{p}{,} \PYG{n}{q}\PYG{p}{,} \PYG{n}{r}\PYG{p}{,} \PYG{n}{n}\PYG{p}{,} \PYG{n}{dt}\PYG{p}{,} \PYG{n}{K} \PYG{o}{=} \PYG{k+kc}{NULL}\PYG{p}{,} \PYG{n}{S} \PYG{o}{=} \PYG{k+kc}{NULL}\PYG{p}{,}
+                         \PYG{n}{type} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}call\PYGZdq{}}\PYG{p}{,}
+                         \PYG{n}{style} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}european\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{style} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}european\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{rnv.european} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{fn}\PYG{p}{,} \PYG{n}{p}\PYG{p}{,} \PYG{n}{r}\PYG{p}{,} \PYG{n}{dt}\PYG{p}{,} \PYG{n}{state} \PYG{o}{=} \PYG{n}{n}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+            \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{state} \PYG{o}{\PYGZlt{}=} \PYG{l+m}{0}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+                \PYG{n}{fn}
+            \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{p}{\PYGZob{}}
+                \PYG{n}{l} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{state} \PYG{c+c1}{\PYGZsh{} Specify the length l of the vector containing prices of next state looking back by 1 step}
+                \PYG{n}{fm} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{sapply}\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{:}\PYG{n}{l}\PYG{p}{,} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{p}{\PYGZob{}}\PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{r} \PYG{o}{*} \PYG{n}{dt}\PYG{p}{)} \PYG{o}{*} \PYG{p}{(}\PYG{n}{p} \PYG{o}{*} \PYG{n}{fn}\PYG{p}{[}\PYG{n}{i} \PYG{o}{+} \PYG{l+m}{1}\PYG{p}{]} \PYG{o}{+} \PYG{n}{q} \PYG{o}{*} \PYG{n}{fn}\PYG{p}{[}\PYG{n}{i}\PYG{p}{])\PYGZcb{})}
+                \PYG{n+nf}{rnv.european}\PYG{p}{(}\PYG{n}{fm}\PYG{p}{,} \PYG{n}{p}\PYG{p}{,} \PYG{n}{r}\PYG{p}{,} \PYG{n}{dt}\PYG{p}{,} \PYG{n}{state} \PYG{o}{=} \PYG{n}{state} \PYG{o}{\PYGZhy{}} \PYG{l+m}{1}\PYG{p}{)}
+            \PYG{p}{\PYGZcb{}}
+        \PYG{p}{\PYGZcb{}}
+        \PYG{n+nf}{rnv.european}\PYG{p}{(}\PYG{n}{fn}\PYG{p}{,} \PYG{n}{p}\PYG{p}{,} \PYG{n}{r}\PYG{p}{,} \PYG{n}{dt}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{style} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}american\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{rnv.american} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{fn}\PYG{p}{,} \PYG{n}{p}\PYG{p}{,} \PYG{n}{r}\PYG{p}{,} \PYG{n}{dt}\PYG{p}{,} \PYG{n}{K}\PYG{p}{,} \PYG{n}{S}\PYG{p}{,} \PYG{n}{type} \PYG{o}{=} \PYG{n}{type}\PYG{p}{,} \PYG{n}{state} \PYG{o}{=} \PYG{n}{n}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+            \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{state} \PYG{o}{\PYGZlt{}=} \PYG{l+m}{0}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+                \PYG{n}{fn}
+            \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{p}{\PYGZob{}}
+                \PYG{n}{l} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{state}
+                \PYG{n}{fm} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{sapply}\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{:}\PYG{n}{l}\PYG{p}{,} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{i}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+                    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{type} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}call\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+                        \PYG{n+nf}{max}\PYG{p}{(}\PYG{n+nf}{max}\PYG{p}{(}\PYG{n}{S}\PYG{p}{[}\PYG{n}{state}\PYG{p}{,} \PYG{n}{i}\PYG{p}{]} \PYG{o}{\PYGZhy{}} \PYG{n}{K}\PYG{p}{,} \PYG{l+m}{0}\PYG{p}{),} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{r} \PYG{o}{*} \PYG{n}{dt}\PYG{p}{)} \PYG{o}{*} \PYG{p}{(}\PYG{n}{p} \PYG{o}{*} \PYG{n}{fn}\PYG{p}{[}\PYG{n}{i} \PYG{o}{+} \PYG{l+m}{1}\PYG{p}{]} \PYG{o}{+} \PYG{n}{q} \PYG{o}{*} \PYG{n}{fn}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]))}
+                    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{type} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}put\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+                        \PYG{n+nf}{max}\PYG{p}{(}\PYG{n+nf}{max}\PYG{p}{(}\PYG{n}{K} \PYG{o}{\PYGZhy{}} \PYG{n}{S}\PYG{p}{[}\PYG{n}{state}\PYG{p}{,} \PYG{n}{i}\PYG{p}{],} \PYG{l+m}{0}\PYG{p}{),} \PYG{n+nf}{exp}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{r} \PYG{o}{*} \PYG{n}{dt}\PYG{p}{)} \PYG{o}{*} \PYG{p}{(}\PYG{n}{p} \PYG{o}{*} \PYG{n}{fn}\PYG{p}{[}\PYG{n}{i} \PYG{o}{+} \PYG{l+m}{1}\PYG{p}{]} \PYG{o}{+} \PYG{n}{q} \PYG{o}{*} \PYG{n}{fn}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]))}
+                    \PYG{p}{\PYGZcb{}}
+                \PYG{p}{\PYGZcb{})}
+                \PYG{n+nf}{rnv.american}\PYG{p}{(}\PYG{n}{fm}\PYG{p}{,} \PYG{n}{p}\PYG{p}{,} \PYG{n}{r}\PYG{p}{,} \PYG{n}{dt}\PYG{p}{,} \PYG{n}{K}\PYG{p}{,} \PYG{n}{S}\PYG{p}{,} \PYG{n}{type} \PYG{o}{=} \PYG{n}{type}\PYG{p}{,} \PYG{n}{state} \PYG{o}{=} \PYG{n}{state} \PYG{o}{\PYGZhy{}} \PYG{l+m}{1}\PYG{p}{)}
+            \PYG{p}{\PYGZcb{}}
+        \PYG{p}{\PYGZcb{}}
+        \PYG{n+nf}{rnv.american}\PYG{p}{(}\PYG{n}{fn}\PYG{p}{,} \PYG{n}{p}\PYG{p}{,} \PYG{n}{r}\PYG{p}{,} \PYG{n}{dt}\PYG{p}{,} \PYG{n}{K}\PYG{p}{,} \PYG{n}{S}\PYG{p}{,} \PYG{n}{type} \PYG{o}{=} \PYG{n}{type}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{p}{\PYGZob{}}
+        \PYG{n+nf}{stop}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Invalid option style. `style` must be specified to either \PYGZsq{}european\PYGZsq{} or \PYGZsq{}american\PYGZsq{}.\PYGZdq{}}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{\PYGZsh{} Model ========================================================================}
+
+\PYG{c+c1}{\PYGZsh{}\PYGZsq{} Binomial model for pricing vanilla options}
+\PYG{n}{vanilla.binomial} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{obj}\PYG{p}{,} \PYG{n}{env}\PYG{p}{,} \PYG{n}{n}\PYG{p}{,} \PYG{n}{u}\PYG{p}{,} \PYG{n}{d}\PYG{p}{,} \PYG{n}{all} \PYG{o}{=} \PYG{k+kc}{FALSE}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+
+    \PYG{n}{style} \PYG{o}{=} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{style}
+    \PYG{n}{type} \PYG{o}{=} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{type}
+    \PYG{n}{K} \PYG{o}{=} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{K}
+    \PYG{n}{t} \PYG{o}{=} \PYG{n}{obj}\PYG{o}{\PYGZdl{}}\PYG{n}{t}
+    \PYG{n}{S} \PYG{o}{=} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{S}
+    \PYG{n}{r} \PYG{o}{=} \PYG{n}{env}\PYG{o}{\PYGZdl{}}\PYG{n}{r}
+
+    \PYG{n}{dt} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{t} \PYG{o}{/} \PYG{n}{n} \PYG{c+c1}{\PYGZsh{} Compute delta t}
+    \PYG{n}{p} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{p}{(}\PYG{n+nf}{exp}\PYG{p}{(}\PYG{n}{r} \PYG{o}{*} \PYG{n}{dt}\PYG{p}{)} \PYG{o}{\PYGZhy{}} \PYG{n}{d}\PYG{p}{)} \PYG{o}{/} \PYG{p}{(}\PYG{n}{u} \PYG{o}{\PYGZhy{}} \PYG{n}{d}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} Compute riskless probability for an upward price movement}
+    \PYG{n}{q} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{l+m}{1} \PYG{o}{\PYGZhy{}} \PYG{n}{p} \PYG{c+c1}{\PYGZsh{} Compute riskless probability for a downward price movement}
+
+    \PYG{c+c1}{\PYGZsh{} Store the stock prices of the tree for each state in a matrix `price\PYGZus{}tree`}
+    \PYG{n}{price\PYGZus{}tree} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{Binomial.tree}\PYG{p}{(}\PYG{n}{S}\PYG{p}{,} \PYG{n}{u}\PYG{p}{,} \PYG{n}{d}\PYG{p}{,} \PYG{n}{n}\PYG{p}{)}
+    \PYG{n}{Sn} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n}{price\PYGZus{}tree}\PYG{p}{[}\PYG{n}{n} \PYG{o}{+} \PYG{l+m}{1}\PYG{p}{,} \PYG{p}{]} \PYG{c+c1}{\PYGZsh{} Stores the possible stock prices at the terminal steps.}
+
+    \PYG{c+c1}{\PYGZsh{} Calculate the option value at the final step, i.e. maturity.}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{type} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}call\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{fn} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{sapply}\PYG{p}{(}\PYG{n}{Sn}\PYG{p}{,} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)} \PYG{p}{\PYGZob{}}\PYG{n+nf}{max}\PYG{p}{(}\PYG{n}{x} \PYG{o}{\PYGZhy{}} \PYG{n}{K}\PYG{p}{,} \PYG{l+m}{0}\PYG{p}{)\PYGZcb{})}
+    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{type} \PYG{o}{==} \PYG{l+s}{\PYGZdq{}put\PYGZdq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n}{fn} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{sapply}\PYG{p}{(}\PYG{n}{Sn}\PYG{p}{,} \PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)} \PYG{p}{\PYGZob{}}\PYG{n+nf}{max}\PYG{p}{(}\PYG{n}{K} \PYG{o}{\PYGZhy{}} \PYG{n}{x}\PYG{p}{,} \PYG{l+m}{0}\PYG{p}{)\PYGZcb{})}
+    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{p}{\PYGZob{}}
+        \PYG{n+nf}{stop}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Invalid option type. `type` must be specified to either \PYGZsq{}call\PYGZsq{} or \PYGZsq{}put\PYGZsq{}.\PYGZdq{}}\PYG{p}{)}
+    \PYG{p}{\PYGZcb{}}
+
+    \PYG{c+c1}{\PYGZsh{} Calculate the option value at current time.}
+    \PYG{n}{price} \PYG{o}{\PYGZlt{}\PYGZhy{}} \PYG{n+nf}{Binomial.rnv}\PYG{p}{(}\PYG{n}{fn}\PYG{p}{,} \PYG{n}{p}\PYG{p}{,} \PYG{n}{q}\PYG{p}{,} \PYG{n}{r}\PYG{p}{,} \PYG{n}{n}\PYG{p}{,} \PYG{n}{dt}\PYG{p}{,} \PYG{n}{K}\PYG{p}{,} \PYG{n}{S} \PYG{o}{=} \PYG{n}{price\PYGZus{}tree}\PYG{p}{,} \PYG{n}{type} \PYG{o}{=} \PYG{n}{type}\PYG{p}{,} \PYG{n}{style} \PYG{o}{=} \PYG{n}{style}\PYG{p}{)}
+
+    \PYG{c+c1}{\PYGZsh{} Return output}
+    \PYG{n+nf}{if }\PYG{p}{(}\PYG{n}{all}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+        \PYG{n+nf}{list}\PYG{p}{(}
+            \PYG{l+s}{\PYGZdq{}price\PYGZdq{}} \PYG{o}{=} \PYG{n}{price}\PYG{p}{,}
+            \PYG{l+s}{\PYGZdq{}p\PYGZdq{}} \PYG{o}{=} \PYG{n}{p}\PYG{p}{,}
+            \PYG{l+s}{\PYGZdq{}price\PYGZus{}tree\PYGZdq{}} \PYG{o}{=} \PYG{n}{price\PYGZus{}tree}
+        \PYG{p}{)}
+    \PYG{p}{\PYGZcb{}} \PYG{n}{else} \PYG{p}{\PYGZob{}}
+        \PYG{n}{price}
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

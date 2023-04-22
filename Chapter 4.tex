@@ -2,15 +2,15 @@
 
 This Chapter will discuss the outcome of the programming implementation discussed in previous chapters. The ``outcome'' will be presented using numerous option pricing examples based on our package, as well as some comments on the effectiveness of the result.
 
-The second part of the chapter will discuss the limitations of the package and potential directions of furture development.
+The second part of the chapter will discuss the limitations of the package and potential directions for future development.
 
 \section{Examples} \label{sec:examples}
 
-This section gives demonstration of options pricing via \mintinline{R}|rmcop| package. The installation of the package can be found in the README.md file in Appendix \ref{apd:source_code}. An alternative source would be the GitHub repository page which can be found \hyperref{https://github.com/ZhaiJason/rmcop}{site}{rmcop GitHub repository}{here}.
+This section gives a demonstration of options pricing via \mintinline{R}|rmcop| package. The installation of the package can be found in the README.md file in Appendix \ref{apd:source_code}. An alternative source would be the GitHub repository page which can be found \hyperref{https://github.com/ZhaiJason/rmcop}{site}{rmcop GitHub repository}{here}.
 
-The following examples assumed users have \mintinline{R}|rmcop| installed and attached. Their device and software configuration should also be suitable (see Section \ref{sec:machine_env} for reference) to running the package.
+The following examples assumed users have \mintinline{R}|rmcop| installed and attached. Their device and software configuration should also be suitable (see Section \ref{sec:machine_env} for reference) to run the package.
 
-Prior to running any of the following programmes, users shall ensure that they have attached \mintinline{R}|rmcop| to their current environment, such as using the command:
+Before running any of the following programmes, users shall ensure that they have attached \mintinline{R}|rmcop| to their current environment, such as using the command:
 
 \begin{Rminted}
 library(rmcop)
@@ -20,7 +20,7 @@ library(rmcop)
 
 As mentioned in Section \ref{sec:Pkg Structure}, \mintinline{R}|"option"| and \mintinline{R}|"env"| class objects are defined using functions \mintinline{R}|option| and \mintinline{R}|option.env|, respectively.
 
-For example, if we want to define an \textit{knock-out Barrier European call option} with strike price 20, maturity of 1 year, barrier of 10, we can use the following command:
+For example, if we want to define an \textit{knock-out Barrier European call option} with a strike price of 20, maturity of 1 year, and barrier of 10, we can use the following command:
 
 \begin{Rminted}
 option(
@@ -56,9 +56,9 @@ And the result S3 list would be:
 > [1] "barrier" "option" 
 \end{Rminted}
 
-If we wish to define an option of other type, style, or family, simply adjusted the ``common'' arguments and specify additional subclass-specific arguments for exotic options.
+If we wish to define an option of other types, styles, or families, simply adjusted the ``common'' arguments and specify additional subclass-specific arguments for exotic options.
 
-To define an \mintinline{R}|env| class object, for example, a market environment where the current price is 30, interest rate 0.03, dividend yield rate of 0.02, and volatility rate of 0.01 can be defined using the code below:
+To define an \mintinline{R}|env| class object, for example, a market environment where the current price is 30, the interest rate of 0.03, the dividend yield rate of 0.02, and the volatility rate of 0.01 can be defined using the code below:
 
 \begin{Rminted}
 option.env(S = 30, r = 0.03, q = 0.02, sigma = 0.01)
@@ -68,13 +68,13 @@ option.env(S = 30, r = 0.03, q = 0.02, sigma = 0.01)
 
 \mintinline{R}|rmcop| only supports Black-Scholes formula pricing for vanilla options\footnote{This includes vanilla European options and American non-dividend bearing call option, as other American options cannot be solved using explicit form}.
 
-Suppose we want to know the price of an vanilla option which is specified as:
+Suppose we want to know the price of a vanilla option which is specified as:
 
 \begin{Rminted}
 option.vanilla <- option("european", "vanilla", "call", K = 20, t = 1)
 \end{Rminted}
 
-To use Black-Scholes method, we can specify the argument \mintinline{R}|method = "bs"| when defining the environment object or when triggering the pricing function.
+To use the Black-Scholes method, we can specify the argument \mintinline{R}|method = "bs"| when defining the environment object or when triggering the pricing function.
 
 \begin{Rminted}
 # Specified when defining environment
@@ -89,15 +89,15 @@ The result price will then be returned after calling the pricing funtion.
 
 \subsection{Binomial Tree} \label{ex:binomial_tree}
 
-The package supports pricing both European and American vanilla options. Similar to the Black-Scholes case, to change the method to using binomial lattice tree pricing, simply specify the argument \mintinline{R}|method = "binomial"| when defining the environment object or calling the pricing function. We will use the exact same option-environment setup as in the prvious section.
+The package supports pricing both European and American vanilla options. Similar to the Black-Scholes case, to change the method to using binomial lattice tree pricing, simply specify the argument \mintinline{R}|method = "binomial"| when defining the environment object or calling the pricing function. We will use the same option-environment setup as in the previous section.
 
-Because the binomial tree method used different arguments that the Black-Scholes setup used for Black-Scholes method and Monte Carlo method, when calling the pricing function, users need to specify a few more arguments, including ratios of upward and downward jumps.
+Because the binomial tree method used different arguments than the Black-Scholes setup used for the Black-Scholes method and the Monte Carlo method, when calling the pricing function, users need to specify a few more arguments, including ratios of upward and downward jumps.
 
 \begin{Rminted}
 price.option(obj = option.vanilla, env = env, method = "bs")
 \end{Rminted}
 
-The below example uses the binomial tree method to price an option under the same steup.
+The below example uses the binomial tree method to price an option under the same setup.
 
 \begin{Rminted}
 price.option(
@@ -109,7 +109,7 @@ price.option(
 > [1] 4.166904
 \end{Rminted}
 
-The Binomial tree method also allows users to extract more information during the calculation. This can be achieved by specify the argument \mintinline{R}|all = TRUE| in the pricing function.
+The Binomial tree method also allows users to extract more information during the calculation. This can be achieved by specifying the argument \mintinline{R}|all = TRUE| in the pricing function.
 
 \begin{Rminted}
 # Changed n = 4 for better demonstration
@@ -128,14 +128,14 @@ res$price_tree # Extract the binomial price tree matrix
 
 \subsection{Monte Carlo}
 
-To demonstrate the pricing funciton under the Monte Carlo setup, suppose we are interested in a \textit{binary put option} with strike price 50, maturity of 2 years and payout 10, under a market environment where the current price is 15, interest rate 0.5, and volatility 0.1. We will encode these information using the code below:
+To demonstrate the pricing function under the Monte Carlo setup, suppose we are interested in a \textit{binary put option} with a strike price of 50, maturity of 2 years and payout of 10, under a market environment where the current price is 15, interest rate 0.5, and volatility 0.1. We will encode this information using the code below:
 
 \begin{Rminted}
 op.binary <- option("european", "binary", "put", K = 50, t = 2, payout = 10)
 env <- option.env(method = "mc", S = 15, r = 0.5, sigma = 0.1)
 \end{Rminted}
 
-We will price this option-environment combination using Monte Carlo method under the setup of 10000 trajectories simulations, and 1 step only for each trajectory, since a binary option is path-independent.
+We will price this option-environment combination using the Monte Carlo method under the setup of 10000 trajectories simulations, and 1 step only for each trajectory, since a binary option is path-independent.
 
 \begin{Rminted}
 set.seed(10)
@@ -143,9 +143,9 @@ price.option(op.binary, env, n = 1000, steps = 1)
 > [1] 3.487497
 \end{Rminted}
 
-Where we will obtain the estimated price.
+And we will obtain the estimated price.
 
-We can also request for returning more informaiton about the result. For example, we may wish to plot the price trajectories. We can achieve this my simply adding the argument \mintinline{R}|plot = TRUE|.
+We can also request for returning more information about the result. For example, we may wish to plot the price trajectories. We can achieve this my simply adding the argument \mintinline{R}|plot = TRUE|.
 
 \begin{Rminted}
 # For better demonstration, we set steps = 50
@@ -173,9 +173,9 @@ summary(res$C)
 
 \subsection{Comparing Multiple Option-Environment Setups}
 
-The greatest benefit of encapsulating option and environment characteristics using OOP is that we can compare different setups without adjusting too many arguments. This is a particularly useful feature, as investors or hedgers may compare multiple options on the same underlying asset.
+One of the most useful properties of encapsulating options and environment characteristics using OOP is that we can compare different setups without adjusting too many arguments. In real option pricing scenarios, investors or hedgers\footnote{The party who wishes to use options to offset the risk against market fluctuation.} may be interested in comparing multiple financial options on the same underlying asset.
 
-For example, if we are to compare three different options' prices given the same market condition (i.e. price condition of the underlying asset), shown by the codes below:
+For example, if we are to compare three different options' prices given the same market condition (i.e. price condition of the underlying asset), shown by the codes below: We can also use argument \mintinline{R}|all = TRUE| to store some other useful information (such as option's discounted payoffs) for each simulation\footnote{We see from the first few items of the list that the discounted payoff is either identical or zero (zero cases happens to not be in the head of the vector), which is what we would expect to see from a binary option}.
 
 \begin{Rminted}
 # Defining options of interest
@@ -201,16 +201,16 @@ price.option(op2, env)
 price.option(op3, env)
 \end{Rminted}
 
-We can apply similar methods for cases when comparing different market environment setups. As long as the objects are well defined, one can price any option-environment combinations by simply passing in just two arguments for the \mintinline{R}|price.option| funcitons.
+We can apply similar methods for cases when comparing different market environment setups. As long as the objects are well defined, one can price any option-environment combinations by simply passing in just two arguments for the \mintinline{R}|price.option| functions.
 
 \section{Limitations and Future Development}
 
-Currently, \mintinline{R}|rmcop| only supports a few types of options. The derivative market is varying, and it is infesible for a single package to contain tools that can address all possible scenarios. One of the necessary future development of \mintinline{R}|rmcop| will be extending its support to more cases. This includes the support of pricing American and Bermudian styles options via Monte Carlo method, and the support of more types of exotic options pricing.
+Currently, \mintinline{R}|rmcop| only supports a few types of options. The derivative market is varying, and it is infeasible for a single package to contain tools that can address all possible scenarios. One of the necessary future development of \mintinline{R}|rmcop| will be extending its support to more cases. This includes the support of pricing American and Bermudian styles options via the Monte Carlo method, and the support of more types of exotic options pricing.
 
-There are many additional ways enhancing the accuracy and efficiency of Monte Carlo option pricing that haven't been implemented by this package. For instance, applying variance reduction techniques or quasi-Monte Carlo methods as introduced by Glasserman \cite{Glasserman2003}. Monte Carlo option pricing is a vast topic that is still expanding. The package may consider adding some of these features in later versions.
+Additional techniques enhancing the efficiency of Monte Carlo option pricing, including variance reduction techniques or quasi-Monte Carlo methods \cite{Glasserman2003} are not yet implemented by this package. These features may be included in future versions of the package.
 
-Though the development of the package includes several R-programming tricks to speed up the computation, one cannot guarantee the implementation here is the most efficient way of encoding the pricing methods. Also, as we discussed in Section \ref{cpt:Existing Packages}, \mintinline{R}|rmcop| being an R-based package has fundamentally no computational advantage comparing to algorithms developed via lower level programming languages. The main focus of this pacakge is for demonstration of model implementations, and the C++ based programmes should be more desirable when conducting more practical and computationally-intensive option pricing projects.
+Though the development of the package includes several R-programming tricks to speed up the computation, one cannot guarantee the implementation here is the most efficient way of encoding the pricing methods. Also, as we discussed in Section \ref{cpt:Existing Packages}, \mintinline{R}|rmcop| being an R-based package has fundamentally no computational advantage compared to algorithms developed via lower-level programming languages. The main focus of this package is for the demonstration of model implementations, and the C++ programmes should be more desirable when conducting more practical and computationally-intensive option pricing projects.
 
-Until the time when this report is completed, the development of \mintinline{R}|rmcop| is still active. One may found resources in Appendix A useful in terms of tracking future updates of the package.
+Until the time when this report is completed, the development of \mintinline{R}|rmcop| is still active. One may find resources in Appendix A useful in terms of tracking future updates of the package.
 
 \newpage
